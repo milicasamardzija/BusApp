@@ -18,7 +18,10 @@ public class DemoApplication {
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
-	public void sendMail(){
+	public void sendMail() throws InterruptedException {
+		System.out.println("********************************************************");
 		this.emailSenderService.sendEmailWithPdf();
+		System.out.println("********************************************************");
 	}
+
 }
