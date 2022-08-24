@@ -40,9 +40,9 @@ public class EmailSenderService {
     @Autowired
     private QRCodeGenerator qrCodeGenerator;
 
-    public void sendEmailWithPdf() throws InterruptedException {
+    public void sendEmailWithPdf(int id) throws InterruptedException {
 
-        String nameImg = String.valueOf(this.qrCodeGenerator.getQrCode());
+        String nameImg = String.valueOf(this.qrCodeGenerator.getQrCode(id));
         Map<String, Object> data = new HashMap<>();
         User user = new User();
 

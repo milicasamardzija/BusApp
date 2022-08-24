@@ -17,10 +17,10 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
+	//@EventListener(ApplicationReadyEvent.class)
 	public void sendMail() throws InterruptedException {
 		System.out.println("********************************************************");
-		this.emailSenderService.sendEmailWithPdf();
+		this.emailSenderService.sendEmailWithPdf(5);
 		System.out.println("********************************************************");
 	}
 

@@ -4,8 +4,10 @@ import com.example.demo.dto.users.JwtAuthenticationRequest;
 import com.example.demo.dto.users.UserRequest;
 import com.example.demo.dto.users.UserTokenState;
 import com.example.demo.model.users.*;
+import com.example.demo.service.email.EmailSenderService;
 import com.example.demo.service.users.*;
 import com.example.demo.utils.TokenUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +24,8 @@ public class AuthentificationController {
     private AuthenticationManager authenticationManager;
     private UserService userService;
     private TokenUtils tokenUtils;
+    @Autowired
+    private EmailSenderService emailSenderService;
 
     public AuthentificationController (AuthenticationManager authenticationManager, UserService userService, TokenUtils tokenUtils) {
         this.authenticationManager = authenticationManager;
@@ -63,6 +67,14 @@ public class AuthentificationController {
        }
        userService.save(userRequest);
        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/test/{id}")
+    public  ResponseEntity<HttpStatus> test (@PathVariable int id) throws InterruptedException {
+        System.out.println("********************************************************");
+        this.emailSenderService.sendEmailWithPdf(id);
+        System.out.println("********************************************************");
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
