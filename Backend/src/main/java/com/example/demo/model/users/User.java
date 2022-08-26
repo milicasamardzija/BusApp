@@ -1,6 +1,5 @@
 package com.example.demo.model.users;
 
-import com.example.demo.model.users.Role;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
+
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType=DiscriminatorType.STRING)
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -26,7 +28,7 @@ public class User implements UserDetails {
 	private String name;
 	@Column(name = "surname", nullable = false)
 	private String surname;
-	@Column(name = "email", nullable = false, unique=false)
+	@Column(name = "email", nullable = false, unique=true)
 	private String email;
 	@Column(name = "password", nullable = false)
 	private String password;
@@ -40,10 +42,10 @@ public class User implements UserDetails {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "role_id")
 	private Role role;
-	@Column(name = "last_password_reset_date", nullable = true)
-	private Timestamp lastPasswordResetDate;
 	
 	public User() {}
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -83,7 +85,6 @@ public class User implements UserDetails {
 
 	public void setPassword(String password) {
 		Timestamp now = new Timestamp(new Date().getTime());
-		this.setLastPasswordResetDate(now);
 		this.password = password;
 	}
 
@@ -100,15 +101,6 @@ public class User implements UserDetails {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-
-	public Timestamp getLastPasswordResetDate() {
-		return lastPasswordResetDate;
-	}
-
-	public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
-		this.lastPasswordResetDate = lastPasswordResetDate;
-	}
-
 	public int getId() {
 		return id;
 	}

@@ -1,13 +1,16 @@
 package com.example.demo.controller.users;
 
-import com.example.demo.dto.users.JwtAuthenticationRequest;
+import com.example.demo.dto.users.auth.JwtAuthenticationRequest;
 import com.example.demo.dto.users.UserRequest;
-import com.example.demo.dto.users.UserTokenState;
+import com.example.demo.dto.users.auth.UserTokenState;
 import com.example.demo.model.users.*;
 import com.example.demo.service.email.EmailSenderService;
 import com.example.demo.service.users.*;
+import com.example.demo.service.users.client.PassengerRegistrationTokenService;
+import com.example.demo.service.users.client.PassengerService;
 import com.example.demo.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,21 +20,27 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 @Controller
 @RequestMapping(value = "auth")
-public class AuthentificationController {
+public class AuthenticationController {
 
+    @Autowired
     private AuthenticationManager authenticationManager;
-    private UserService userService;
+    @Autowired
+    private UserRegistrationRequestService userRegistrationRequestService;
+    @Autowired
     private TokenUtils tokenUtils;
     @Autowired
     private EmailSenderService emailSenderService;
-
-    public AuthentificationController (AuthenticationManager authenticationManager, UserService userService, TokenUtils tokenUtils) {
-        this.authenticationManager = authenticationManager;
-        this.userService = userService;
-        this.tokenUtils = tokenUtils;
-    }
+    @Autowired
+    private PassengerRegistrationTokenService passengerRegistrationTokenService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private PassengerService passengerService;
 
     @PostMapping("/login")
     public ResponseEntity<UserTokenState> createAuthenticationToken(
@@ -40,7 +49,7 @@ public class AuthentificationController {
         Authentication authentication = null;
         try {
             authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    authenticationRequest.getEmail(), authenticationRequest.getPassword()));
+                    authenticationRequest.email, authenticationRequest.password));
         }
         catch (Exception ex){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -51,7 +60,7 @@ public class AuthentificationController {
         User user = (User) authentication.getPrincipal();
         String jwt = tokenUtils.generateToken(user.getEmail());
         int expiresIn = tokenUtils.getExpiredIn();
-        if (user.isEnabled() == false) {
+        if (!user.isEnabled()) {
             return ResponseEntity.ok(new UserTokenState(jwt, expiresIn,user.getRole().getName(), user.isEnabled()));
         }
 
@@ -60,21 +69,40 @@ public class AuthentificationController {
 
 
     @RequestMapping(value="/signup", method = {RequestMethod.POST })
-    public ResponseEntity<HttpStatus> addUser(@RequestBody UserRequest userRequest){
-        User existUser = this.userService.findByEmail(userRequest.getEmail());
+    public ResponseEntity<HttpStatus> saveUser(@RequestBody UserRequest userRequest){
+
+       User existUser = this.userService.findByEmail(userRequest.email);
        if (existUser != null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
        }
-       userService.save(userRequest);
+
+       userRegistrationRequestService.save(userRequest);
+       if (userRequest.role.equals("ROLE_PASSENGER")){
+           String code = passengerRegistrationTokenService.save(userRequest.email);
+           emailSenderService.sendEmailForVerification(userRequest.email, code);
+       }
        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/test/{id}")
-    public  ResponseEntity<HttpStatus> test (@PathVariable int id) throws InterruptedException {
+    public ResponseEntity<HttpStatus> test(@PathVariable int id) throws InterruptedException {
         System.out.println("********************************************************");
         this.emailSenderService.sendEmailWithPdf(id);
         System.out.println("********************************************************");
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "confirm-account/{code}")
+    public ResponseEntity<HttpStatus> confirm(@PathVariable String code) throws URISyntaxException {
+        String email = this.passengerRegistrationTokenService.findByCode(code);
+        UserRegistrationRequest user = this.userRegistrationRequestService.findByEmail(email);
+        this.passengerService.savePassenger(user);
+        this.userRegistrationRequestService.deleteByEmail(email);
+
+        URI frontend = new URI("http://localhost:4200/");
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setLocation(frontend);
+        return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
     }
 
 }

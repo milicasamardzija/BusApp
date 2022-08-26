@@ -6,6 +6,7 @@ import com.example.demo.model.users.Role;
 import com.example.demo.model.users.Address;
 import com.example.demo.model.users.User;
 import com.example.demo.repository.users.UserRepository;
+import com.example.demo.service.users.auth.RoleService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,7 @@ public class UserService {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
-    private RoleService roleService; 
+    private RoleService roleService;
     private AddressService addressService;
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AddressService addressService, RoleService roleService) {
@@ -31,22 +32,28 @@ public class UserService {
     public User save(UserRequest user){
         User u = new User();
 
-        Role role = roleService.findByName(user.getRole());
+        Role role = roleService.findByName(user.role);
         if (role == null) {
-            role = new Role(user.getRole());
+            role = new Role(user.role);
             roleService.save(role);
         }
         u.setRole(role);
 
-        u.setPassword(passwordEncoder.encode(user.getPassword()));
-        u.setName(user.getName());
-        u.setSurname(user.getSurname());
-        u.setTelephone(user.getTelephone());
-        u.setEmail(user.getEmail());
+        u.setPassword(passwordEncoder.encode(user.password));
+        u.setName(user.password);
+        u.setSurname(user.surname);
+        u.setTelephone(user.telephone);
+        u.setEmail(user.email);
         u.setEnabled(true);
-        u.setAddress(addressService.save(new Address(user.getCountry(), user.getCity(), user.getStreet(), user.getNumber())));
+        u.setAddress(addressService.save(new Address(user.country, user.city, user.street, user.number)));
         this.userRepository.save(u);
         return u;
     }
 
+    public String generateCode() {
+        //user request code + email
+        //save
+        //return code
+        return "";
+    }
 }

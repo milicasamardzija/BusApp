@@ -1,6 +1,6 @@
 package com.example.demo.security;
 
-import com.example.demo.service.users.CustomUserDetailsService;
+import com.example.demo.service.users.auth.CustomUserDetailsService;
 import com.example.demo.utils.TokenUtils;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.apache.commons.logging.Log;

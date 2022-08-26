@@ -1,4 +1,4 @@
-package com.example.demo.service.users;
+package com.example.demo.service.users.auth;
 
 import com.example.demo.model.users.User;
 import com.example.demo.repository.users.UserRepository;

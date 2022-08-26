@@ -1,29 +1,26 @@
 package com.example.demo.service.email;
 
 import com.example.demo.model.users.User;
+import com.example.demo.service.pdf.PdfGenerateService;
 import com.example.demo.service.pdf.QRCodeGenerator;
-import com.google.zxing.WriterException;
-import com.itextpdf.text.pdf.qrcode.QRCode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class EmailSenderService {
@@ -77,5 +74,26 @@ public class EmailSenderService {
         } catch (TemplateException e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendEmailForVerification(String email, String code) {
+        System.out.println("Slanje emaila...");
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setSubject("Confirm your account");
+            mimeMessageHelper.setFrom(new InternetAddress("sammilica99@gmail.com", "Bus app"));
+            mimeMessageHelper.setTo(email);
+            mimeMessageHelper.setText("To confirm your account, please click here :" + "http://localhost:8081" + "/auth/confirm-account/" + code + ".\n");
+
+            mailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Email poslat!");
     }
 }

@@ -2,7 +2,7 @@ package com.example.demo.config;
 
 import com.example.demo.security.RestAuthenticationEntryPoint;
 import com.example.demo.security.TokenAuthenticationFilter;
-import com.example.demo.service.users.CustomUserDetailsService;
+import com.example.demo.service.users.auth.CustomUserDetailsService;
 import com.example.demo.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -58,7 +58,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
 
-                .authorizeRequests().antMatchers("/auth/**").permitAll()
+                .authorizeRequests().antMatchers("/**").permitAll()
 
                 .anyRequest().authenticated().and()
 
