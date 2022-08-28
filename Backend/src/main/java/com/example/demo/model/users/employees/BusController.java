@@ -1,4 +1,9 @@
 package com.example.demo.model.users.employees;
 
-public class BusController extends  BussStaff{
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("BUSS_CONTROLLER")
+public class BusController extends BussStaff{
 }

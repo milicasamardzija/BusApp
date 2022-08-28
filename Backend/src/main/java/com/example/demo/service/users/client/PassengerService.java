@@ -42,4 +42,16 @@ public class PassengerService {
     public List<Passenger> getAll(){
         return this.passengerRepository.findAll();
     }
+
+    public Passenger findById(int id) {
+        return this.passengerRepository.getById(id);
+    }
+
+    public Passenger findByIdWithTickets(int id) {
+        return this.passengerRepository.findByIdWithTickets(id);
+    }
+
+    public void update(Passenger passenger) {
+        this.passengerRepository.save(passenger);
+    }
 }

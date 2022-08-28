@@ -84,14 +84,6 @@ public class AuthenticationController {
        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/test/{id}")
-    public ResponseEntity<HttpStatus> test(@PathVariable int id) throws InterruptedException {
-        System.out.println("********************************************************");
-        this.emailSenderService.sendEmailWithPdf(id);
-        System.out.println("********************************************************");
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
     @RequestMapping(value = "confirm-account/{code}")
     public ResponseEntity<HttpStatus> confirm(@PathVariable String code) throws URISyntaxException {
         String email = this.passengerRegistrationTokenService.findByCode(code);

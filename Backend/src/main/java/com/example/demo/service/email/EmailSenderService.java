@@ -1,8 +1,6 @@
 package com.example.demo.service.email;
 
-import com.example.demo.model.users.User;
-import com.example.demo.service.pdf.PdfGenerateService;
-import com.example.demo.service.pdf.QRCodeGenerator;
+import com.example.demo.model.users.client.Passenger;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -31,40 +29,20 @@ public class EmailSenderService {
     @Autowired
     private Configuration configuration;
 
-    @Autowired
-    private PdfGenerateService pdfGenerateService;
-
-    @Autowired
-    private QRCodeGenerator qrCodeGenerator;
-
-    public void sendEmailWithPdf(int id) throws InterruptedException {
-
-        String nameImg = String.valueOf(this.qrCodeGenerator.getQrCode(id));
-        Map<String, Object> data = new HashMap<>();
-        User user = new User();
-
-        user.setName("Milica");
-        user.setSurname("Samardzija");
-
-        data.put("user", user);
-        data.put("img", nameImg);
-
-        pdfGenerateService.generatePdfFile("ticketTemplate", data, "ticket.pdf");
-
+    public void sendEmailWithPdf(Passenger passenger){
         MimeMessage message = mailSender.createMimeMessage();
         try {
             System.out.println("Pisem mejl.");
             Map<String, String> model = new HashMap<>();
-            model.put("name", "sammilica99@gmail.com");
-            model.put("value", "Welcome to ASB Notebook!!");
+            model.put("name", passenger.getName() + " " + passenger.getSurname());
             MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
             ClassPathResource pdf = new ClassPathResource("static/ticket.pdf");
             Template template = configuration.getTemplate("email.ftl");
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
-            helper.setTo("sammilica99@gmail.com");
+            helper.setTo(passenger.getEmail());
             helper.setFrom("sammilica99@gmail.com");
-            helper.setSubject("You're ticket is here!");
+            helper.setSubject("Ticket");
             helper.setText(html, true);
             helper.addAttachment("ticket.pdf", pdf);
             mailSender.send(message);

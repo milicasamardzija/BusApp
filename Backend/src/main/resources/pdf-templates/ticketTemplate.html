@@ -19,21 +19,45 @@
     </style>
 </head>
 <body>
-<h1>Quotation</h1>
+<h1>Standard ticket</h1>
 <table>
     <tr>
-        <th>Customer</th>
+        <th>Passenger</th>
     </tr>
     <tr>
-        <td th:text="'Company Name: ' + ${user.name}"></td>
+        <td th:text="'Name: ' + ${passenger.name}"></td>
     </tr>
     <tr>
-        <td th:text="'Contact Name: ' + ${user.surname}"></td>
+        <td th:text="'Surname: ' + ${passenger.surname}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Telephone number: ' + ${passenger.telephone}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Email: ' + ${passenger.email}"></td>
     </tr>
 </table>
-<br />
-<p>Slika</p>
-    <img width="100" height="100" th:src="@{classpath:static/images/QRCode.png}"/>
-<p>Slika</p>
+<hr/>
+<table>
+    <tr>
+        <th>Ticket info</th>
+    </tr>
+    <tr>
+        <td th:text="'From: ' + ${standardTicket.cityStart}"></td>
+    </tr>
+    <tr>
+        <td th:text="'To: ' + ${standardTicket.cityEnd}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Date issued: ' + ${standardTicket.dateIssued}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Date expiration: ' + ${standardTicket.dateExpiration}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Price: ' + ${standardTicket.price}"></td>
+    </tr>
+</table>
+<img width="200" height="200" th:src="@{classpath:static/images/QRCode.png}"/>
 </body>
 </html>

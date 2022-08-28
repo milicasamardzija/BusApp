@@ -20,8 +20,6 @@ public class PdfGenerateServiceImpl implements PdfGenerateService {
     @Value("${pdf.directory}")
     private String pdfDirectory;
 
-    //private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/static/images/QRCode";
-
     @Override
     public void generatePdfFile(String templateName, Map<String, Object> data, String pdfFileName) {
         Context context = new Context();
@@ -30,7 +28,6 @@ public class PdfGenerateServiceImpl implements PdfGenerateService {
         String htmlContent = templateEngine.process(templateName, context);
         try {
             System.out.println("Pisem pdf.");
-            //Thread.sleep(120000);
             FileOutputStream fileOutputStream = new FileOutputStream(pdfDirectory + pdfFileName);
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(htmlContent);
