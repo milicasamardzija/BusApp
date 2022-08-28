@@ -1,6 +1,5 @@
 package com.example.demo.controller.tickets;
 
-import com.example.demo.dto.business.BusRequest;
 import com.example.demo.dto.tickets.StandardTicketRequest;
 import com.example.demo.model.tickets.StandardTicket;
 import com.example.demo.model.users.User;
@@ -24,10 +23,19 @@ public class StandardTicketController {
 
     @Autowired
     private StandardTicketService standardTicketService;
-@GetMapping
+
+    @GetMapping
     public ResponseEntity<List<StandardTicket>> getAll(){
         return new ResponseEntity<>(this.standardTicketService.findAll(), HttpStatus.OK);
     }
+
+    @GetMapping(value="/previousTickets")
+    public ResponseEntity<List<StandardTicket>> getPreviousTickets(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        return new ResponseEntity<>(this.standardTicketService.getPreviousTickets(user), HttpStatus.OK);
+    }
+
 
     @PostMapping
     public ResponseEntity<HttpStatus> addTicket(@RequestBody StandardTicketRequest ticket){
@@ -36,6 +44,4 @@ public class StandardTicketController {
         this.standardTicketService.addTicket(ticket, user);
         return new ResponseEntity<>( HttpStatus.OK);
     }
-
-
 }

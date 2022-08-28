@@ -4,60 +4,76 @@
     <style>
         h1{
             color: brown;
+            margin-left: 43%;
+            margin-top: 5%;
+            font-size: 25px;
         }
-        .quotation {
-            width: 100%;
+        .text{
+            font-size: 25px;
+            color: brown;
         }
-        .quotation, .quotation th, .quotation td {
-            border: 1px solid brown;
-            border-collapse: collapse;
+        .info {
+            font-size: 20px;
         }
-        .quotation th {
-            background-color: brown;
-            color: white;
+        .qrcode {
+         margin-left: 72%;
         }
     </style>
 </head>
 <body>
-<h1>Standard ticket</h1>
 <table>
     <tr>
-        <th>Passenger</th>
+        <td>Adresa: Pavla Papa 5</td>
     </tr>
     <tr>
-        <td th:text="'Name: ' + ${passenger.name}"></td>
+        <td>21 000, Novi Sad, Srbija</td>
     </tr>
     <tr>
-        <td th:text="'Surname: ' + ${passenger.surname}"></td>
+        <td>Kontakt telefon: 021/352-985</td>
     </tr>
     <tr>
-        <td th:text="'Telephone number: ' + ${passenger.telephone}"></td>
-    </tr>
-    <tr>
-        <td th:text="'Email: ' + ${passenger.email}"></td>
+        <td>Email adresa: busapp@gmail.com</td>
     </tr>
 </table>
-<hr/>
-<table>
+<h1>Karta</h1>
+<table style="margin-top:10%">
     <tr>
-        <th>Ticket info</th>
+        <th class="text"><i>Putnik</i></th>
     </tr>
     <tr>
-        <td th:text="'From: ' + ${standardTicket.cityStart}"></td>
+        <td class="info" th:text="'Ime: ' + ${passenger.name}"></td>
     </tr>
     <tr>
-        <td th:text="'To: ' + ${standardTicket.cityEnd}"></td>
+        <td class="info" th:text="'Prezime: ' + ${passenger.surname}"></td>
     </tr>
     <tr>
-        <td th:text="'Date issued: ' + ${standardTicket.dateIssued}"></td>
+        <td class="info" th:text="'Broj telefona: ' + ${passenger.telephone}"></td>
     </tr>
     <tr>
-        <td th:text="'Date expiration: ' + ${standardTicket.dateExpiration}"></td>
-    </tr>
-    <tr>
-        <td th:text="'Price: ' + ${standardTicket.price}"></td>
+        <td class="info" th:text="'Email adresa: ' + ${passenger.email}"></td>
     </tr>
 </table>
-<img width="200" height="200" th:src="@{classpath:static/images/QRCode.png}"/>
+<hr style="margin-top:5%"/>
+<table style="margin-top:5%">
+    <tr>
+        <th class="text"><i>Detalji o karti</i></th>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Polazna stanica: ' + ${standardTicket.cityStart}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Krajnja stanica: ' + ${standardTicket.cityEnd}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Izdata: ' + ${standardTicket.dateIssued}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Vazi do: ' + ${standardTicket.dateExpiration}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Cena: ' + ${standardTicket.price}"></td>
+    </tr>
+</table>
+    <img class="qrcode" width="200" height="200" th:src="@{classpath:static/images/QRCode.png}"/>
 </body>
 </html>

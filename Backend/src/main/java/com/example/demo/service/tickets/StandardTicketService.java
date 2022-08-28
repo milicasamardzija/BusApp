@@ -13,10 +13,8 @@ import com.example.demo.service.users.client.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 @Service
@@ -46,7 +44,12 @@ public class StandardTicketService {
         standardTicket.setCityEnd(ticket.cityEnd);
         standardTicket.setTimeStart(ticket.timeStart);
         standardTicket.setDateIssued(new Date());
-        standardTicket.setDateExpiration(new Date()); //date end ispravi
+
+        Calendar dateEnd = Calendar.getInstance();
+        dateEnd.set(Calendar.DAY_OF_MONTH, 30);
+        dateEnd.set(Calendar.MONTH, standardTicket.getDateIssued().getMonth() + 1);
+        standardTicket.setDateExpiration(dateEnd.getTime());
+
         standardTicket.setDateChecked(null);
         standardTicket.setPrice(ticket.price);
         standardTicket.setPassenger(passenger);
@@ -67,4 +70,7 @@ public class StandardTicketService {
         pdfGenerateService.generatePdfFile("ticketTemplate", data, "ticket.pdf");
     }
 
+    public List<StandardTicket> getPreviousTickets(User user) {
+        return this.standardTicketRepository.getPreviousTickets(user.getId(), new Date());
+    }
 }
