@@ -1,0 +1,39 @@
+<mat-toolbar class="toolbar">
+    <span class="text"><i>Welcome</i></span>
+    <button mat-raised-button color="accent" class="login" >Login</button>
+</mat-toolbar>
+
+<!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+    <!-- Indicators/dots -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+    </div>
+  
+    <!-- The slideshow/carousel -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../../assets/bus-traveling.jpg"  width="100%" height="600rem">
+        </div>
+        <div class="carousel-item">
+            <img src="../../assets/bus-choice.jpg"  width="100%" height="600rem">
+        </div>
+        <div class="carousel-item">
+            <img src="../../assets/bus_lanes.jpg" width="100%" height="600rem" >
+        </div>
+    </div>
+  
+    <!-- Left and right controls/icons -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <app-search-lines></app-search-lines>
+  <app-all-bus-lines></app-all-bus-lines>

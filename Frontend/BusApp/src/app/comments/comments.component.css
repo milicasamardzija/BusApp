@@ -1,0 +1,15 @@
+img{
+    margin-top: 5px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+p{
+    color: #4775a0 ;
+    font-size: medium;
+}
+
+.media{
+    margin-left: 4%;
+}
