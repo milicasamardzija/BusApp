@@ -16,4 +16,8 @@ public class BusDepartureService {
     public List<BusDeparture> getAll() {
         return this.busDepartureRepository.findAll();
     }
+
+    public void update(BusDeparture busDeparture) {
+        this.busDepartureRepository.save(busDeparture);
+    }
 }

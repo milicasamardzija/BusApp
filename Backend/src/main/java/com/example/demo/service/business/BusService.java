@@ -29,4 +29,16 @@ public class BusService {
     public void deleteById(int id) {
 
     }
+
+    public Bus findById(int busId) {
+        return this.busRepository.findById(busId);
+    }
+
+    public Bus findByIdWithDrivingLines(int busId) {
+        return this.busRepository.findByIdWithDrivingLines(busId);
+    }
+
+    public void update(Bus bus) {
+        this.busRepository.save(bus);
+    }
 }

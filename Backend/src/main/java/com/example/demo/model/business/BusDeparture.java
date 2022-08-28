@@ -1,7 +1,5 @@
 package com.example.demo.model.business;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -14,20 +12,22 @@ public class BusDeparture {
     @Column(name="id", unique=true, nullable=false)
     private int id;
     @Column
-    private String cityStart;
-    @Column
-    private String cityEnd;
-    @Column
-    private double price;
+    private String city;
     @Column
     private double km;
     @Column
-    private Date startTime;
-    @Column
-    private Date endTime;
+    private Date time;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "driving_line_id")
     private DrivingLine drivingLine;
+
+    public BusDeparture(){}
+
+    public BusDeparture(String city, double km, Date time) {
+        this.city = city;
+        this.km = km;
+        this.time = time;
+    }
 
     public int getId() {
         return id;
@@ -37,28 +37,12 @@ public class BusDeparture {
         this.id = id;
     }
 
-    public String getCityStart() {
-        return cityStart;
+    public String getCity() {
+        return city;
     }
 
-    public void setCityStart(String cityStart) {
-        this.cityStart = cityStart;
-    }
-
-    public String getCityEnd() {
-        return cityEnd;
-    }
-
-    public void setCityEnd(String cityEnd) {
-        this.cityEnd = cityEnd;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public double getKm() {
@@ -69,20 +53,12 @@ public class BusDeparture {
         this.km = km;
     }
 
-    public Date getStartTime() {
-        return startTime;
+    public Date getTime() {
+        return time;
     }
 
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setTime(Date time) {
+        this.time = time;
     }
 
     public DrivingLine getDrivingLine() {

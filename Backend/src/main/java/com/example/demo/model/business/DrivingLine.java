@@ -15,25 +15,21 @@ public class DrivingLine {
     @Column(name="id", unique=true, nullable=false)
     private int id;
     @Column
-    private String Name;
+    private String name;
+    @Column
+    private Date dateStart;
     @Column
     private Date dateEnd;
-    @Column
-    private String activeOn;
     @OneToMany(mappedBy = "drivingLine", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @Column
+    private List<ActiveDeparture> activeDepartures;
+    @OneToMany(mappedBy = "drivingLine", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<BusDeparture> busDepartures;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bus_id")
     private Bus bus;
-
-    public Bus getBus() {
-        return bus;
-    }
-
-    public void setBus(Bus bus) {
-        this.bus = bus;
-    }
 
     public int getId() {
         return id;
@@ -44,11 +40,19 @@ public class DrivingLine {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
     }
 
     public Date getDateEnd() {
@@ -59,19 +63,27 @@ public class DrivingLine {
         this.dateEnd = dateEnd;
     }
 
-    public String getActiveOn() {
-        return activeOn;
-    }
-
-    public void setActiveOn(String activeOn) {
-        this.activeOn = activeOn;
-    }
-
     public List<BusDeparture> getBusDepartures() {
         return busDepartures;
     }
 
     public void setBusDepartures(List<BusDeparture> busDepartures) {
         this.busDepartures = busDepartures;
+    }
+
+    public Bus getBus() {
+        return bus;
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
+
+    public List<ActiveDeparture> getActiveDepartures() {
+        return activeDepartures;
+    }
+
+    public void setActiveDepartures(List<ActiveDeparture> activeDepartures) {
+        this.activeDepartures = activeDepartures;
     }
 }

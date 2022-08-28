@@ -1,7 +1,6 @@
 package com.example.demo.controller.business;
 
 import com.example.demo.dto.business.BusRequest;
-import com.example.demo.dto.business.BusResponse;
 import com.example.demo.model.business.Bus;
 import com.example.demo.service.business.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +20,8 @@ public class BusController {
     private BusService busService;
 
     @GetMapping
-    public ResponseEntity<List<BusResponse>> getAll(){
-        List<BusResponse> ret = new ArrayList<>();
-        for (Bus bus : this.busService.getAll()
-        ) {
-            ret.add(new BusResponse());
-        }
-        return new ResponseEntity<>(ret, HttpStatus.OK);
+    public ResponseEntity<List<Bus>> getAll(){
+        return new ResponseEntity<>(this.busService.getAll(), HttpStatus.OK);
     }
 
     @PostMapping
