@@ -1,5 +1,16 @@
 .login {
-    margin-left: 90%;
+    margin-left: 80%;
+    background-color: #4775a0;
+    color: white;
+    width: 40%;
+}
+
+.register{
+    margin-left: 1%;
+    margin-right: 1%;
+    background-color: #4775a0;
+    color: white;
+    width: 40%;
 }
 
 .toolbar {

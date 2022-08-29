@@ -8,10 +8,6 @@
                 <mat-icon>directions_bus</mat-icon>
                 <span>Polasci</span>
             </button>
-            <button mat-button class="menu-button" (click)="goToKomentari()">
-                <mat-icon>comment</mat-icon>
-                <span>Komentari</span>
-            </button>
             <button mat-button class="menu-button" (click)="goToMesecna()">
                 <mat-icon>card_travel</mat-icon>
                 <span>Mesecna karta</span>
@@ -29,7 +25,6 @@
     <mat-sidenav-content>
         <div class="content mat-elevation-z4">
             <div *ngIf="see==='POLASCI'">
-                <app-search-lines></app-search-lines>
                 <app-all-bus-lines></app-all-bus-lines>
             </div>
             <div *ngIf="see==='KOMENTARI'">

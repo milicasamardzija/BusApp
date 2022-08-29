@@ -1,13 +1,35 @@
-<div class="n">
-<nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
-        <form class="d-flex">
-            <input class="form-control me-2" type="text" placeholder="Pocetno mesto">
-            <input class="form-control me-2" type="text" placeholder="Krajnje mesto">
-            <input class="form-control me-2" type="text" placeholder="Dan">
-            <button class="btn btn-primary" type="button">Pretrazi</button>
-        </form>
+<div >
+    <div class="n">
+        <nav class="navbar navbar-expand-sm bg-light">
+            <div class="container-fluid">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="text"  placeholder="Pocetno mesto"  [ngModelOptions]="{standalone: true}" [(ngModel)] = "cityStart">
+                    <input class="form-control me-2" type="text" placeholder="Krajnje mesto"  [ngModelOptions]="{standalone: true}" [(ngModel)] = "cityEnd">
+                    <input class="form-control me-2" type="number" placeholder="Dan"  [ngModelOptions]="{standalone: true}" [(ngModel)] = "day">
+                    <button mat-raised-button class="searchButton" (click)="search()">Pretrazi</button>
+                    <button *ngIf = "hideThis === true" mat-button class="menu-button" (click)="cancel()">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </form>
+            </div>
+        </nav>
     </div>
-</nav>
+    <div *ngIf = "hideThis === true">
+        <div class="example-card" *ngFor = "let d of departures">
+            <div class="card-wrapper" >
+                <mat-card class="card">
+                <mat-card-header>
+                <mat-card-title><b><i>Relacija: </i></b><span >{{d.cityStart}} - {{d.cityEnd}}</span></mat-card-title>   
+                </mat-card-header>
+                <mat-card-content>
+                <p><b>Vreme polaska:</b> {{d.timeStart}}</p>
+                <p><b>Vreme dolaska:</b> {{d.timeEnd}}</p>
+                <p><b>Cena standradne karte:</b> {{d.price}}</p>
+                <p><b>Cena mesecne karte:</b> {{d.price}}</p>
+                </mat-card-content>
+                </mat-card> 
+            </div>
+        </div>
+    </div>
 </div>
 

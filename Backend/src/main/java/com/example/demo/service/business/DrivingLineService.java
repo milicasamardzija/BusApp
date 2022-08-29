@@ -30,7 +30,7 @@ public class DrivingLineService {
     private ActiveDepartureService activeDepartureService;
 
     public List<DrivingLine> getAll() {
-        return this.drivingLineRepository.findAll();
+        return this.drivingLineRepository.getAllWithWeeks();
     }
 
     public void addDrivingLine(DrivingLineRequest drivingLineRequest) {
@@ -80,17 +80,17 @@ public class DrivingLineService {
         for (DrivingLine drivingLine: this.drivingLineRepository.getAll(busDepartureSearchRequest.day)) {
             activeDepartureId = activeDepartureService.findByDrivingLine(drivingLine.getId(), busDepartureSearchRequest.day);
             for (BusDeparture busDeparture: drivingLine.getBusDepartures()) {
-                if (busDeparture.getCity().equals(busDepartureSearchRequest.cityStart)){
+                if (busDeparture.getCity().equalsIgnoreCase(busDepartureSearchRequest.cityStart)){
                     inxStart = drivingLine.getBusDepartures().indexOf(busDeparture);
                     kmStart = busDeparture.getKm();
                 }
-                if (busDeparture.getCity().equals(busDepartureSearchRequest.cityEnd)){
+                if (busDeparture.getCity().equalsIgnoreCase(busDepartureSearchRequest.cityEnd)){
                     inxEnd = drivingLine.getBusDepartures().indexOf(busDeparture);
                     kmEnd = busDeparture.getKm();
                 }
             }
             if (inxStart < inxEnd){
-                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDepartureId, busDepartureSearchRequest.cityStart, busDepartureSearchRequest.cityEnd,new Date(), new Date(), kmEnd - kmStart));
+                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDepartureId, busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),new Date(), new Date(), kmEnd - kmStart));
             }
         }
 
