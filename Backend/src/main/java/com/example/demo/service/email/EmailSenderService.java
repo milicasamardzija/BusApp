@@ -37,14 +37,14 @@ public class EmailSenderService {
             model.put("name", passenger.getName() + " " + passenger.getSurname());
             MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
-            ClassPathResource pdf = new ClassPathResource("static/ticket.pdf");
+            ClassPathResource pdf = new ClassPathResource("static/karta.pdf");
             Template template = configuration.getTemplate("email.ftl");
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
             helper.setTo(passenger.getEmail());
             helper.setFrom("sammilica99@gmail.com");
             helper.setSubject("Ticket");
             helper.setText(html, true);
-            helper.addAttachment("ticket.pdf", pdf);
+            helper.addAttachment("karta.pdf", pdf);
             mailSender.send(message);
             System.out.println("Poslao sam mejl.");
         } catch (MessagingException | IOException  e) {

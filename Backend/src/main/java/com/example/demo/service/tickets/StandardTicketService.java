@@ -67,7 +67,7 @@ public class StandardTicketService {
         Map<String, Object> data = new HashMap<>();
         data.put("passenger", passenger);
         data.put("standardTicket", standardTicket);
-        pdfGenerateService.generatePdfFile("ticketTemplate", data, "ticket.pdf");
+        pdfGenerateService.generatePdfFile("ticketTemplate", data, "karta.pdf");
     }
 
     public List<StandardTicket> getPreviousTickets(User user) {
