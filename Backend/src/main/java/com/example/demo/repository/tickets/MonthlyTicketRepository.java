@@ -12,8 +12,8 @@ import java.util.List;
 public interface MonthlyTicketRepository extends JpaRepository<MonthlyTicket, Integer> {
 
     MonthlyTicket findById(int id);
-    @Query("select mt from MonthlyTicket mt where mt.passenger.id = ?1 and mt.approved = true")
-    MonthlyTicket getMonthlyTicketByUser(int id);
+    @Query("select mt from MonthlyTicket mt where mt.passenger.id = ?1 and mt.approved = true and mt.dateExpiration > ?2")
+    List<MonthlyTicket> getMonthlyTicketByUser(int id, Date date);
     @Query("select mt from MonthlyTicket mt where mt.approved = false")
     List<MonthlyTicket> getRequests();
 }

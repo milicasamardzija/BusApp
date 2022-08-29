@@ -26,12 +26,16 @@ public class MonthlyTicketController {
         return new ResponseEntity<>(this.monthlyTicketService.getRequests(), HttpStatus.OK);
     }
 
+    @GetMapping(value = "/currentMonthlyTicket/{id}")
+    public ResponseEntity<MonthlyTicket> currentMonthlyTicket(@PathVariable int id){
+        return new ResponseEntity<>(this.monthlyTicketService.getMonthlyTicketById(id), HttpStatus.OK);
+    }
 
-    @GetMapping(value = "/currentMonthlyTicket")
-    public ResponseEntity<MonthlyTicket> getMonthlyTicket(){
+    @GetMapping(value = "/currentMonthlyTickets")
+    public ResponseEntity<List<MonthlyTicket>> getMonthlyTicket(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
-        MonthlyTicket ret = this.monthlyTicketService.getMonthlyTicket(user);
+        List<MonthlyTicket> ret = this.monthlyTicketService.getMonthlyTicket(user);
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 

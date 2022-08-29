@@ -66,8 +66,8 @@ public class MonthlyTicketService {
         pdfGenerateService.generatePdfFile("ticketTemplate", data, "ticket.pdf");
     }
 
-    public MonthlyTicket getMonthlyTicket(User user) {
-        return this.monthlyTicketRepository.getMonthlyTicketByUser(user.getId());
+    public List<MonthlyTicket> getMonthlyTicket(User user) {
+        return this.monthlyTicketRepository.getMonthlyTicketByUser(user.getId(), new Date());
     }
 
     public List<MonthlyTicket> getRequests() {
@@ -82,5 +82,9 @@ public class MonthlyTicketService {
         this.generatePdf(monthlyTicket.getPassenger(), monthlyTicket);
         this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
         return monthlyTicket;
+    }
+
+    public MonthlyTicket getMonthlyTicketById(int id) {
+        return this.monthlyTicketRepository.findById(id);
     }
 }
