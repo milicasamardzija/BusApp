@@ -1,0 +1,27 @@
+.inputField{
+    width: 95%;
+}
+
+p{
+    margin-top: 2%;
+}
+
+.buttonYes {
+    background-color: #4775a0;
+    color: white;
+    margin-right: 10%;
+}
+
+.buttonNo {
+    background-color: white;
+    color: #4775a0;
+}
+
+.actions{
+    margin-top: 5%;
+    margin-left: 35%;
+}
+
+.title{
+    color: #4775a0;;
+}

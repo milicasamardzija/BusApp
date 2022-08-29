@@ -24,6 +24,8 @@ import { PassengerStatisticsComponent } from './passenger-statistics/passenger-s
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
 import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/passenger-previous-tickets.component';
 import { PassengerHomePageComponent } from './passenger-home-page/passenger-home-page.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { PassengerHomePageComponent } from './passenger-home-page/passenger-home
     CommentsComponent,
     PassengerMonthlyTicketComponent,
     PassengerStatisticsComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
