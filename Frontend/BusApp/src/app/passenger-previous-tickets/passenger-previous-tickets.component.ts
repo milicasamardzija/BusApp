@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MonthlyService } from '../passenger-monthly-ticket/monthly.service';
 import { StandardTicketsService } from './standard-tickets.service';
 
 @Component({
@@ -7,18 +8,28 @@ import { StandardTicketsService } from './standard-tickets.service';
   styleUrls: ['./passenger-previous-tickets.component.css']
 })
 export class PassengerPreviousTicketsComponent implements OnInit {
-  tickets!: any[];
+  ticketsStandard!: any[];
+  ticketsMonthly!: any[];
 
-  constructor(private standardTicketsService: StandardTicketsService) { }
+  constructor(private standardTicketsService: StandardTicketsService, private monthlyTicketService: MonthlyService) { }
 
   ngOnInit(): void {
-    this.getTickets();
+    this.getStandardTickets();
+    this.getMonthlyTickets();
   }
 
-  getTickets(){
+  getStandardTickets(){
     this.standardTicketsService.getPreviousTickets().subscribe(
       response => {
-        this.tickets = response;
+        this.ticketsStandard = response;
+      }
+    );
+  }
+
+  getMonthlyTickets(){
+    this.monthlyTicketService.getPreviousTickets().subscribe(
+      response => {
+        this.ticketsMonthly = response;
       }
     );
   }

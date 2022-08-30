@@ -85,4 +85,15 @@ public class MonthlyTicketService {
     public MonthlyTicket getMonthlyTicketById(int id) {
         return this.monthlyTicketRepository.findById(id);
     }
+
+    public List<MonthlyTicket> previousTickets(User user) {
+        return this.monthlyTicketRepository.previousTickets(user.getId(), new Date());
+    }
+
+    public void sendTicketToMail(int id) {
+        MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
+        this.QRCodeGenerator.getQrCode(monthlyTicket.getId());
+        this.generatePdf(monthlyTicket.getPassenger(), monthlyTicket);
+        this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
+    }
 }

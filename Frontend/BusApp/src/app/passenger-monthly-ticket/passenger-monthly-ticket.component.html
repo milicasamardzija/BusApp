@@ -1,1 +1,29 @@
-<p>passenger-monthly-ticket works!</p>
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Vazece mesecne karte</i></p>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Datum izdavanja</th>
+        <th scope="col">Datum prestanka vazenja</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Pocetno mesto</th>
+        <th scope="col">Krajnje mesto</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let t of tickets">
+        <td>{{t.dateIssued}}</td>
+        <td>{{t.dateExpiration}}</td>
+        <td>{{t.price}}</td>
+        <td>{{t.cityStart}}</td>
+        <td>{{t.cityEnd}}</td>
+        <td>
+          <button mat-raised-button class="button" (click)="sendTicket(t.id)">Posalji kartu na email</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+</div>
+

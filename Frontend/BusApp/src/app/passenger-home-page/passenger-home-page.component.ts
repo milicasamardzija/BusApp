@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./passenger-home-page.component.css']
 })
 export class PassengerHomePageComponent implements OnInit {
-  see = "STAT";
+  see = "MESECNA";
 
   constructor() { }
 

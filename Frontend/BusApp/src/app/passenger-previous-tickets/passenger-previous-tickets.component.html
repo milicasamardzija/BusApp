@@ -1,7 +1,7 @@
 <div style="height: 60px;"></div>
 <div>
 <p class="text"><i>Ranije kupljene karte</i></p>
-<table class="table table-hover">
+<table class="table table-hover" *ngIf="ticketsStandard.length > 0">
   <thead>
       <tr>
         <th scope="col">Datum izdavanja</th>
@@ -13,12 +13,33 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let t of tickets">
+      <tr *ngFor = "let t of ticketsStandard">
         <td>{{t.dateIssued}}</td>
         <td>{{t.price}}</td>
         <td>{{t.cityStart}}</td>
         <td>{{t.cityEnd}}</td>
         <td>{{t.timeStart}}</td>
+        <td>{{t.ticketType}}</td>
+      </tr>
+    </tbody>
+</table>
+
+<table class="table table-hover" *ngIf="ticketsMonthly.length > 0" style="margin-top:3%">
+  <thead>
+      <tr>
+        <th scope="col">Datum izdavanja</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Pocetno mesto</th>
+        <th scope="col">Krajnje mesto</th>
+        <th scope="col">Tip karte</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let t of ticketsMonthly">
+        <td>{{t.dateIssued}}</td>
+        <td>{{t.price}}</td>
+        <td>{{t.cityStart}}</td>
+        <td>{{t.cityEnd}}</td>
         <td>{{t.ticketType}}</td>
       </tr>
     </tbody>

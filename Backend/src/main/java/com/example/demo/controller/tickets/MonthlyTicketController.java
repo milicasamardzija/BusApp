@@ -39,6 +39,22 @@ public class MonthlyTicketController {
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
+    @GetMapping(value="/previousTickets")
+    public ResponseEntity<List<MonthlyTicket>> previousTickets(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        List<MonthlyTicket> ret = this.monthlyTicketService.previousTickets(user);
+        return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
+
+    @GetMapping(value="/sendTicketToMail/{id}")
+    public ResponseEntity<HttpStatus> sendTicketToMail(@PathVariable int id){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        this.monthlyTicketService.sendTicketToMail(id);
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<HttpStatus> addTicket(@RequestBody MonthlyTicketRequest ticket){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

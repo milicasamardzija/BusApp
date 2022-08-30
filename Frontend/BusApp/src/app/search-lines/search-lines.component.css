@@ -9,11 +9,19 @@
     margin-left: 2%;
     margin-right: 2%;
 }
+
 .example-card{
     background-color: aliceblue;
 }
+
 .searchButton{
     background-color: #4775a0;
     color: white;
     width: 60%;
 }
+
+.button {
+    background-color: #4775a0;
+    color: white;
+}
+
