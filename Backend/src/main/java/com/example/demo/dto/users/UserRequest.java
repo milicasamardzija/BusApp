@@ -12,6 +12,7 @@ public class UserRequest {
     public String city;
     public String street;
     public String number;
+    public String image;
 
     public UserRequest() {}
 }

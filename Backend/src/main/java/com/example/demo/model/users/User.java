@@ -38,6 +38,8 @@ public class User implements UserDetails {
 	private Address address;
 	@Column(name = "enabled")
 	private boolean enabled;
+	@Column(length = 255)
+	private String picture;
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "role_id")
@@ -143,5 +145,13 @@ public class User implements UserDetails {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public String getPicture() {
+		return picture;
+	}
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 }

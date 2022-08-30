@@ -5,6 +5,7 @@ import { PassengerHomePageComponent } from './passenger-home-page/passenger-home
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
 import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/passenger-previous-tickets.component';
 import { PassengerStatisticsComponent } from './passenger-statistics/passenger-statistics.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -23,6 +24,9 @@ const routes: Routes = [
       },
       {
         path:'tickets', component: PassengerPreviousTicketsComponent
+      },
+      {
+        path:'profile', component: UserProfileComponent
       }
     ]
   }

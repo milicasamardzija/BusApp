@@ -23,7 +23,7 @@ export class SearchLinesComponent implements OnInit {
   constructor(private busLinesService : BusLinesService, private standardTicketService: StandardTicketsService, private monthlyTicketService: MonthlyService) { }
 
   ngOnInit(): void {
-      this.role = localStorage.getItem('role') || "";
+    this.role = localStorage.getItem('role') || "";
   }
 
   search(){

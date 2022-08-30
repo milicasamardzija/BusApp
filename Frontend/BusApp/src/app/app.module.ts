@@ -27,6 +27,8 @@ import { PassengerHomePageComponent } from './passenger-home-page/passenger-home
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UserProfileChangeComponent } from './user-profile-change/user-profile-change.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,8 @@ import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
     LoginComponent,
     RegisterComponent,
     UserNavBarComponent,
+    UserProfileComponent,
+    UserProfileChangeComponent,
   ],
   imports: [
     BrowserModule,

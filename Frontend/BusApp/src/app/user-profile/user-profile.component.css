@@ -1,0 +1,16 @@
+.text{
+    color: black;
+    font-size: medium;
+    margin-left: 5%;
+}
+
+.button {
+    background-color: #4775a0;
+    color: white;
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.img{
+    margin-left: 5%;
+}

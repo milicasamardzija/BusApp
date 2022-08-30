@@ -1,11 +1,11 @@
-thead {
+table {
     width: 90%;
     margin-left: 5%;
-    color: #434343;;
+    color: #434343;
     font-size: medium;
 }
 
-table {
+thead {
     color:  #4775a0;
 }
 

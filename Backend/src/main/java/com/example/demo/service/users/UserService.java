@@ -40,7 +40,7 @@ public class UserService {
         u.setRole(role);
 
         u.setPassword(passwordEncoder.encode(user.password));
-        u.setName(user.password);
+        u.setName(user.name);
         u.setSurname(user.surname);
         u.setTelephone(user.telephone);
         u.setEmail(user.email);
@@ -50,10 +50,22 @@ public class UserService {
         return u;
     }
 
-    public String generateCode() {
-        //user request code + email
-        //save
-        //return code
-        return "";
+    public void update(UserRequest updatedUser) {
+        User user = this.userRepository.findByEmail(updatedUser.email);
+        Role role = roleService.findByName(updatedUser.role);
+        if (role == null) {
+            role = new Role(updatedUser.role);
+            roleService.save(role);
+        }
+        user.setRole(role);
+        user.setPicture(updatedUser.image);
+        user.setPassword(passwordEncoder.encode(updatedUser.password));
+        user.setName(updatedUser.name);
+        user.setSurname(updatedUser.surname);
+        user.setTelephone(updatedUser.telephone);
+        user.setEmail(updatedUser.email);
+        user.setEnabled(true);
+        user.setAddress(addressService.save(new Address(updatedUser.country, updatedUser.city, updatedUser.street, updatedUser.number)));
+        this.userRepository.save(user);
     }
 }

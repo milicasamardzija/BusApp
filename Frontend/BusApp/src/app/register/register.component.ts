@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import Swal from 'sweetalert2';
 import { AuthService } from '../login/auth.service';
 import { User } from '../model/User';
 
@@ -20,6 +21,7 @@ export class RegisterComponent implements OnInit {
     this.authService.register(this.user).subscribe(
       response => {
         console.log(response);
+        Swal.fire('Uspesno!', 'Uspesno ste se registrovali.', 'success');
       }
     );
     this.dialogRef.close();
