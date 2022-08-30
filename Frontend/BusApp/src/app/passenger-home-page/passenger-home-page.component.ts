@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-passenger-home-page',
@@ -6,31 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./passenger-home-page.component.css']
 })
 export class PassengerHomePageComponent implements OnInit {
-  see = "MESECNA";
 
-  constructor() { }
+  constructor(private route: ActivatedRoute,private router: Router) { }
 
   ngOnInit(): void {
+    this.router.navigate(['passenger/lines']);
   }
-
-  goToPolasci(){
-    this.see = "POLASCI"
-  }
-
-  goToKomentari(){
-    this.see = "KOMENTARI"
-  }
-
-  goToMesecna(){
-    this.see = "MESECNA"
-  }
-
-  goToKarte(){
-    this.see = "KARTE"
-  }
-
-  goToStat(){
-    this.see = "STAT"
-  }
-
 }

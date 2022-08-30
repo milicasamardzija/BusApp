@@ -4,41 +4,28 @@
             <img class="avatar mat-elevation-z8" src="https://source.unsplash.com/c_GmwfHBDzk/200x200" />
             <h4 class="name">John Smith</h4>
             <mat-divider></mat-divider>
-            <button mat-button class="menu-button" (click)="goToPolasci()">
+            <button mat-button class="menu-button" [routerLink]="['lines']">
                 <mat-icon>directions_bus</mat-icon>
                 <span>Polasci</span>
             </button>
-            <button mat-button class="menu-button" (click)="goToMesecna()">
+            <button mat-button class="menu-button" [routerLink]="['monthlyTickets']">
                 <mat-icon>card_travel</mat-icon>
                 <span>Mesecna karta</span>
             </button>
-            <button mat-button class="menu-button" (click)="goToKarte()">
+            <button mat-button class="menu-button" [routerLink]="['tickets']">
                 <mat-icon>list_alt</mat-icon>
                 <span>Ranije karte</span>
             </button>
-            <button mat-button class="menu-button" (click)="goToStat()">
+            <button mat-button class="menu-button" [routerLink]="['statistics']">
                 <mat-icon>bar_chart</mat-icon>
                 <span>Statistika</span>
             </button>
             <mat-divider></mat-divider>
     </mat-sidenav>
     <mat-sidenav-content>
+        <router-outlet></router-outlet>
         <div class="content mat-elevation-z4">
-            <div *ngIf="see==='POLASCI'">
-                <app-all-bus-lines></app-all-bus-lines>
-            </div>
-            <div *ngIf="see==='KOMENTARI'">
-                <app-comments></app-comments>
-            </div>
-            <div *ngIf="see==='MESECNA'">
-                <app-passenger-monthly-ticket></app-passenger-monthly-ticket>
-            </div>
-            <div *ngIf="see==='KARTE'">
-                <app-passenger-previous-tickets></app-passenger-previous-tickets>
-            </div>
-            <div *ngIf="see==='STAT'">
-                <app-passenger-statistics></app-passenger-statistics>
-            </div>
+            <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
