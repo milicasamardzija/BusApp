@@ -26,6 +26,7 @@ import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/
 import { PassengerHomePageComponent } from './passenger-home-page/passenger-home-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { RegisterComponent } from './register/register.component';
     PassengerStatisticsComponent,
     LoginComponent,
     RegisterComponent,
+    UserNavBarComponent,
   ],
   imports: [
     BrowserModule,
