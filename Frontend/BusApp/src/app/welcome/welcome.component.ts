@@ -24,8 +24,8 @@ export class WelcomeComponent implements OnInit {
 
   signUp(){
     const dialogRef = this.dialog.open(RegisterComponent, {
-      width: '700px',
-      height: '680px',
+      width: '720px',
+      height: '700px',
     }); 
   }
 }

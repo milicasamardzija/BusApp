@@ -1,0 +1,22 @@
+.chartFirst{
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 3rem;
+}
+
+.chartSecond{
+    width: 70%;
+    margin-top: 3rem
+}
+
+.card{
+    margin-right: 100px;
+    margin-left: 100px;
+    background-color: aliceblue;
+    height: 30rem;
+}
+p{
+    color: #4775a0;
+    margin-left: 7%;
+    margin-bottom: 2%;
+}

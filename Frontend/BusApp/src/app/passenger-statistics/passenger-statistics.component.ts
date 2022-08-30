@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Chart, registerables} from 'chart.js'
+import { TicketsService } from './tickets.service';
 
 @Component({
   selector: 'app-passenger-statistics',
@@ -7,51 +8,51 @@ import {Chart, registerables} from 'chart.js'
   styleUrls: ['./passenger-statistics.component.css']
 })
 export class PassengerStatisticsComponent implements OnInit {
-  chartOfferInACtiveTender: any;
-  chartWinnings: any;
-  
-  chartActiveTenderOffersStatX: any;
-  chartActiveTenderOffersStatY: any;
+  chartNumberOfTicketsPassenger: any;
+  chartPriceOfTicketsPassenger: any;
 
-  chartWinningsStat: any
+  numberOfTicketsData: any;
+  priceOfTicketsData: any;
 
-  constructor() { }
+  constructor(private ticketsService : TicketsService) { }
 
   ngOnInit(): void {
-    setTimeout(() =>{
-      this.chartOfferInACtiveTender = document.getElementById('offerInACtiveTenderChart');
-      this.chartWinnings = document.getElementById('winningPriceChart');
-      Chart.register(...registerables);
+
+    this.ticketsService.getStatNumberOfTicketsPassenger().subscribe(
+      response => {
+        this.numberOfTicketsData = response;
+        this.chartNumberOfTicketsPassenger = document.getElementById('offerInACtiveTenderChart');
+        Chart.register(...registerables);
       this.loadChartOffesrInACtiveTender();
-      this.loadChartWinnings();
-    }, 1000
+      }
+    )
+    this.ticketsService.getStatPriceOfTicketsPassenger().subscribe(
+      response => {
+        this.priceOfTicketsData = response;
+        this.chartPriceOfTicketsPassenger = document.getElementById('winningPriceChart');
+        Chart.register(...registerables);
+        this.loadChartWinnings();
+      }
     )
   }
 
 
   loadChartOffesrInACtiveTender()  : void {
-    new Chart( this.chartOfferInACtiveTender, {
+    new Chart( this.chartNumberOfTicketsPassenger, {
       type: 'bar',
       data: {
-          labels: [10,20,30,50,65,10],
+          labels: this.numberOfTicketsData.ticketTypes,
           datasets: [{
-              label: '#ponude u toku aktivnog tendera',
-              data: [10,20,30,50,65,10],
+              label: '#broj kupljenih karata',
+              data: this.numberOfTicketsData.numberOfTickets,
               backgroundColor: [
-                  'rgba(255, 99, 132, 0.2)',
+                'rgb(255, 182, 102)',
                   'rgba(54, 162, 235, 0.2)',
-                  'rgba(255, 206, 86, 0.2)',
-                  'rgba(75, 192, 192, 0.2)',
-                  'rgba(153, 102, 255, 0.2)',
-                  'rgba(255, 159, 64, 0.2)'
               ],
               borderColor: [
-                  'rgba(255, 99, 132, 1)',
+                'rgb(255, 182, 102)',
                   'rgba(54, 162, 235, 1)',
-                  'rgba(255, 206, 86, 1)',
-                  'rgba(75, 192, 192, 1)',
-                  'rgba(153, 102, 255, 1)',
-                  'rgba(255, 159, 64, 1)'
+                  'rgb(102, 178, 255)',
               ],
               borderWidth: 1
           }]
@@ -68,20 +69,16 @@ export class PassengerStatisticsComponent implements OnInit {
   }
 
   loadChartWinnings() : void {
-    new Chart( this.chartWinnings,{
+    new Chart( this.chartPriceOfTicketsPassenger,{
       type: 'pie',
       data: {
-        labels: [
-          'Osvojila',
-          'Izgubila'
-        ],
+        labels: this.priceOfTicketsData.ticketTypes,
         datasets: [{
-          label: 'Pobede u tenderima',
-          data: [10,65,10],
+          label: 'Potroseno novca na karte',
+          data: this.priceOfTicketsData.numberOfTickets,
           backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)'
+            'rgb(255, 182, 102)',
+            'rgb(102, 178, 255)'
           ],
           hoverOffset: 4
         }]
