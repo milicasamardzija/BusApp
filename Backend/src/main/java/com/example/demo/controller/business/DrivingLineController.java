@@ -39,14 +39,14 @@ public class DrivingLineController {
     }
 
     @PutMapping
-    public ResponseEntity<HttpStatus> changeDrivingLine(@RequestBody DrivingLineRequest bus){
-
+    public ResponseEntity<HttpStatus> changeDrivingLine(@RequestBody DrivingLineRequest drivingLineRequest){
+        this.drivingLineService.changeDrivingLine(drivingLineRequest);
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<HttpStatus> delete(@PathVariable int id){
-
+        this.drivingLineService.deleteById(id);
         return new ResponseEntity<>( HttpStatus.OK);
     }
 

@@ -16,18 +16,6 @@ public class QRCodeGenerator {
 
     private static final String QR_CODE_IMAGE_PATH = "./src/main/resources/static/images/QRCode";
 
-    public void getQrCode(int id){
-
-        String link="http://localhost:4200/ticket/" + id;
-        try {
-            System.out.println("Generisem QR kod.");
-            QRCodeGenerator.generateQRCodeImage(link,250,250,QR_CODE_IMAGE_PATH + ".png");
-            System.out.println("Iznegerisao sam QR kod.");
-        } catch (WriterException | IOException e) {
-            e.printStackTrace();
-        }
-     }
-
     public static void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -36,5 +24,27 @@ public class QRCodeGenerator {
         Path path = FileSystems.getDefault().getPath(filePath);
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
+    }
+
+    public void getQrCodeForMonthlyTicket(int id) {
+        String link="http://localhost:4200/monthlyTicket/checkTicket/" + id;
+        try {
+            System.out.println("Generisem QR kod.");
+            QRCodeGenerator.generateQRCodeImage(link,250,250,QR_CODE_IMAGE_PATH + ".png");
+            System.out.println("Iznegerisao sam QR kod.");
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getQrCodeForStandardTicket(int id) {
+        String link="http://localhost:4200/standardTicket/checkTicket/" + id;
+        try {
+            System.out.println("Generisem QR kod.");
+            QRCodeGenerator.generateQRCodeImage(link,250,250,QR_CODE_IMAGE_PATH + ".png");
+            System.out.println("Iznegerisao sam QR kod.");
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
     }
 }

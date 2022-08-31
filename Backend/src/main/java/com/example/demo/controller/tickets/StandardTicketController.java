@@ -10,10 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,12 +33,16 @@ public class StandardTicketController {
         return new ResponseEntity<>(this.standardTicketService.getPreviousTickets(user), HttpStatus.OK);
     }
 
-
     @PostMapping
     public ResponseEntity<HttpStatus> addTicket(@RequestBody StandardTicketRequest ticket){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
         this.standardTicketService.addTicket(ticket, user);
         return new ResponseEntity<>( HttpStatus.OK);
+    }
+
+    @GetMapping(value = "checkTicket/{id}")
+    public ResponseEntity<String> checkTicket (@PathVariable int id){
+        return new ResponseEntity<>(this.standardTicketService.checkTicket(id), HttpStatus.OK);
     }
 }

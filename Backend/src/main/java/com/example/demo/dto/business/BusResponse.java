@@ -10,4 +10,14 @@ public class BusResponse {
     public String manufacturer;
     public double kilometersTraveled;
     public Date endRegistrationDate;
+
+    public BusResponse(int id, String registrationNumber, int garageNumber, int seatNumber, String manufacturer, double kilometersTraveled, Date endRegistrationDate) {
+        this.id = id;
+        this.registrationNumber = registrationNumber;
+        this.garageNumber = garageNumber;
+        this.seatNumber = seatNumber;
+        this.manufacturer = manufacturer;
+        this.kilometersTraveled = kilometersTraveled;
+        this.endRegistrationDate = endRegistrationDate;
+    }
 }

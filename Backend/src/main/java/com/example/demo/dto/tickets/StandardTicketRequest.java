@@ -7,4 +7,5 @@ public class StandardTicketRequest {
     public String cityEnd;
     public Date timeStart;
     public double price;
+    public int activeDepartureId;
 }

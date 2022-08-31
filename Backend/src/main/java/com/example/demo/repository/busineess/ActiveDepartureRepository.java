@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface ActiveDepartureRepository extends JpaRepository<ActiveDeparture, Integer> {
     @Query("select a from ActiveDeparture a left join fetch a.drivingLine line where line.id = ?1 and a.dayOfWeek = ?2")
     ActiveDeparture findByDrivingLine(int id, DaysOfWeek day);
+    ActiveDeparture findById(int id);
 }

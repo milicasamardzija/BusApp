@@ -7,6 +7,7 @@ import java.util.List;
 
 public class DrivingLineRequest {
 
+    public int id;
     public String name;
     public Date dateStart;
     public Date dateEnd;

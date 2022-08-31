@@ -18,16 +18,31 @@ public class BusService {
         return this.busRepository.findAll();
     }
 
-    public void addBus(BusRequest bus) {
-
+    public void addBus(BusRequest busRequest) {
+        Bus bus = new Bus();
+        bus.setManufacturer(busRequest.manufacturer);
+        bus.setGarageNumber(busRequest.garageNumber);
+        bus.setKilometersTraveled(busRequest.kilometersTraveled);
+        bus.setSeatNumber(busRequest.seatNumber);
+        bus.setDrivingLines(null);
+        bus.setEndRegistrationDate(busRequest.endRegistrationDate);
+        bus.setRegistrationNumber(busRequest.registrationNumber);
+        this.busRepository.save(bus);
     }
 
-    public void changeBus(BusRequest bus) {
-
+    public void changeBus(BusRequest busRequest) {
+        Bus bus = this.busRepository.findById(busRequest.id);
+        bus.setManufacturer(busRequest.manufacturer);
+        bus.setGarageNumber(busRequest.garageNumber);
+        bus.setKilometersTraveled(busRequest.kilometersTraveled);
+        bus.setSeatNumber(busRequest.seatNumber);
+        bus.setEndRegistrationDate(busRequest.endRegistrationDate);
+        bus.setRegistrationNumber(busRequest.registrationNumber);
+        this.busRepository.save(bus);
     }
 
     public void deleteById(int id) {
-
+        this.busRepository.deleteById(id);
     }
 
     public Bus findById(int busId) {

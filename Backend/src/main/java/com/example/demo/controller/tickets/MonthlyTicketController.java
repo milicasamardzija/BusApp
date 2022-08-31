@@ -67,4 +67,9 @@ public class MonthlyTicketController {
     public ResponseEntity<MonthlyTicket> monthlyTicketApprove(@PathVariable int id){
         return new ResponseEntity<>(this.monthlyTicketService.monthlyTicketApprove(id), HttpStatus.OK);
     }
+
+    @GetMapping(value = "checkTicket/{id}")
+    public ResponseEntity<String> checkTicket (@PathVariable int id){
+        return new ResponseEntity<>(this.monthlyTicketService.checkTicket(id), HttpStatus.OK);
+    }
 }

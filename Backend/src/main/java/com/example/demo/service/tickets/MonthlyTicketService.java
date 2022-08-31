@@ -2,10 +2,13 @@ package com.example.demo.service.tickets;
 
 import com.example.demo.dto.tickets.MonthlyTicketRequest;
 import com.example.demo.enums.TicketType;
+import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.model.tickets.MonthlyTicket;
+import com.example.demo.model.tickets.StandardTicket;
 import com.example.demo.model.users.User;
 import com.example.demo.model.users.client.Passenger;
 import com.example.demo.repository.tickets.MonthlyTicketRepository;
+import com.example.demo.service.business.ActiveDepartureService;
 import com.example.demo.service.email.EmailSenderService;
 import com.example.demo.service.pdf.PdfGenerateService;
 import com.example.demo.service.users.client.PassengerService;
@@ -27,6 +30,8 @@ public class MonthlyTicketService {
     private com.example.demo.service.pdf.QRCodeGenerator QRCodeGenerator;
     @Autowired
     private EmailSenderService emailSenderService;
+    @Autowired
+    private ActiveDepartureService activeDepartureService;
 
     public MonthlyTicket getById(int idTicket) {
         return this.monthlyTicketRepository.findById(idTicket);
@@ -34,6 +39,10 @@ public class MonthlyTicketService {
 
     public void addTicket(MonthlyTicketRequest ticket, User user) {
         Passenger passenger = this.passengerService.findByIdWithTickets(user.getId());
+
+        ActiveDeparture activeDeparture = this.activeDepartureService.getById(ticket.activeDepartureId);
+        activeDeparture.setSeats(activeDeparture.getSeats() - 1);
+        this.activeDepartureService.save(activeDeparture);
 
         MonthlyTicket monthlyTicket = new MonthlyTicket();
         monthlyTicket.setTicketType(TicketType.MESECNA_KARTA);
@@ -76,7 +85,7 @@ public class MonthlyTicketService {
         MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
         monthlyTicket.setApproved(true);
         this.monthlyTicketRepository.save(monthlyTicket);
-        this.QRCodeGenerator.getQrCode(monthlyTicket.getId());
+        this.QRCodeGenerator.getQrCodeForMonthlyTicket(monthlyTicket.getId());
         this.generatePdf(monthlyTicket.getPassenger(), monthlyTicket);
         this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
         return monthlyTicket;
@@ -92,8 +101,21 @@ public class MonthlyTicketService {
 
     public void sendTicketToMail(int id) {
         MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
-        this.QRCodeGenerator.getQrCode(monthlyTicket.getId());
+        this.QRCodeGenerator.getQrCodeForMonthlyTicket(monthlyTicket.getId());
         this.generatePdf(monthlyTicket.getPassenger(), monthlyTicket);
         this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
+    }
+
+    public String checkTicket(int id) {
+        MonthlyTicket monthlyTicket = this.monthlyTicketRepository.getById(id);
+        String ret = "";
+
+        if (monthlyTicket.getApproved() && monthlyTicket.getDateExpiration().before(new Date())){
+            return "Karta je uspesno verifikovana!";
+        } else if (monthlyTicket.getDateExpiration().after(new Date())){
+            return "Rok vazenja ove karte je istekao!";
+        }
+
+        return ret;
     }
 }

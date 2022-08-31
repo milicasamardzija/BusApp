@@ -25,6 +25,7 @@ export class StandardTicketsService {
       "cityEnd": ticket.cityEnd,
       "timeStart": ticket.timeStart,
       "price": ticket.price,
+      "activeDepartureId": ticket.activeDepartureId
     }
     , {"headers":headers});
   }

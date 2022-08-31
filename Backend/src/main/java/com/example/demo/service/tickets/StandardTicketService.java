@@ -2,10 +2,12 @@ package com.example.demo.service.tickets;
 
 import com.example.demo.dto.tickets.StandardTicketRequest;
 import com.example.demo.enums.TicketType;
+import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.model.tickets.StandardTicket;
 import com.example.demo.model.users.User;
 import com.example.demo.model.users.client.Passenger;
 import com.example.demo.repository.tickets.StandardTicketRepository;
+import com.example.demo.service.business.ActiveDepartureService;
 import com.example.demo.service.email.EmailSenderService;
 import com.example.demo.service.pdf.PdfGenerateService;
 import com.example.demo.service.pdf.QRCodeGenerator;
@@ -30,6 +32,8 @@ public class StandardTicketService {
     private QRCodeGenerator QRCodeGenerator;
     @Autowired
     private EmailSenderService emailSenderService;
+    @Autowired
+    private ActiveDepartureService activeDepartureService;
 
     public List<StandardTicket> findAll() {
         return this.standardTicketRepository.findAll();
@@ -37,6 +41,10 @@ public class StandardTicketService {
 
     public void addTicket(StandardTicketRequest ticket, User user) {
         Passenger passenger = this.passengerService.findByIdWithTickets(user.getId());
+
+        ActiveDeparture activeDeparture = this.activeDepartureService.getById(ticket.activeDepartureId);
+        activeDeparture.setSeats(activeDeparture.getSeats() - 1);
+        this.activeDepartureService.save(activeDeparture);
 
         StandardTicket standardTicket = new StandardTicket();
         standardTicket.setTicketType(TicketType.STANDARDNA_KARTA);
@@ -58,7 +66,7 @@ public class StandardTicketService {
         passenger.getTickets().add(standardTicket);
         this.passengerService.update(passenger);
 
-        this.QRCodeGenerator.getQrCode(standardTicket.getId());
+        this.QRCodeGenerator.getQrCodeForStandardTicket(standardTicket.getId());
         this.generatePdf(passenger, standardTicket);
         this.emailSenderService.sendEmailWithPdf(passenger);
     }
@@ -72,5 +80,22 @@ public class StandardTicketService {
 
     public List<StandardTicket> getPreviousTickets(User user) {
         return this.standardTicketRepository.getPreviousTickets(user.getId(), new Date());
+    }
+
+    public String checkTicket(int id) {
+        StandardTicket standardTicket = this.standardTicketRepository.getById(id);
+        String ret = "";
+
+        if (standardTicket.getDateChecked() == null && standardTicket.getDateExpiration().before(new Date())){
+            standardTicket.setDateChecked(new Date());
+            this.standardTicketRepository.save(standardTicket);
+            return "Karta je uspesno verifikovana!";
+        } else if (standardTicket.getDateChecked() != null && standardTicket.getDateExpiration().before(new Date())){
+            return "Karta je vec iskoriscena!";
+        } else if (standardTicket.getDateExpiration().after(new Date())){
+            return "Rok vazenja ove karte je istekao!";
+        }
+
+        return ret;
     }
 }

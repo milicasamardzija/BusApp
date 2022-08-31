@@ -1,6 +1,7 @@
 package com.example.demo.controller.business;
 
 import com.example.demo.dto.business.BusRequest;
+import com.example.demo.dto.business.BusResponse;
 import com.example.demo.model.business.Bus;
 import com.example.demo.service.business.BusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -19,8 +21,14 @@ public class BusController {
     private BusService busService;
 
     @GetMapping
-    public ResponseEntity<List<Bus>> getAll(){
-        return new ResponseEntity<>(this.busService.getAll(), HttpStatus.OK);
+    public ResponseEntity<List<BusResponse>> getAll(){
+        List<BusResponse> ret = new ArrayList<>();
+
+        for (Bus bus: this.busService.getAll() ) {
+            ret.add(new BusResponse(bus.getId(), bus.getRegistrationNumber(), bus.getGarageNumber(), bus.getSeatNumber(), bus.getManufacturer(), bus.getKilometersTraveled(), bus.getEndRegistrationDate()));
+        }
+
+        return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
     @PostMapping

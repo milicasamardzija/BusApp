@@ -5,10 +5,7 @@ import com.example.demo.dto.business.BusDepartureSearchRequest;
 import com.example.demo.dto.business.BusDepartureSearchResponse;
 import com.example.demo.dto.business.DrivingLineRequest;
 import com.example.demo.enums.DaysOfWeek;
-import com.example.demo.model.business.ActiveDeparture;
-import com.example.demo.model.business.Bus;
-import com.example.demo.model.business.BusDeparture;
-import com.example.demo.model.business.DrivingLine;
+import com.example.demo.model.business.*;
 import com.example.demo.repository.busineess.DrivingLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +25,8 @@ public class DrivingLineService {
     private BusDepartureService busDepartureService;
     @Autowired
     private ActiveDepartureService activeDepartureService;
+    @Autowired
+    private PriceService priceService;
 
     public List<DrivingLine> getAll() {
         return this.drivingLineRepository.getAllWithWeeks();
@@ -71,14 +70,15 @@ public class DrivingLineService {
     }
 
     public List<BusDepartureSearchResponse> searchDrivingLines(BusDepartureSearchRequest busDepartureSearchRequest) {
+        Price price = this.priceService.getById(1);
         List<BusDepartureSearchResponse> ret = new ArrayList<>();
         int inxStart = 0;
         int inxEnd = 0;
-        int activeDepartureId = 0;
+        ActiveDeparture activeDeparture = null;
         double kmStart = 0;
         double kmEnd = 0;
         for (DrivingLine drivingLine: this.drivingLineRepository.getAll(busDepartureSearchRequest.day)) {
-            activeDepartureId = activeDepartureService.findByDrivingLine(drivingLine.getId(), busDepartureSearchRequest.day);
+            activeDeparture = activeDepartureService.findByDrivingLine(drivingLine.getId(), busDepartureSearchRequest.day);
             for (BusDeparture busDeparture: drivingLine.getBusDepartures()) {
                 if (busDeparture.getCity().equalsIgnoreCase(busDepartureSearchRequest.cityStart)){
                     inxStart = drivingLine.getBusDepartures().indexOf(busDeparture);
@@ -90,10 +90,31 @@ public class DrivingLineService {
                 }
             }
             if (inxStart < inxEnd){
-                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDepartureId, busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),new Date(), new Date(), kmEnd - kmStart));
+                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDeparture.getId(), busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),new Date(), new Date(), price.getPricePerKilometer() * (kmEnd - kmStart), price.getPricePerKilometerMonthlyTicket() * (kmEnd - kmStart), activeDeparture.getSeats()));
             }
         }
 
         return ret;
+    }
+
+    public void changeDrivingLine(DrivingLineRequest drivingLineRequest) {
+        DrivingLine drivingLine = this.drivingLineRepository.findById(drivingLineRequest.id);
+        drivingLine.setName(drivingLineRequest.name);
+        drivingLine.setDateStart(drivingLineRequest.dateStart);
+        drivingLine.setDateEnd(drivingLineRequest.dateEnd);
+
+        Bus bus = this.busService.findByIdWithDrivingLines(drivingLineRequest.busId);
+        drivingLine.setBus(bus);
+
+        this.drivingLineRepository.save(drivingLine);
+
+        //sredi
+        //drivingLine.getBusDepartures();
+        //drivingLine.getActiveDepartures();
+
+    }
+
+    public void deleteById(int id) {
+        this.drivingLineRepository.deleteById(id);
     }
 }

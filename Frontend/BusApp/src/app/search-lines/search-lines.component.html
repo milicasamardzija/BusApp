@@ -38,7 +38,8 @@
                 <p><b>Vreme polaska:</b> {{d.timeStart}}</p>
                 <p><b>Vreme dolaska:</b> {{d.timeEnd}}</p>
                 <p><b>Cena standardne karte:</b> {{d.price}}</p>
-                <p><b>Cena mesecne karte:</b> {{d.price}}</p>
+                <p><b>Cena mesecne karte:</b> {{d.priceMonthly}}</p>
+                <p><b>Broj slobodnih sedista:</b>{{d.seats}}</p>
                 <div *ngIf = "role === 'ROLE_PASSENGER'">
                     <button mat-raised-button class="button" (click)="buyStandardTicket(d)">Kupi standardnu kartu</button>
                     <button mat-raised-button class="button" (click)="buyMonthlyTicket(d)" style="margin-left: 3%;">Kupi mesecnu kartu</button>
