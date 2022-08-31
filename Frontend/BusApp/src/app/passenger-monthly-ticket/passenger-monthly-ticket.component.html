@@ -14,8 +14,8 @@
     </thead>
     <tbody>
       <tr *ngFor = "let t of tickets">
-        <td>{{t.dateIssued}}</td>
-        <td>{{t.dateExpiration}}</td>
+        <td>{{t.dateIssued | date}}</td>
+        <td>{{t.dateExpiration | date}}</td>
         <td>{{t.price}}</td>
         <td>{{t.cityStart}}</td>
         <td>{{t.cityEnd}}</td>

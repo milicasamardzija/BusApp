@@ -14,7 +14,7 @@
     </thead>
     <tbody>
       <tr *ngFor = "let t of ticketsStandard">
-        <td>{{t.dateIssued}}</td>
+        <td>{{t.dateIssued | date}}</td>
         <td>{{t.price}}</td>
         <td>{{t.cityStart}}</td>
         <td>{{t.cityEnd}}</td>

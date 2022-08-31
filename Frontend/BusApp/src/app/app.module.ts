@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -36,6 +36,7 @@ import { StaffPassengersComponent } from './staff-passengers/staff-passengers.co
 import { StaffMonthlyTicketsComponent } from './staff-monthly-tickets/staff-monthly-tickets.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminRegistrationRequestsComponent } from './admin-registration-requests/admin-registration-requests.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,8 @@ import { AdminRegistrationRequestsComponent } from './admin-registration-request
     MatSidenavModule,
     MatIconModule,
     MatDividerModule,
+    MatSelectModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
