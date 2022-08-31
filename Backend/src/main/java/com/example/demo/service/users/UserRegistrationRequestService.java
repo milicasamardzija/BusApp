@@ -6,6 +6,8 @@ import com.example.demo.model.users.UserRegistrationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserRegistrationRequestService {
 
@@ -18,6 +20,10 @@ public class UserRegistrationRequestService {
 
     public void save(UserRequest userRequest) {
         this.userRegistrationRequestRepository.save(new UserRegistrationRequest(userRequest.email, userRequest.password, userRequest.name, userRequest.surname, userRequest.role, userRequest.telephone, userRequest.country, userRequest.city, userRequest.street, userRequest.number));
+    }
+
+    public List<UserRegistrationRequest> getAll(){
+        return this.userRegistrationRequestRepository.findAll();
     }
 
     public void deleteByEmail(String email) {

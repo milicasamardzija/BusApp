@@ -16,7 +16,7 @@ public class StaffController {
     private StaffService staffService;
 
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<HttpStatus> confirm(@PathVariable int id) throws InterruptedException {
+    public ResponseEntity<HttpStatus> confirm(@PathVariable int id) {
         staffService.addStaffMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

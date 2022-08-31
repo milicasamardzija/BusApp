@@ -10,6 +10,8 @@ import com.example.demo.service.users.auth.RoleService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -67,5 +69,9 @@ public class UserService {
         user.setEnabled(true);
         user.setAddress(addressService.save(new Address(updatedUser.country, updatedUser.city, updatedUser.street, updatedUser.number)));
         this.userRepository.save(user);
+    }
+
+    public List<User> getAll() {
+        return this.userRepository.findAll();
     }
 }

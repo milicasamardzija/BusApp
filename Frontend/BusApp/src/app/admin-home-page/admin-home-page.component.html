@@ -8,6 +8,14 @@
                 <mat-icon>directions_bus</mat-icon>
                 <span>Polasci</span>
             </button>
+            <button mat-button class="menu-button" [routerLink]="['users']">
+                <mat-icon>people</mat-icon>
+                <span>Korisnici sistema</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="['requests']">
+                <mat-icon>done</mat-icon>
+                <span>Zahtevi za registraciju</span>
+            </button>
             <mat-divider></mat-divider>
     </mat-sidenav>
     <mat-sidenav-content>

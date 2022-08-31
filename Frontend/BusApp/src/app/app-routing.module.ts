@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
+import { AdminRegistrationRequestsComponent } from './admin-registration-requests/admin-registration-requests.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AllBusLinesComponent } from './all-bus-lines/all-bus-lines.component';
 import { PassengerHomePageComponent } from './passenger-home-page/passenger-home-page.component';
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
@@ -58,6 +60,12 @@ const routes: Routes = [
     children: [
       {
         path:'lines', component: AllBusLinesComponent
+      },
+      {
+        path:'users', component: AdminUsersComponent
+      },
+      {
+        path:'requests', component: AdminRegistrationRequestsComponent
       }
     ]  
   }

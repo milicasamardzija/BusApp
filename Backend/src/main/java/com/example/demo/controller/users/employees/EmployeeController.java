@@ -1,12 +1,9 @@
 package com.example.demo.controller.users.employees;
 
-import com.example.demo.dto.users.client.PassengerResponse;
 import com.example.demo.dto.users.employees.EmployeeRequest;
 import com.example.demo.dto.users.employees.EmployeeResponse;
-import com.example.demo.model.users.client.Passenger;
 import com.example.demo.model.users.employees.Employee;
 import com.example.demo.service.users.employees.EmployeeService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
