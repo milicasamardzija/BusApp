@@ -22,9 +22,12 @@ export class LoginComponent implements OnInit {
       response => {
         localStorage.setItem("token", response.accessToken);
         localStorage.setItem("role", response.role);
-        
         if (response.role == "ROLE_PASSENGER"){
           this.router.navigate(['/','passenger']);
+        } else if (response.role == "ROLE_STAFF") {
+          this.router.navigate(['/','staff']);
+        } else if (response.role == "ROLE_ADMIN") {
+          this.router.navigate(['/','admin']);
         }
       }
     );

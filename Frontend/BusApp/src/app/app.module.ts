@@ -29,6 +29,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserNavBarComponent } from './user-nav-bar/user-nav-bar.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileChangeComponent } from './user-profile-change/user-profile-change.component';
+import { StaffHomePageComponent } from './staff-home-page/staff-home-page.component';
+import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,8 @@ import { UserProfileChangeComponent } from './user-profile-change/user-profile-c
     UserNavBarComponent,
     UserProfileComponent,
     UserProfileChangeComponent,
+    StaffHomePageComponent,
+    AdminHomePageComponent,
   ],
   imports: [
     BrowserModule,
