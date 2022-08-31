@@ -21,4 +21,18 @@ export class TicketsService {
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
     return this._http.get("http://localhost:8081/ticket/stat/getStatPriceOfTicketsPassenger", {"headers": headers});
   }
+
+  getStatNumberOfTicketsStaff(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.get("http://localhost:8081/ticket/stat/getStatNumberOfTickets", {"headers": headers});
+  }
+
+  getStatPriceOfTicketsStaffr(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.get("http://localhost:8081/ticket/stat/getStatPriceOfTickets", {"headers": headers});
+  }
 }

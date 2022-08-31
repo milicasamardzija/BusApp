@@ -1,0 +1,32 @@
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Zahtevi za mesecne karte</i></p>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Ime</th>
+        <th scope="col">Prezime</th>
+        <th scope="col">Telefon</th>
+        <th scope="col">Email</th>
+        <th scope="col">Cena</th>
+        <th scope="col">Pocetno mesto</th>
+        <th scope="col">Krajnje mesto</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let t of tickets">
+        <td>{{t.passenger.name}}</td>
+        <td>{{t.passenger.surname}}</td>
+        <td>{{t.passenger.telephone}}</td>
+        <td>{{t.passenger.email}}</td>
+        <td>{{t.price}}</td>
+        <td>{{t.cityStart}}</td>
+        <td>{{t.cityEnd}}</td>
+        <td>
+          <button mat-raised-button class="button" (click)="approveTicket(t.id)">Odobri zahtev</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+</div>

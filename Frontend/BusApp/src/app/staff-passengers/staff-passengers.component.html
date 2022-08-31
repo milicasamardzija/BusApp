@@ -1,0 +1,21 @@
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Putnici</i></p>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Ime</th>
+        <th scope="col">Prezime</th>
+        <th scope="col">Broj telefona</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let p of passengers">
+        <td>{{p.name}}</td>
+        <td>{{p.surname}}</td>
+        <td>{{p.telephone}}</td>
+        <td>{{p.email}}</td>
+      </tr>
+    </tbody>
+</table>

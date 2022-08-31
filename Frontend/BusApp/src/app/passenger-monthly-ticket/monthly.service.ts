@@ -42,4 +42,19 @@ export class MonthlyService {
     , {"headers":headers});
   }
 
+
+  getRequests(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.get<any[]>("http://localhost:8081/monthlyTicket/requests", {"headers":headers});
+  }
+
+  approveTicket(id: number){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.put("http://localhost:8081/monthlyTicket/monthlyTicketApprove/" + id, {"headers":headers});
+  }
+
 }

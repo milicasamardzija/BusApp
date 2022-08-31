@@ -31,6 +31,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserProfileChangeComponent } from './user-profile-change/user-profile-change.component';
 import { StaffHomePageComponent } from './staff-home-page/staff-home-page.component';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
+import { StaffStatisticsComponent } from './staff-statistics/staff-statistics.component';
+import { StaffPassengersComponent } from './staff-passengers/staff-passengers.component';
+import { StaffMonthlyTicketsComponent } from './staff-monthly-tickets/staff-monthly-tickets.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { AdminHomePageComponent } from './admin-home-page/admin-home-page.compon
     UserProfileChangeComponent,
     StaffHomePageComponent,
     AdminHomePageComponent,
+    StaffStatisticsComponent,
+    StaffPassengersComponent,
+    StaffMonthlyTicketsComponent,
   ],
   imports: [
     BrowserModule,
