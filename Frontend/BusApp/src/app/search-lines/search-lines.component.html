@@ -5,11 +5,11 @@
                 <form class="d-flex">
                     <input class="form-control me-2" type="text"  placeholder="Pocetno mesto"  [ngModelOptions]="{standalone: true}" [(ngModel)] = "cityStart">
                     <input class="form-control me-2" type="text" placeholder="Krajnje mesto"  [ngModelOptions]="{standalone: true}" [(ngModel)] = "cityEnd">
-                    
+                    <div style="height: 3rem;font-size: 1rem">
                     <mat-form-field>
                         <mat-label>Dani u nedelji</mat-label>
                         <mat-select [formControl]="days"> 
-                          <mat-select-trigger>
+                          <mat-select-trigger >
                             {{days.value?.[0] || ''}}
                             <span *ngIf="(days.value?.length || 0) > 1"  >
                               (+{{(days.value?.length || 0) - 1}} {{days.value?.length === 2 ? 'other' : 'others'}})
@@ -18,7 +18,7 @@
                           <mat-option *ngFor="let day of daysList" [value]="day">{{day}}</mat-option>
                         </mat-select>
                     </mat-form-field>
-
+                    </div>
                     <button mat-raised-button class="searchButton" (click)="search()">Pretrazi</button>
                     <button *ngIf = "hideThis === true" mat-button class="menu-button" (click)="cancel()">
                         <mat-icon>cancel</mat-icon>

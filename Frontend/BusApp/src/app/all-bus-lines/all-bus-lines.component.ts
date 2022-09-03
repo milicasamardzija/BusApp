@@ -1,4 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { StaffAddDrivingLineComponent } from '../staff-add-driving-line/staff-add-driving-line.component';
 import { BusLinesService } from './bus-lines.service';
 
 @Component({
@@ -9,11 +12,13 @@ import { BusLinesService } from './bus-lines.service';
 export class AllBusLinesComponent implements OnInit {
   lines!: any;
   @Input() hide = false;
+  role!: string;
 
-  constructor(private busLinesService : BusLinesService) { }
+  constructor(private busLinesService : BusLinesService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllLines();
+    this.role = localStorage.getItem('role') || "";
   }
 
   getAllLines(){
@@ -27,6 +32,10 @@ export class AllBusLinesComponent implements OnInit {
 
   hideDIv(hide: boolean){
     this.hide = hide;
+  }
+
+  add(){
+     this.router.navigate(['staff', 'add'])
   }
 
 }

@@ -16,14 +16,14 @@ public class BusDeparture {
     @Column
     private double km;
     @Column
-    private Date time;
+    private String time;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "driving_line_id")
     private DrivingLine drivingLine;
 
     public BusDeparture(){}
 
-    public BusDeparture(String city, double km, Date time) {
+    public BusDeparture(String city, double km, String time) {
         this.city = city;
         this.km = km;
         this.time = time;
@@ -53,11 +53,11 @@ public class BusDeparture {
         this.km = km;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 

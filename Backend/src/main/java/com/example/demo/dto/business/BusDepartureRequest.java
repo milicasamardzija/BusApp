@@ -6,6 +6,6 @@ public class BusDepartureRequest {
 
     public String city;
     public double km;
-    public Date time;
+    public String time;
 
 }

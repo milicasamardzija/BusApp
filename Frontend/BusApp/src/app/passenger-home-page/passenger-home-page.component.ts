@@ -19,7 +19,7 @@ export class PassengerHomePageComponent implements OnInit {
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || "";
     this.getUserInfo();
-    this.router.navigate(['passenger/lines']);
+   // this.router.navigate(['passenger/lines']);
   }
 
   getUserInfo(){

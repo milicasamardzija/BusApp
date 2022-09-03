@@ -37,6 +37,15 @@ import { StaffMonthlyTicketsComponent } from './staff-monthly-tickets/staff-mont
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminRegistrationRequestsComponent } from './admin-registration-requests/admin-registration-requests.component';
 import { MatSelectModule } from '@angular/material/select';
+import { StaffAddDrivingLineComponent } from './staff-add-driving-line/staff-add-driving-line.component';
+import { StaffUpdateDrivingLineComponent } from './staff-update-driving-line/staff-update-driving-line.component';
+import { StaffDeleteDrivingLineComponent } from './staff-delete-driving-line/staff-delete-driving-line.component';
+import { StaffPriceDrivingLineComponent } from './staff-price-driving-line/staff-price-driving-line.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { StaffBusesComponent } from './staff-buses/staff-buses.component';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +70,11 @@ import { MatSelectModule } from '@angular/material/select';
     StaffMonthlyTicketsComponent,
     AdminUsersComponent,
     AdminRegistrationRequestsComponent,
+    StaffAddDrivingLineComponent,
+    StaffUpdateDrivingLineComponent,
+    StaffDeleteDrivingLineComponent,
+    StaffPriceDrivingLineComponent,
+    StaffBusesComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,9 +94,12 @@ import { MatSelectModule } from '@angular/material/select';
     MatIconModule,
     MatDividerModule,
     MatSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgxMaterialTimepickerModule
   ],
-  providers: [],
+  providers: [ ] ,
   bootstrap: [AppComponent]
 })
 export class AppModule { }

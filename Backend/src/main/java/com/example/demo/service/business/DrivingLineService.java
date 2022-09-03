@@ -90,7 +90,7 @@ public class DrivingLineService {
                 }
             }
             if (inxStart < inxEnd){
-                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDeparture.getId(), busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),new Date(), new Date(), price.getPricePerKilometer() * (kmEnd - kmStart), price.getPricePerKilometerMonthlyTicket() * (kmEnd - kmStart), activeDeparture.getSeats()));
+                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDeparture.getId(), busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),new Date(), new Date(), price.getPricePerKilometer() * Math.abs(kmEnd - kmStart), price.getPricePerKilometerMonthlyTicket() * Math.abs(kmEnd - kmStart) * 20, activeDeparture.getSeats()));
             }
         }
 

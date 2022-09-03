@@ -10,7 +10,7 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, public dialogRef : MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +23,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   signUp(){
-    const dialogRef = this.dialog.open(RegisterComponent, {
+    const dialogRef = this.dialogRef.open(RegisterComponent, {
       width: '720px',
       height: '700px',
     }); 

@@ -20,6 +20,6 @@ public class PriceService {
     }
 
     public Price getById(int id) {
-        return this.priceRepository.getById(id);
+        return this.priceRepository.findById(id);
     }
 }

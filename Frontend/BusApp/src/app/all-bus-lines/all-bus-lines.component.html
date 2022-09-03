@@ -1,4 +1,5 @@
 <app-search-lines (hide)="hideDIv($event)"></app-search-lines>
+<button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="add()">Dodaj</button>
 <div *ngIf="hide===false">
     <div class="example-card" *ngFor = "let l of lines">
         <div class="card-wrapper" >

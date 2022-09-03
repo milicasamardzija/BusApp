@@ -8,6 +8,7 @@ import { PassengerHomePageComponent } from './passenger-home-page/passenger-home
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
 import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/passenger-previous-tickets.component';
 import { PassengerStatisticsComponent } from './passenger-statistics/passenger-statistics.component';
+import { StaffAddDrivingLineComponent } from './staff-add-driving-line/staff-add-driving-line.component';
 import { StaffHomePageComponent } from './staff-home-page/staff-home-page.component';
 import { StaffMonthlyTicketsComponent } from './staff-monthly-tickets/staff-monthly-tickets.component';
 import { StaffPassengersComponent } from './staff-passengers/staff-passengers.component';
@@ -53,6 +54,9 @@ const routes: Routes = [
       },
       {
         path:'monthlyTickets', component: StaffMonthlyTicketsComponent
+      },
+      {
+        path:'add', component: StaffAddDrivingLineComponent
       }
     ]  
   },

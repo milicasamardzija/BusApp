@@ -56,4 +56,5 @@ public class BusService {
     public void update(Bus bus) {
         this.busRepository.save(bus);
     }
+
 }

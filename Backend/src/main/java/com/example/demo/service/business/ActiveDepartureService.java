@@ -40,12 +40,16 @@ public class ActiveDepartureService {
             yesterday = 6;
         }
 
-        for (ActiveDeparture activeDeparture: this.getAll()) {
+        for (ActiveDeparture activeDeparture: this.getDepartures()) {
             if (activeDeparture.getDayOfWeek().ordinal() == yesterday){
-                activeDeparture.setSeats(0);
+                activeDeparture.setSeats(activeDeparture.getDrivingLine().getBus().getSeatNumber());
                 this.activeDepartureRepository.save(activeDeparture);
             }
         }
+    }
+
+    private List<ActiveDeparture> getDepartures() {
+        return this.activeDepartureRepository.getDepartures();
     }
 
     private List<ActiveDeparture> getAll() {

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { DrivingLine } from '../model/DrivingLine';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,9 @@ export class BusLinesService {
       "cityEnd": endCity,
       "day": day
     });
+  }
+
+  add(drivingLine: DrivingLine) {
+    return this._http.post("http://localhost:8081/drivingLine", drivingLine);
   }
 }
