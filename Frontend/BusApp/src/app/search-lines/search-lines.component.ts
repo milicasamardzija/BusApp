@@ -4,7 +4,7 @@ import { MonthlyService } from '../passenger-monthly-ticket/monthly.service';
 import { StandardTicketsService } from '../passenger-previous-tickets/standard-tickets.service';
 
 import Swal from 'sweetalert2';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search-lines',
@@ -17,7 +17,7 @@ export class SearchLinesComponent implements OnInit {
   cityEnd!: string;
   hideThis: boolean = false;
   role: string = "";
-  days = new FormControl('');
+  days = new UntypedFormControl('');
   daysList:string[] = ['Ponedeljak', 'Utorak', 'Sreda', 'Cetvrtak', 'Petak', 'Subota', 'Nedelja']
   
   @Output() hide = new EventEmitter<boolean>();
