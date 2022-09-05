@@ -60,12 +60,12 @@ public class DrivingLineService {
 
         for (ActiveDeparture activeDeparture: drivingLine.getActiveDepartures()) {
             activeDeparture.setDrivingLine(drivingLine);
-            activeDepartureService.update(activeDeparture);
+            activeDepartureService.save(activeDeparture);
         }
 
         for (BusDeparture busDeparture: drivingLine.getBusDepartures()){
             busDeparture.setDrivingLine(drivingLine);
-            this.busDepartureService.update(busDeparture);
+            this.busDepartureService.save(busDeparture);
         }
     }
 
@@ -98,23 +98,72 @@ public class DrivingLineService {
     }
 
     public void changeDrivingLine(DrivingLineRequest drivingLineRequest) {
-        DrivingLine drivingLine = this.drivingLineRepository.findById(drivingLineRequest.id);
+        DrivingLine drivingLine = this.drivingLineRepository.findCompleteById(drivingLineRequest.id);
         drivingLine.setName(drivingLineRequest.name);
         drivingLine.setDateStart(drivingLineRequest.dateStart);
         drivingLine.setDateEnd(drivingLineRequest.dateEnd);
 
         Bus bus = this.busService.findByIdWithDrivingLines(drivingLineRequest.busId);
         drivingLine.setBus(bus);
+        Bus busOld = this.busService.findByIdWithDrivingLines(drivingLine.getBus().getId());
+
+        //this.drivingLineRepository.save(drivingLine);
+
+        for (BusDeparture busDeparture: drivingLine.getBusDepartures()
+             ) {
+            busDeparture.setDrivingLine(null);
+            this.busDepartureService.delete(busDeparture);
+           // this.busDepartureService.update(busDeparture);
+        }
+        drivingLine.setBusDepartures(null);
+
+        for (ActiveDeparture activeDeparture: drivingLine.getActiveDepartures()
+             ) {
+            activeDeparture.setDrivingLine(null);
+            this.activeDepartureService.delete(activeDeparture);
+            //this.activeDepartureService.save(activeDeparture);
+        }
+        drivingLine.setActiveDepartures(null);
+
+        List<ActiveDeparture> activeDepartures = new ArrayList<>();
+        for (DaysOfWeek day: drivingLineRequest.daysOfWeek) {
+            activeDepartures.add(new ActiveDeparture(day,bus.getSeatNumber()));
+        }
+        drivingLine.setActiveDepartures(activeDepartures);
+
+        List<BusDeparture> busDepartures = new ArrayList<>();
+        for (BusDepartureRequest busDepartureRequest: drivingLineRequest.busDepartures) {
+            busDepartures.add(new BusDeparture(busDepartureRequest.city, busDepartureRequest.km, busDepartureRequest.time));
+        }
+        drivingLine.setBusDepartures(busDepartures);
 
         this.drivingLineRepository.save(drivingLine);
 
-        //sredi
-        //drivingLine.getBusDepartures();
-        //drivingLine.getActiveDepartures();
+        List<DrivingLine> drivingLines = busOld.getDrivingLines();
+        if (drivingLines.size() > 0)
+            drivingLines.remove(drivingLine);
+        busOld.setDrivingLines(drivingLines);
+        this.busService.save(busOld);
+        bus.getDrivingLines().add(drivingLine);
+        this.busService.save(bus);
+
+        for (ActiveDeparture activeDeparture: drivingLine.getActiveDepartures()) {
+            activeDeparture.setDrivingLine(drivingLine);
+            activeDepartureService.save(activeDeparture);
+        }
+
+        for (BusDeparture busDeparture: drivingLine.getBusDepartures()){
+            busDeparture.setDrivingLine(drivingLine);
+            this.busDepartureService.save(busDeparture);
+        }
 
     }
 
     public void deleteById(int id) {
         this.drivingLineRepository.deleteById(id);
+    }
+
+    public DrivingLine getById(int id) {
+        return this.drivingLineRepository.findCompleteById(id);
     }
 }

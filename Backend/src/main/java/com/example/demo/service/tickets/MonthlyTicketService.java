@@ -42,7 +42,7 @@ public class MonthlyTicketService {
 
         ActiveDeparture activeDeparture = this.activeDepartureService.getById(ticket.activeDepartureId);
         activeDeparture.setSeats(activeDeparture.getSeats() - 1);
-        this.activeDepartureService.save(activeDeparture);
+        this.activeDepartureService.update(activeDeparture);
 
         MonthlyTicket monthlyTicket = new MonthlyTicket();
         monthlyTicket.setTicketType(TicketType.MESECNA_KARTA);

@@ -1,9 +1,9 @@
 package com.example.demo.controller.business;
 
-import com.example.demo.dto.business.BusDepartureSearchRequest;
-import com.example.demo.dto.business.BusDepartureSearchResponse;
-import com.example.demo.dto.business.DrivingLineRequest;
-import com.example.demo.dto.business.DrivingLineResponse;
+import com.example.demo.dto.business.*;
+import com.example.demo.enums.DaysOfWeek;
+import com.example.demo.model.business.ActiveDeparture;
+import com.example.demo.model.business.BusDeparture;
 import com.example.demo.model.business.DrivingLine;
 import com.example.demo.service.business.DrivingLineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,30 @@ public class DrivingLineController {
             ret.add(new DrivingLineResponse(drivingLine.getId(), drivingLine.getName(), drivingLine.getActiveDepartures(), drivingLine.getBusDepartures()));
         }
         return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<DrivingLineUpdateResponse> getById(@PathVariable int id){
+        DrivingLine drivingLine = this.drivingLineService.getById(id);
+        return new ResponseEntity<>(new DrivingLineUpdateResponse(drivingLine.getId(), drivingLine.getName(), drivingLine.getDateStart(), drivingLine.getDateEnd(), getDays(drivingLine.getActiveDepartures()), drivingLine.getBus().getId(), this.getDepartures(drivingLine.getBusDepartures())), HttpStatus.OK);
+    }
+
+    private List<DaysOfWeek> getDays(List<ActiveDeparture> activeDepartures) {
+        List<DaysOfWeek> days = new ArrayList<>();
+        for (ActiveDeparture activeDeparture: activeDepartures
+             ) {
+            days.add(activeDeparture.getDayOfWeek());
+        }
+        return days;
+    }
+
+    private List<BusDepartureResponse> getDepartures(List<BusDeparture> busDepartures) {
+        List<BusDepartureResponse> departures = new ArrayList<>();
+        for (BusDeparture busDeparture: busDepartures
+             ) {
+            departures.add(new BusDepartureResponse(busDeparture.getId(), busDeparture.getCity(), busDeparture.getKm(), busDeparture.getTime()));
+        }
+        return departures;
     }
 
     @PostMapping

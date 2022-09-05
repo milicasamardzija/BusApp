@@ -1,6 +1,7 @@
 import { BusDeparture } from "./BusDeparture";
 
 export interface DrivingLine {
+    id: number;
     name: string;
     dateStart: Date;
     dateEnd: Date;

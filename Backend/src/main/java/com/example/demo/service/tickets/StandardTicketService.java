@@ -44,7 +44,7 @@ public class StandardTicketService {
 
         ActiveDeparture activeDeparture = this.activeDepartureService.getById(ticket.activeDepartureId);
         activeDeparture.setSeats(activeDeparture.getSeats() - 1);
-        this.activeDepartureService.save(activeDeparture);
+        this.activeDepartureService.update(activeDeparture);
 
         StandardTicket standardTicket = new StandardTicket();
         standardTicket.setTicketType(TicketType.STANDARDNA_KARTA);

@@ -20,4 +20,12 @@ public class BusDepartureService {
     public void update(BusDeparture busDeparture) {
         this.busDepartureRepository.save(busDeparture);
     }
+
+    public void delete(BusDeparture busDeparture) {
+        this.busDepartureRepository.delete(busDeparture);
+    }
+
+    public void save(BusDeparture busDeparture) {
+        this.busDepartureRepository.save(busDeparture);
+    }
 }

@@ -1,0 +1,38 @@
+
+.buttonYes {
+    background-color: #4775a0;
+    color: white;
+    margin-right: 10%;
+}
+
+.buttonNo {
+    background-color: white;
+    color: #4775a0;
+}
+
+.actions{
+    margin-top: 15%;
+    margin-left: 25%;
+}
+
+.title{
+    color: #4775a0;
+    margin-left: 40%;
+    width: 10rem;
+}
+
+td {
+    width:10rem;
+}
+
+.card{
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.toggle-example{
+    margin-left: 3%;
+}
+
+

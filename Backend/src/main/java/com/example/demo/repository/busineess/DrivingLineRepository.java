@@ -15,4 +15,7 @@ public interface DrivingLineRepository extends JpaRepository<DrivingLine, Intege
     @Query("select distinct d from DrivingLine d left join fetch d.activeDepartures active left join fetch d.bus b where d.id = active.drivingLine.id")
     List<DrivingLine> getAllWithWeeks();
     DrivingLine findById(int id);
+    @Query("select distinct d from DrivingLine d left join fetch d.activeDepartures active left join fetch d.bus b where d.id = ?1 ")
+    DrivingLine findCompleteById(int id);
+
 }

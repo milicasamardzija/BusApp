@@ -13,6 +13,7 @@ import { StaffHomePageComponent } from './staff-home-page/staff-home-page.compon
 import { StaffMonthlyTicketsComponent } from './staff-monthly-tickets/staff-monthly-tickets.component';
 import { StaffPassengersComponent } from './staff-passengers/staff-passengers.component';
 import { StaffStatisticsComponent } from './staff-statistics/staff-statistics.component';
+import { StaffUpdateDrivingLineComponent } from './staff-update-driving-line/staff-update-driving-line.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -57,6 +58,9 @@ const routes: Routes = [
       },
       {
         path:'add', component: StaffAddDrivingLineComponent
+      },
+      {
+        path:'lines/:id', component: StaffUpdateDrivingLineComponent
       }
     ]  
   },

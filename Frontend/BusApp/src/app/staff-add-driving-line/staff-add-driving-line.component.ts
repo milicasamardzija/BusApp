@@ -13,7 +13,7 @@ import { BusService } from '../staff-buses/bus.service';
   styleUrls: ['./staff-add-driving-line.component.css']
 })
 export class StaffAddDrivingLineComponent implements OnInit {
-  drivingLine: DrivingLine = {name : "", dateStart: new Date(), dateEnd: new Date(), daysOfWeek: [], busId: 0, busDepartures: []};
+  drivingLine: DrivingLine = { id: 0, name : "", dateStart: new Date(), dateEnd: new Date(), daysOfWeek: [], busId: 0, busDepartures: []};
   busDepartures: BusDeparture[] = [];
   days = new FormControl('');
   daysList:string[] = ['Ponedeljak', 'Utorak', 'Sreda', 'Cetvrtak', 'Petak', 'Subota', 'Nedelja'];

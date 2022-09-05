@@ -55,4 +55,8 @@ public class ActiveDepartureService {
     private List<ActiveDeparture> getAll() {
         return this.activeDepartureRepository.findAll();
     }
+
+    public void delete(ActiveDeparture activeDeparture) {
+        this.activeDepartureRepository.delete(activeDeparture);
+    }
 }

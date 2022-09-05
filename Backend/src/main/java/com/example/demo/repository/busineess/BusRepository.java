@@ -16,4 +16,5 @@ public interface BusRepository extends JpaRepository<Bus, Integer> {
     Bus findByIdWithDrivingLines(int busId);
     @Query("select b from Bus b left join fetch b.drivingLines lines where b.id = ?1")
     List<Bus> getAvailableBuses();
+
 }

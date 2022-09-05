@@ -1,1 +1,18 @@
-<p>staff-delete-driving-line works!</p>
+<div style="height: 30px;"></div>
+<div>
+<div class="example-card">
+    <mat-card-header>
+    <mat-card-title class="title"><i>Izbrisi liniju</i></mat-card-title>   
+    </mat-card-header>
+    <mat-card-content class="contentCard">
+        <div style="margin-left: 2rem;color: #000;">
+            <p>Da li ste sigurni da zelite da izbrisete ovu liniju?</p>
+        </div>
+        <div class="actions">
+        <button mat-raised-button class="buttonYes" (click)="delete()">Yes</button>
+        <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+        </div>
+    </mat-card-content>
+</div>
+
+

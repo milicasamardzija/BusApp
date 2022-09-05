@@ -31,6 +31,12 @@ public class BusController {
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<BusResponse> get(@PathVariable int id){
+        Bus bus = this.busService.getById(id);
+        return new ResponseEntity<>(new BusResponse(bus.getId(), bus.getRegistrationNumber(), bus.getGarageNumber(), bus.getSeatNumber(), bus.getManufacturer(), bus.getKilometersTraveled(), bus.getEndRegistrationDate()), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<HttpStatus> addBus(@RequestBody BusRequest bus){
         this.busService.addBus(bus);

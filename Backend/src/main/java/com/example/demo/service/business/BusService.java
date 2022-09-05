@@ -57,4 +57,10 @@ public class BusService {
         this.busRepository.save(bus);
     }
 
+    public Bus getById(int id) {
+        return this.busRepository.findById(id);
+    }
+
+    public void save(Bus bus) { this.busRepository.save(bus);
+    }
 }
