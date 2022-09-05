@@ -1,1 +1,31 @@
-<p>staff-buses works!</p>
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Autobusi</i></p>
+<button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="add()">Dodaj</button>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Registarski broj</th>
+        <th scope="col">Broj garaze</th>
+        <th scope="col">Broj sedista</th>
+        <th scope="col">Proizvodjac</th>
+        <th scope="col">Predjeno kilometara</th>
+        <th scope="col">Datum isteka registracije</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let b of buses">
+        <td>{{b.registrationNumber}}</td>
+        <td>{{b.garageNumber}}</td>
+        <td>{{b.seatNumber}}</td>
+        <td>{{b.manufacturer}}</td>
+        <td>{{b.kilometersTraveled}}</td>
+        <td>{{b.endRegistrationDate | date}}</td>
+        <td><button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="change(b.id)" >Izmeni</button></td>
+        <td><button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add"  (click)="delete(b.id)" >Izbrisi</button></td>
+      </tr>
+    </tbody>
+</table>
+

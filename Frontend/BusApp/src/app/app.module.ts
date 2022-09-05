@@ -45,6 +45,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { StaffBusesComponent } from './staff-buses/staff-buses.component';
+import { StaffBusAddChangeComponent } from './staff-bus-add-change/staff-bus-add-change.component';
+import { StaffBusDeleteComponent } from './staff-bus-delete/staff-bus-delete.component';
 
 
 @NgModule({
@@ -75,6 +77,8 @@ import { StaffBusesComponent } from './staff-buses/staff-buses.component';
     StaffDeleteDrivingLineComponent,
     StaffPriceDrivingLineComponent,
     StaffBusesComponent,
+    StaffBusAddChangeComponent,
+    StaffBusDeleteComponent,
   ],
   imports: [
     BrowserModule,

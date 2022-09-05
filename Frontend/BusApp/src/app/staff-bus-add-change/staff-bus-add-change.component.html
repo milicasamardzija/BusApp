@@ -1,0 +1,61 @@
+<div class="example-card">
+    <mat-card-header>
+    <mat-card-title class="title" *ngIf="add===true"><i>Dodaj novi autobus!</i></mat-card-title>   
+    <mat-card-title class="title" *ngIf="add===false"><i>Izmeni autobus!</i></mat-card-title>   
+    </mat-card-header>
+    <mat-card-content class="contentCard">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <p>Registarski broj</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "bus.registrationNumber" ></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Broj garaze</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "bus.garageNumber"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Broj sedista</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "bus.seatNumber"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Proizvodjac</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "bus.manufacturer"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Predjeno kilometara</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "bus.kilometersTraveled"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Datum isteka registracije</p>
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker" [(ngModel)] = "bus.endRegistrationDate">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matSuffix [for]="picker">
+                            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="actions">
+        <button mat-raised-button class="buttonYes" (click)="change()">Yes</button>
+        <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+        </div>
+    </mat-card-content>
+</div>
+
