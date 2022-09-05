@@ -47,6 +47,8 @@ import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { StaffBusesComponent } from './staff-buses/staff-buses.component';
 import { StaffBusAddChangeComponent } from './staff-bus-add-change/staff-bus-add-change.component';
 import { StaffBusDeleteComponent } from './staff-bus-delete/staff-bus-delete.component';
+import { StaffEmployeesComponent } from './staff-employees/staff-employees.component';
+import { StaffEmployeeAddChangeComponent } from './staff-employee-add-change/staff-employee-add-change.component';
 
 
 @NgModule({
@@ -79,6 +81,8 @@ import { StaffBusDeleteComponent } from './staff-bus-delete/staff-bus-delete.com
     StaffBusesComponent,
     StaffBusAddChangeComponent,
     StaffBusDeleteComponent,
+    StaffEmployeesComponent,
+    StaffEmployeeAddChangeComponent,
   ],
   imports: [
     BrowserModule,

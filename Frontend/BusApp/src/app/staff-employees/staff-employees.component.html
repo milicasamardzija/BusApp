@@ -1,0 +1,30 @@
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Zaposleni</i></p>
+<button  mat-raised-button class="add" (click)="add()" >Dodaj</button>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Ime</th>
+        <th scope="col">Prezime</th>
+        <th scope="col">Broj telefona</th>
+        <th scope="col">Email</th>
+        <th scope="col">Plata</th>
+        <th scope="col">Pozicija</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let u of employees">
+        <td>{{u.name}}</td>
+        <td>{{u.surname}}</td>
+        <td>{{u.telephone}}</td>
+        <td>{{u.email}}</td>
+        <td>{{u.salary}}</td>
+        <td>{{u.type}}</td>
+        <td><button  mat-raised-button class="add" (click)="change(u.id)" >Izmeni</button></td>
+        <td><button  mat-raised-button class="add"  (click)="delete(u.id)" >Izbrisi</button></td>
+      </tr>
+    </tbody>
+</table>

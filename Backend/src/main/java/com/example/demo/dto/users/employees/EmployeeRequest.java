@@ -1,6 +1,5 @@
 package com.example.demo.dto.users.employees;
 
-import com.example.demo.enums.EmployeeType;
 import com.example.demo.model.users.Address;
 
 public class EmployeeRequest {
@@ -11,7 +10,7 @@ public class EmployeeRequest {
     public String email;
     public Address address;
     public double salary;
-    public EmployeeType employeeType;
+    public String type;
     public String telephone;
 
 }

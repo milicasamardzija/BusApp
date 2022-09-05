@@ -1,36 +1,33 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { StaffBusAddChangeComponent } from '../staff-bus-add-change/staff-bus-add-change.component';
 import { StaffBusDeleteComponent } from '../staff-bus-delete/staff-bus-delete.component';
-import { BusService } from './bus.service';
+import { StaffEmployeeAddChangeComponent } from '../staff-employee-add-change/staff-employee-add-change.component';
+import { EmployeeService } from './employee.service';
 
 @Component({
-  selector: 'app-staff-buses',
-  templateUrl: './staff-buses.component.html',
-  styleUrls: ['./staff-buses.component.css']
+  selector: 'app-staff-employees',
+  templateUrl: './staff-employees.component.html',
+  styleUrls: ['./staff-employees.component.css']
 })
-export class StaffBusesComponent implements OnInit {
-  buses!: any[];
-  role!: string;
+export class StaffEmployeesComponent implements OnInit {
+  employees!: any[];
 
-  constructor(private busService: BusService, public dialog: MatDialog) { }
+  constructor(private employeeService: EmployeeService,  public dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.role = localStorage.getItem('role') || "";
     this.getAll();
   }
-  
+
   getAll(){
-    this.busService.getAll().subscribe(
+    this.employeeService.getAll().subscribe(
       response => {
-        this.buses = response;
+        this.employees = response;
       }
     )
   }
 
   add(){
-    const dialogRef = this.dialog.open(StaffBusAddChangeComponent, {
+    const dialogRef = this.dialog.open(StaffEmployeeAddChangeComponent, {
       width: '600px',
       height: '770px',
       data: {
@@ -49,7 +46,7 @@ export class StaffBusesComponent implements OnInit {
   }
 
   change(identifier: number){
-    const dialogRef = this.dialog.open(StaffBusAddChangeComponent, {
+    const dialogRef = this.dialog.open(StaffEmployeeAddChangeComponent, {
       width: '600px',
       height: '770px',
       data: {
@@ -73,7 +70,7 @@ export class StaffBusesComponent implements OnInit {
     height: '250px',
     data: {
       id: identifier,
-      bus: true,
+      bus: false,
     }
   });
   
@@ -85,4 +82,5 @@ export class StaffBusesComponent implements OnInit {
     }
   )
   }
+
 }

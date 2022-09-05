@@ -10,6 +10,7 @@ import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/
 import { PassengerStatisticsComponent } from './passenger-statistics/passenger-statistics.component';
 import { StaffAddDrivingLineComponent } from './staff-add-driving-line/staff-add-driving-line.component';
 import { StaffBusesComponent } from './staff-buses/staff-buses.component';
+import { StaffEmployeesComponent } from './staff-employees/staff-employees.component';
 import { StaffHomePageComponent } from './staff-home-page/staff-home-page.component';
 import { StaffMonthlyTicketsComponent } from './staff-monthly-tickets/staff-monthly-tickets.component';
 import { StaffPassengersComponent } from './staff-passengers/staff-passengers.component';
@@ -56,6 +57,9 @@ const routes: Routes = [
       },  
       {
         path:'buses', component: StaffBusesComponent
+      },
+      {
+        path:'employees', component: StaffEmployeesComponent
       },
       {
         path:'monthlyTickets', component: StaffMonthlyTicketsComponent

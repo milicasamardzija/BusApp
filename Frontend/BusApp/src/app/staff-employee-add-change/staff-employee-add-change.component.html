@@ -1,0 +1,68 @@
+<div class="example-card">
+    <mat-card-header>
+    <mat-card-title class="title" *ngIf="add===true"><i>Dodaj novog zaposlenog!</i></mat-card-title>   
+    <mat-card-title class="title" *ngIf="add===false"><i>Izmeni informacije!</i></mat-card-title>   
+    </mat-card-header>
+    <mat-card-content class="contentCard">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <p>Ime</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.name" ></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Prezime</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.surname"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Broj telefona</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.telephone"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Email adresa</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.email"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Plata</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.salary"></mat-form-field>
+                    </td>
+                </tr>
+                <tr *ngIf="add===true">
+                    <td>
+                        <p>Pozicija</p>
+                        <div style="height: 3rem;font-size: 1rem">
+                            <mat-form-field>
+                                <mat-label>Pozicija</mat-label>
+                                <mat-select [formControl]="positions"> 
+                                    <mat-select-trigger >
+                                    {{positions.value?.[0] || ''}}
+                                    <span *ngIf="(positions.value?.length || 0) > 1"  >
+                                        (+{{(positions.value?.length || 0) - 1}} {{positions.value?.length === 2 ? 'other' : 'others'}})
+                                    </span>
+                                    </mat-select-trigger >
+                                    <mat-option *ngFor="let p of positionsList" [value]="p" >{{p}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+            
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="actions">
+        <button mat-raised-button class="buttonYes" (click)="change()">Yes</button>
+        <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+        </div>
+    </mat-card-content>
+</div>
+
+

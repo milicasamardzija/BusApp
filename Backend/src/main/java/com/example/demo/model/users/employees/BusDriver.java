@@ -6,4 +6,5 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("BUSS_DRIVER")
 public class BusDriver extends BussStaff {
+    public BusDriver(){}
 }

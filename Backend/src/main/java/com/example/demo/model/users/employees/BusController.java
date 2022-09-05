@@ -6,4 +6,5 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("BUSS_CONTROLLER")
 public class BusController extends BussStaff{
+    public BusController(){}
 }

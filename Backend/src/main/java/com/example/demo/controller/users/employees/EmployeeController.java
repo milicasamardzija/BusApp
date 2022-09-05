@@ -2,11 +2,17 @@ package com.example.demo.controller.users.employees;
 
 import com.example.demo.dto.users.employees.EmployeeRequest;
 import com.example.demo.dto.users.employees.EmployeeResponse;
+import com.example.demo.enums.EmployeeType;
+import com.example.demo.model.users.employees.BusController;
+import com.example.demo.model.users.employees.BusDriver;
 import com.example.demo.model.users.employees.Employee;
+import com.example.demo.service.users.employees.BusControllerService;
+import com.example.demo.service.users.employees.BusDriverService;
 import com.example.demo.service.users.employees.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,15 +25,33 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private BusDriverService busDriverService;
+    @Autowired
+    private BusControllerService busControllerService;
 
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getAll(){
         List<EmployeeResponse> ret = new ArrayList<>();
         for (Employee employee : this.employeeService.getAll()
         ) {
-            ret.add(new EmployeeResponse(employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary()));
+            String type = this.employeeService.getEmployeeType(employee.getId(), employee.getEmployeeType());
+            ret.add(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type));
         }
         return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<EmployeeResponse> getById(@PathVariable int id){
+        Employee employee = this.employeeService.getById(id);
+        String type = this.employeeService.getEmployeeType(employee.getId(), employee.getEmployeeType());
+        return new ResponseEntity<>(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<HttpStatus> addEmployee(@RequestBody EmployeeRequest employee){
+        this.employeeService.saveEmployee(employee);
+        return new ResponseEntity<>( HttpStatus.CREATED);
     }
 
     @PutMapping
