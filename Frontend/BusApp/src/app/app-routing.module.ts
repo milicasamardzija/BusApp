@@ -8,6 +8,7 @@ import { PassengerHomePageComponent } from './passenger-home-page/passenger-home
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
 import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/passenger-previous-tickets.component';
 import { PassengerStatisticsComponent } from './passenger-statistics/passenger-statistics.component';
+import { PassengerTicketCheckComponent } from './passenger-ticket-check/passenger-ticket-check.component';
 import { StaffAddDrivingLineComponent } from './staff-add-driving-line/staff-add-driving-line.component';
 import { StaffBusesComponent } from './staff-buses/staff-buses.component';
 import { StaffEmployeesComponent } from './staff-employees/staff-employees.component';
@@ -84,6 +85,9 @@ const routes: Routes = [
         path:'requests', component: AdminRegistrationRequestsComponent
       }
     ]  
+  },
+  {
+    path:'standardTicket/checkTicket/:id', component: PassengerTicketCheckComponent
   }
 ];
 

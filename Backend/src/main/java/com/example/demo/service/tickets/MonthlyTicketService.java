@@ -1,6 +1,7 @@
 package com.example.demo.service.tickets;
 
 import com.example.demo.dto.tickets.MonthlyTicketRequest;
+import com.example.demo.dto.tickets.TicketPdfResponse;
 import com.example.demo.enums.TicketType;
 import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.model.tickets.MonthlyTicket;
@@ -62,11 +63,15 @@ public class MonthlyTicketService {
         dateEnd.set(Calendar.MONTH, new Date().getMonth() + 1);
         monthlyTicket.setDateExpiration(dateEnd.getTime());
 
+        monthlyTicket.setDiscountPercentage(ticket.discountPercentage);
+
+        this.monthlyTicketRepository.save(monthlyTicket);
+
         passenger.getTickets().add(monthlyTicket);
         this.passengerService.update(passenger);
     }
 
-    private void generatePdf(Passenger passenger, MonthlyTicket standardTicket) {
+    private void generatePdf(Passenger passenger, TicketPdfResponse standardTicket) {
         Map<String, Object> data = new HashMap<>();
         data.put("passenger", passenger);
         data.put("standardTicket", standardTicket);
@@ -86,7 +91,7 @@ public class MonthlyTicketService {
         monthlyTicket.setApproved(true);
         this.monthlyTicketRepository.save(monthlyTicket);
         this.QRCodeGenerator.getQrCodeForMonthlyTicket(monthlyTicket.getId());
-        this.generatePdf(monthlyTicket.getPassenger(), monthlyTicket);
+        this.generatePdf(monthlyTicket.getPassenger(), new TicketPdfResponse(monthlyTicket));
         this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
         return monthlyTicket;
     }
@@ -102,7 +107,7 @@ public class MonthlyTicketService {
     public void sendTicketToMail(int id) {
         MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
         this.QRCodeGenerator.getQrCodeForMonthlyTicket(monthlyTicket.getId());
-        this.generatePdf(monthlyTicket.getPassenger(), monthlyTicket);
+        this.generatePdf(monthlyTicket.getPassenger(), new TicketPdfResponse(monthlyTicket));
         this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
     }
 

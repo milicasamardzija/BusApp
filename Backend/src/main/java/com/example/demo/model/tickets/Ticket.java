@@ -2,8 +2,8 @@ package com.example.demo.model.tickets;
 
 import com.example.demo.enums.TicketType;
 import com.example.demo.model.users.client.Passenger;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.joda.time.DateTime;
 
 import javax.persistence.*;
 
@@ -19,8 +19,10 @@ public class Ticket {
     @Column(name="id", unique=true, nullable=false)
     private int id;
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateIssued;
     @Column
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dateExpiration;
     @Column
     private double price;
@@ -29,9 +31,13 @@ public class Ticket {
     @Column
     private String cityEnd;
     @Column
-    private Date timeStart;
+    private String timeStart;
     @Column
     private TicketType ticketType;
+    @Column
+    private double fullPrice;
+    @Column
+    private double discountPercentage;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
@@ -84,11 +90,11 @@ public class Ticket {
         this.cityEnd = cityEnd;
     }
 
-    public Date getTimeStart() {
+    public String getTimeStart() {
         return timeStart;
     }
 
-    public void setTimeStart(Date timeStart) {
+    public void setTimeStart(String timeStart) {
         this.timeStart = timeStart;
     }
 
@@ -106,5 +112,21 @@ public class Ticket {
 
     public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
+    }
+
+    public double getFullPrice() {
+        return fullPrice;
+    }
+
+    public void setFullPrice(double fullPrice) {
+        this.fullPrice = fullPrice;
+    }
+
+    public double getDiscountPercentage() {
+        return discountPercentage;
+    }
+
+    public void setDiscountPercentage(double discountPercentage) {
+        this.discountPercentage = discountPercentage;
     }
 }

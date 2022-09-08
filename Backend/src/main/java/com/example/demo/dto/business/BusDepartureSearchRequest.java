@@ -1,9 +1,9 @@
 package com.example.demo.dto.business;
 
-import com.example.demo.enums.DaysOfWeek;
+import java.util.Date;
 
 public class BusDepartureSearchRequest {
     public String cityStart;
     public String cityEnd;
-    public DaysOfWeek day;
+    public Date date;
 }

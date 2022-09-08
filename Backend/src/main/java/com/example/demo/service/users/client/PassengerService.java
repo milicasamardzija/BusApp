@@ -44,7 +44,7 @@ public class PassengerService {
     }
 
     public Passenger findById(int id) {
-        return this.passengerRepository.getById(id);
+        return this.passengerRepository.findById(id);
     }
 
     public Passenger findByIdWithTickets(int id) {
@@ -52,6 +52,10 @@ public class PassengerService {
     }
 
     public void update(Passenger passenger) {
+        this.passengerRepository.save(passenger);
+    }
+
+    public void save(Passenger passenger) {
         this.passengerRepository.save(passenger);
     }
 }

@@ -14,4 +14,7 @@ public interface StandardTicketRepository  extends JpaRepository<StandardTicket,
     List<StandardTicket>  findAll();
     @Query("select t from StandardTicket t where t.passenger.id = ?1 and t.dateChecked < ?2")
     List<StandardTicket> getPreviousTickets(int id, Date date);
+    @Query("select t from StandardTicket t where t.dateIssued = ?1")
+    List<StandardTicket> getTodayTickets(Date date);
+    StandardTicket findById(int id);
 }

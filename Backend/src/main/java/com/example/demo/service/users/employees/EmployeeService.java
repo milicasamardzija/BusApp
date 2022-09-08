@@ -57,7 +57,7 @@ public class EmployeeService {
         busDriver.setName(employee.name);
         busDriver.setSurname(employee.surname);
         busDriver.setTelephone(employee.telephone);
-        busDriver.setAddress(null);
+        busDriver.setAddress(employee.address);
         busDriver.setEmail(employee.email);
         busDriver.setSalary(employee.salary);
         busDriver.setEmployeeType(EmployeeType.BUS_STAFF);

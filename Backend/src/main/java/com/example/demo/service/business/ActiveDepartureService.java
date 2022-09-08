@@ -4,7 +4,6 @@ import com.example.demo.enums.DaysOfWeek;
 import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.repository.busineess.ActiveDepartureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -20,8 +19,8 @@ public class ActiveDepartureService {
         this.activeDepartureRepository.save(activeDeparture);
     }
 
-    public ActiveDeparture findByDrivingLine(int id, DaysOfWeek day) {
-        return this.activeDepartureRepository.findByDrivingLine(id, day);
+    public ActiveDeparture findByDrivingLine(int id, DaysOfWeek day, Date date) {
+        return this.activeDepartureRepository.findByDrivingLine(id, day, date);
     }
 
     public ActiveDeparture getById(int activeDepartureId) {
@@ -32,7 +31,7 @@ public class ActiveDepartureService {
         this.activeDepartureRepository.save(activeDeparture);
     }
 
-    @Scheduled(cron = "${greeting.cron}")
+    /*@Scheduled(cron = "${greeting.cron}")
     private void removeSeats(){
         Date date = new Date();
         int yesterday = date.getDay() - 1;
@@ -46,7 +45,7 @@ public class ActiveDepartureService {
                 this.activeDepartureRepository.save(activeDeparture);
             }
         }
-    }
+    }*/
 
     private List<ActiveDeparture> getDepartures() {
         return this.activeDepartureRepository.getDepartures();

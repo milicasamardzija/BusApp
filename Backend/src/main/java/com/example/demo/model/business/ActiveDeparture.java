@@ -3,6 +3,7 @@ package com.example.demo.model.business;
 import com.example.demo.enums.DaysOfWeek;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class ActiveDeparture {
@@ -16,13 +17,16 @@ public class ActiveDeparture {
     private DaysOfWeek dayOfWeek;
     @Column
     private int seats;
+    @Column
+    private Date date;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "driving_line_id")
     private DrivingLine drivingLine;
 
     public ActiveDeparture(){}
 
-    public ActiveDeparture(DaysOfWeek dayOfWeek, int seats) {
+    public ActiveDeparture(Date date,DaysOfWeek dayOfWeek, int seats) {
+        this.date = date;
         this.dayOfWeek = dayOfWeek;
         this.seats = seats;
     }
@@ -57,5 +61,13 @@ public class ActiveDeparture {
 
     public void setDrivingLine(DrivingLine drivingLine) {
         this.drivingLine = drivingLine;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

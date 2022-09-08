@@ -1,6 +1,7 @@
 package com.example.demo.model.business;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Price {
@@ -14,8 +15,19 @@ public class Price {
     private double pricePerKilometer;
     @Column
     private double pricePerKilometerMonthlyTicket;
+    @Column
+    private Date dateStart;
+    @Column
+    private Date dateEnd;
 
     public Price() {}
+
+    public Price(double pricePerKilometer, double pricePerKilometerMonthlyTicket, Date dateStart, Date dateEnd) {
+        this.pricePerKilometer = pricePerKilometer;
+        this.pricePerKilometerMonthlyTicket = pricePerKilometerMonthlyTicket;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+    }
 
     public int getId() {
         return id;
@@ -39,5 +51,21 @@ public class Price {
 
     public void setPricePerKilometerMonthlyTicket(double pricePerKilometerMonthlyTicket) {
         this.pricePerKilometerMonthlyTicket = pricePerKilometerMonthlyTicket;
+    }
+
+    public Date getDateStart() {
+        return dateStart;
+    }
+
+    public void setDateStart(Date dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public Date getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Date dateEnd) {
+        this.dateEnd = dateEnd;
     }
 }

@@ -5,10 +5,13 @@ import com.example.demo.enums.DaysOfWeek;
 import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.model.business.BusDeparture;
 import com.example.demo.model.business.DrivingLine;
+import com.example.demo.model.users.User;
 import com.example.demo.service.business.DrivingLineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -76,7 +79,9 @@ public class DrivingLineController {
 
     @PostMapping(value = "/search")
     public ResponseEntity<List<BusDepartureSearchResponse>> searchDrivingLines(@RequestBody BusDepartureSearchRequest busDepartureSearchRequest){
-        List<BusDepartureSearchResponse> ret = this.drivingLineService.searchDrivingLines(busDepartureSearchRequest);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        List<BusDepartureSearchResponse> ret = this.drivingLineService.searchDrivingLines(busDepartureSearchRequest, user);
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 

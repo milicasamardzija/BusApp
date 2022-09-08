@@ -1,5 +1,6 @@
 package com.example.demo.controller.tickets;
 
+import com.example.demo.dto.tickets.CheckTicketResponse;
 import com.example.demo.dto.tickets.StandardTicketRequest;
 import com.example.demo.model.tickets.StandardTicket;
 import com.example.demo.model.users.User;
@@ -12,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @Controller
@@ -34,7 +36,7 @@ public class StandardTicketController {
     }
 
     @PostMapping
-    public ResponseEntity<HttpStatus> addTicket(@RequestBody StandardTicketRequest ticket){
+    public ResponseEntity<HttpStatus> addTicket(@RequestBody StandardTicketRequest ticket) throws ParseException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
         this.standardTicketService.addTicket(ticket, user);
@@ -42,7 +44,16 @@ public class StandardTicketController {
     }
 
     @GetMapping(value = "checkTicket/{id}")
-    public ResponseEntity<String> checkTicket (@PathVariable int id){
-        return new ResponseEntity<>(this.standardTicketService.checkTicket(id), HttpStatus.OK);
+    public ResponseEntity<CheckTicketResponse> checkTicket (@PathVariable int id){
+        return new ResponseEntity<>( new CheckTicketResponse( this.standardTicketService.checkTicket(id)), HttpStatus.OK);
     }
+
+    @GetMapping("/report")
+    public  ResponseEntity<HttpStatus> getDailyReport(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        this.standardTicketService.getDailyReport(user);
+        return new ResponseEntity<>( HttpStatus.OK);
+    }
+
 }

@@ -1,11 +1,12 @@
 package com.example.demo.dto.tickets;
 
-import java.util.Date;
 
 public class StandardTicketRequest {
     public String cityStart;
     public String cityEnd;
-    public Date timeStart;
+    public String timeStart;
     public double price;
     public int activeDepartureId;
+    public double discountPercentage;
+    public double fullPrice;
 }

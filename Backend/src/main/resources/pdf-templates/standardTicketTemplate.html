@@ -5,7 +5,7 @@
         h1{
             color: brown;
             margin-left: 43%;
-            margin-top: 2%;
+            margin-top: 1%;
             font-size: 25px;
         }
         .text{
@@ -49,7 +49,7 @@
     </tr>
 </table>
 <h1>Karta</h1>
-<table style="margin-top:10%">
+<table style="margin-top:5%">
     <tr>
         <th class="text"><i>Putnik</i></th>
     </tr>
@@ -69,13 +69,19 @@
 <hr style="margin-top:5%"/>
 <table style="margin-top:5%">
     <tr>
-        <th class="text"><i>Mesecna karta</i></th>
+        <th class="text"><i>Detalji o karti</i></th>
     </tr>
     <tr>
         <td class="info" th:text="'Polazna stanica: ' + ${standardTicket.cityStart}"></td>
     </tr>
     <tr>
         <td class="info" th:text="'Krajnja stanica: ' + ${standardTicket.cityEnd}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Vreme polaska: ' + ${time}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Dan u nedelji za koji vazi: ' + ${days}"></td>
     </tr>
     <tr>
         <td class="info" th:text="'Izdata: ' + ${standardTicket.dateIssued}"></td>

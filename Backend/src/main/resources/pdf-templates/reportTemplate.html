@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        h1{
+            color: brown;
+            margin-left: 43%;
+            margin-top: 5%;
+            font-size: 25px;
+        }
+        .text{
+            margin-left:32%;
+            font-size: 25px;
+            color: brown;
+        }
+        .info {
+            font-size: 20px;
+        }
+        .qrcode {
+         margin-left: 72%;
+        }
+        .logo {
+            align-content: flex-end;
+            margin-left: 90%;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>Adresa: Pavla Papa 5</td>
+                </tr>
+                <tr>
+                    <td>21 000, Novi Sad, Srbija</td>
+                </tr>
+                <tr>
+                    <td>Kontakt telefon: 021/352-985</td>
+                </tr>
+                <tr>
+                    <td>Email adresa: busapp@gmail.com</td>
+                </tr>
+            </table>
+        </td>
+        <td style="width:500px">
+            <img class="logo" width="180" height="180" th:src="@{classpath:static/images/logo.png}"/>
+        </td>
+    </tr>
+</table>
+<p class="text"><i>Izvestaj o prodatim kartama</i></p>
+<table style="margin-top:4%;border: 1px solid;width: 90%;border-collapse: collapse;">
+    <tr style="border: 1px solid;">
+        <th style="border: 1px solid;">#</th>
+        <th style="border: 1px solid;">Datum prodaje</th>
+        <th style="border: 1px solid;">Pocetna stanica</th>
+        <th style="border: 1px solid;">Krajnja stanica</th>
+        <th style="border: 1px solid;">Vreme polaska</th>
+        <th style="border: 1px solid;">Placeno</th>
+        <th style="border: 1px solid;">Puna cena</th>
+        <th style="border: 1px solid;">Popust</th>
+    </tr>
+    <tr style="border: 1px solid;" th:each="item, iterStat: ${tickets}">
+        <td style="border: 1px solid;" th:text="${iterStat.index + 1}"></td>
+        <td style="border: 1px solid;" th:text="${item.dateIssued}"></td>
+        <td style="border: 1px solid;" th:text="${item.cityStart}"></td>
+        <td style="border: 1px solid;" th:text="${item.cityEnd}"></td>
+        <td style="border: 1px solid;" th:text="${item.timeStart}"></td>
+        <td style="border: 1px solid;" th:text="${item.price}"></td>
+        <td style="border: 1px solid;" th:text="${item.fullPrice}"></td>
+        <td style="border: 1px solid;" th:text="${item.discountPercentage}"></td>
+    </tr>
+</table>
+<p th:text="'Ukupno: ' + ${sum} + 'din.'"></p>
+</body>
+</html>

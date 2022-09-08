@@ -2,9 +2,6 @@ package com.example.demo.controller.users.employees;
 
 import com.example.demo.dto.users.employees.EmployeeRequest;
 import com.example.demo.dto.users.employees.EmployeeResponse;
-import com.example.demo.enums.EmployeeType;
-import com.example.demo.model.users.employees.BusController;
-import com.example.demo.model.users.employees.BusDriver;
 import com.example.demo.model.users.employees.Employee;
 import com.example.demo.service.users.employees.BusControllerService;
 import com.example.demo.service.users.employees.BusDriverService;
@@ -12,7 +9,6 @@ import com.example.demo.service.users.employees.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +32,9 @@ public class EmployeeController {
         for (Employee employee : this.employeeService.getAll()
         ) {
             String type = this.employeeService.getEmployeeType(employee.getId(), employee.getEmployeeType());
+            if (type.equals("Sluzbenik")){
+                break;
+            }
             ret.add(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type));
         }
         return new ResponseEntity<>(ret, HttpStatus.OK);
