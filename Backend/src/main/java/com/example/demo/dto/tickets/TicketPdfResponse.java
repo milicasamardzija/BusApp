@@ -1,5 +1,6 @@
 package com.example.demo.dto.tickets;
 
+import com.example.demo.enums.StandardTicketType;
 import com.example.demo.model.tickets.MonthlyTicket;
 import com.example.demo.model.tickets.StandardTicket;
 
@@ -14,6 +15,7 @@ public class TicketPdfResponse {
     public String dateChecked;
     public double fullPrice;
     public double discountPercentage;
+    public StandardTicketType standardTicketType;
 
     public TicketPdfResponse(StandardTicket standardTicket) {
         if (dateChecked != null)
@@ -28,6 +30,7 @@ public class TicketPdfResponse {
         cityStart = standardTicket.getCityStart();
         fullPrice = standardTicket.getFullPrice();
         discountPercentage = standardTicket.getDiscountPercentage();
+        standardTicketType = standardTicket.getStandardTicketType();
     }
 
     public TicketPdfResponse(MonthlyTicket monthlyTicket) {

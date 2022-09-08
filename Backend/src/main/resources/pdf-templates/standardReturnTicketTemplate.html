@@ -81,10 +81,13 @@
         <td class="info" th:text="'Vreme polaska: ' + ${time}"></td>
     </tr>
     <tr>
-        <td class="info" th:text="'Datum polaska: ' + ${standardTicket.date}"></td>
+        <td class="info" th:text="'Dan u nedelji za koji vazi: ' + ${days}"></td>
     </tr>
     <tr>
         <td class="info" th:text="'Izdata: ' + ${standardTicket.dateIssued}"></td>
+    </tr>
+    <tr>
+        <td class="info" th:text="'Vazi do: ' + ${standardTicket.dateExpiration}"></td>
     </tr>
     <tr>
         <td class="info" th:text="'Cena: ' + ${standardTicket.price}"></td>

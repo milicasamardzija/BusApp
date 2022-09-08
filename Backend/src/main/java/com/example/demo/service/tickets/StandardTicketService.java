@@ -2,6 +2,7 @@ package com.example.demo.service.tickets;
 
 import com.example.demo.dto.tickets.StandardTicketRequest;
 import com.example.demo.dto.tickets.TicketPdfResponse;
+import com.example.demo.enums.StandardTicketType;
 import com.example.demo.enums.TicketType;
 import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.model.tickets.StandardTicket;
@@ -53,13 +54,17 @@ public class StandardTicketService {
         standardTicket.setCityStart(ticket.cityStart);
         standardTicket.setCityEnd(ticket.cityEnd);
         standardTicket.setTimeStart(ticket.timeStart);
+        standardTicket.setStandardTicketType(ticket.standardTicketType);
+        standardTicket.setDate(ticket.date);
 
         standardTicket.setDateIssued(new Date());
         Calendar dateEnd = Calendar.getInstance();
         dateEnd.set(Calendar.DAY_OF_MONTH, 30);
         dateEnd.set(Calendar.MONTH, standardTicket.getDateIssued().getMonth() + 1);
 
-        standardTicket.setDateExpiration(dateEnd.getTime());
+        if (standardTicket.getStandardTicketType() == StandardTicketType.Povratna)
+            standardTicket.setDateExpiration(dateEnd.getTime());
+
         standardTicket.setDateChecked(null);
         standardTicket.setPrice(ticket.price);
         standardTicket.setPassenger(passenger);
@@ -72,8 +77,20 @@ public class StandardTicketService {
         this.passengerService.update(passenger);
 
         this.QRCodeGenerator.getQrCodeForStandardTicket(standardTicket.getId());
-        this.generatePdf(passenger, new TicketPdfResponse(t), ticket.timeStart, activeDeparture.getDayOfWeek().toString());
+        if (standardTicket.getStandardTicketType() == StandardTicketType.Jednosmerna)
+            this.generatePdf(passenger, new TicketPdfResponse(t), ticket.timeStart, activeDeparture.getDayOfWeek().toString());
+        else
+            this.generatePdfPovratna(passenger, new TicketPdfResponse(t), ticket.timeStart, activeDeparture.getDayOfWeek().toString());
         this.emailSenderService.sendEmailWithPdf(passenger);
+    }
+
+    private void generatePdfPovratna(Passenger passenger, TicketPdfResponse ticketPdfResponse, String timeStart, String days) {
+        Map<String, Object> data = new HashMap<>();
+        data.put("passenger", passenger);
+        data.put("standardTicket", ticketPdfResponse);
+        data.put("time", timeStart);
+        data.put("days", days);
+        pdfGenerateService.generatePdfFile("standardReturnTicketTemplate", data, "karta.pdf");
     }
 
     private void generatePdf(Passenger passenger, TicketPdfResponse standardTicket, String timeStart, String days) {
