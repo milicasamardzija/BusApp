@@ -1,0 +1,22 @@
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Cene</i></p>
+<button  mat-raised-button class="add" (click)="add()" >Dodaj</button>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Datum pocetka vazenja</th>
+        <th scope="col">Datum kraja vazenja</th>
+        <th scope="col">Cena standardne karte po kilometru</th>
+        <th scope="col">Cena mesecne karte po kilometru</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let p of prices">
+        <td>{{p.dateStart | date}}</td>
+        <td>{{p.dateEnd | date}}</td>
+        <td>{{p.pricePerKilometer}}</td>
+        <td>{{p.pricePerKilometerMonthlyTicket}}</td>
+      </tr>
+    </tbody>
+</table>

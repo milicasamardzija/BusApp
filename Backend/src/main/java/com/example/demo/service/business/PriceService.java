@@ -6,6 +6,7 @@ import com.example.demo.repository.busineess.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,6 +20,12 @@ public class PriceService {
     }
 
     public void add(PriceRequest priceRequest) {
+        Price priceOld = this.priceRepository.getValidPrice(new Date());
+        if (priceOld != null){
+            priceOld.setDateEnd(priceRequest.dateStart);
+            this.priceRepository.save(priceOld);
+        }
+
         Price price = new Price();
         price.setPricePerKilometer(priceRequest.pricePerKilometer);
         price.setPricePerKilometerMonthlyTicket(priceRequest.pricePerKilometerMonthlyTicket);
@@ -32,6 +39,6 @@ public class PriceService {
     }
 
     public Price getValidPrice() {
-        return this.priceRepository.getValidPrice();
+        return this.priceRepository.getValidPrice(new Date());
     }
 }

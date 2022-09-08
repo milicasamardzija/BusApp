@@ -40,16 +40,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { StaffAddDrivingLineComponent } from './staff-add-driving-line/staff-add-driving-line.component';
 import { StaffUpdateDrivingLineComponent } from './staff-update-driving-line/staff-update-driving-line.component';
 import { StaffDeleteDrivingLineComponent } from './staff-delete-driving-line/staff-delete-driving-line.component';
-import { StaffPriceDrivingLineComponent } from './staff-price-driving-line/staff-price-driving-line.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
+import { MatNativeDateModule} from '@angular/material/core';
+import { NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { StaffBusesComponent } from './staff-buses/staff-buses.component';
 import { StaffBusAddChangeComponent } from './staff-bus-add-change/staff-bus-add-change.component';
 import { StaffBusDeleteComponent } from './staff-bus-delete/staff-bus-delete.component';
 import { StaffEmployeesComponent } from './staff-employees/staff-employees.component';
 import { StaffEmployeeAddChangeComponent } from './staff-employee-add-change/staff-employee-add-change.component';
 import { PassengerTicketCheckComponent } from './passenger-ticket-check/passenger-ticket-check.component';
+import { StaffPriceComponent } from './staff-price/staff-price.component';
+import { StaffPriceAddComponent } from './staff-price-add/staff-price-add.component';
 
 
 @NgModule({
@@ -78,13 +79,14 @@ import { PassengerTicketCheckComponent } from './passenger-ticket-check/passenge
     StaffAddDrivingLineComponent,
     StaffUpdateDrivingLineComponent,
     StaffDeleteDrivingLineComponent,
-    StaffPriceDrivingLineComponent,
     StaffBusesComponent,
     StaffBusAddChangeComponent,
     StaffBusDeleteComponent,
     StaffEmployeesComponent,
     StaffEmployeeAddChangeComponent,
     PassengerTicketCheckComponent,
+    StaffPriceComponent,
+    StaffPriceAddComponent,
   ],
   imports: [
     BrowserModule,
