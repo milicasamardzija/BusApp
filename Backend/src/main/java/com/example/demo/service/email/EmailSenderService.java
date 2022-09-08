@@ -121,4 +121,67 @@ public class EmailSenderService {
             e.printStackTrace();
         }
     }
+
+    public void sendMonthlyTicketRejection(Passenger passenger) {
+        System.out.println("Slanje emaila...");
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setSubject("Odbijen zahtev za popust");
+            mimeMessageHelper.setFrom(new InternetAddress("sammilica99@gmail.com", "Bus app"));
+            mimeMessageHelper.setTo(passenger.getEmail());
+            mimeMessageHelper.setText("Vas zahtev za mesecnu kartu je odbijen.Za vise informacija javite se nasoj sluzbi.Hvala.");
+
+            mailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Email poslat!");
+    }
+
+    public void acceptDeleteRequest(User user) {
+        System.out.println("Slanje emaila...");
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setSubject("Odbijen zahtev za popust");
+            mimeMessageHelper.setFrom(new InternetAddress("sammilica99@gmail.com", "Bus app"));
+            mimeMessageHelper.setTo(user.getEmail());
+            mimeMessageHelper.setText("Vas zahtev za brisanje naloga je prihvacen.");
+
+            mailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Email poslat!");
+    }
+
+    public void rejectDeleteRequest(User user) {
+        System.out.println("Slanje emaila...");
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+            mimeMessageHelper.setSubject("Odbijen zahtev za popust");
+            mimeMessageHelper.setFrom(new InternetAddress("sammilica99@gmail.com", "Bus app"));
+            mimeMessageHelper.setTo(user.getEmail());
+            mimeMessageHelper.setText("Vas zahtev za brisanje naloga je odbijen.Kontaktirajte naseg administratora za vise informacija.");
+
+            mailSender.send(mimeMessageHelper.getMimeMessage());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Email poslat!");
+    }
 }

@@ -5,7 +5,6 @@ import com.example.demo.dto.tickets.TicketPdfResponse;
 import com.example.demo.enums.TicketType;
 import com.example.demo.model.business.ActiveDeparture;
 import com.example.demo.model.tickets.MonthlyTicket;
-import com.example.demo.model.tickets.StandardTicket;
 import com.example.demo.model.users.User;
 import com.example.demo.model.users.client.Passenger;
 import com.example.demo.repository.tickets.MonthlyTicketRepository;
@@ -122,5 +121,10 @@ public class MonthlyTicketService {
         }
 
         return ret;
+    }
+
+    public void monthlyTicketReject(int id) {
+        MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
+        this.emailSenderService.sendMonthlyTicketRejection(monthlyTicket.getPassenger());
     }
 }

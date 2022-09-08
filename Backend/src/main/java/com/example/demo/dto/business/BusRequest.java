@@ -10,4 +10,5 @@ public class BusRequest {
     public String manufacturer;
     public double kilometersTraveled;
     public Date endRegistrationDate;
+    public int idBusDriver;
 }

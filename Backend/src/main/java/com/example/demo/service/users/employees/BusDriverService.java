@@ -18,4 +18,8 @@ public class BusDriverService {
     public void save(BusDriver busDriver) {
         this.busDriverRepository.save(busDriver);
     }
+
+    public BusDriver getByIdWithBuses(int idBusDriver) {
+        return this.busDriverRepository.getByIdWithBuses(idBusDriver);
+    }
 }

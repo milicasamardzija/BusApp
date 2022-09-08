@@ -25,7 +25,7 @@ public class BusController {
         List<BusResponse> ret = new ArrayList<>();
 
         for (Bus bus: this.busService.getAll() ) {
-            ret.add(new BusResponse(bus.getId(), bus.getRegistrationNumber(), bus.getGarageNumber(), bus.getSeatNumber(), bus.getManufacturer(), bus.getKilometersTraveled(), bus.getEndRegistrationDate()));
+            ret.add(new BusResponse(bus.getId(), bus.getRegistrationNumber(), bus.getGarageNumber(), bus.getSeatNumber(), bus.getManufacturer(), bus.getKilometersTraveled(), bus.getEndRegistrationDate(), bus.getBusDriver()));
         }
 
         return new ResponseEntity<>(ret, HttpStatus.OK);
@@ -34,7 +34,7 @@ public class BusController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<BusResponse> get(@PathVariable int id){
         Bus bus = this.busService.getById(id);
-        return new ResponseEntity<>(new BusResponse(bus.getId(), bus.getRegistrationNumber(), bus.getGarageNumber(), bus.getSeatNumber(), bus.getManufacturer(), bus.getKilometersTraveled(), bus.getEndRegistrationDate()), HttpStatus.OK);
+        return new ResponseEntity<>(new BusResponse(bus.getId(), bus.getRegistrationNumber(), bus.getGarageNumber(), bus.getSeatNumber(), bus.getManufacturer(), bus.getKilometersTraveled(), bus.getEndRegistrationDate(), bus.getBusDriver()), HttpStatus.OK);
     }
 
     @PostMapping

@@ -1,5 +1,6 @@
 package com.example.demo.model.business;
 
+import com.example.demo.model.users.employees.BusDriver;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -29,6 +30,17 @@ public class Bus {
     @OneToMany(mappedBy = "bus", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<DrivingLine> drivingLines;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "bus_driver_id")
+    private BusDriver busDriver;
+
+    public BusDriver getBusDriver() {
+        return busDriver;
+    }
+
+    public void setBusDriver(BusDriver busDriver) {
+        this.busDriver = busDriver;
+    }
 
     public int getId() {
         return id;
