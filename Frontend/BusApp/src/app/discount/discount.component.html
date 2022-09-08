@@ -1,0 +1,23 @@
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Popusti</i></p>
+<button  mat-raised-button class="add" (click)="add()" >Dodaj</button>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Vrsta popusta</th>
+        <th scope="col">Popust</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let d of discounts">
+        <td>{{d.discountType}}</td>
+        <td>{{d.percentage}} %</td>
+        <td><button  mat-raised-button class="add" (click)="change(d.id)" >Izmeni</button></td>
+        <td><button  mat-raised-button class="add"  (click)="delete(d.id)" >Izbrisi</button></td>
+      </tr>
+    </tbody>
+</table>
+

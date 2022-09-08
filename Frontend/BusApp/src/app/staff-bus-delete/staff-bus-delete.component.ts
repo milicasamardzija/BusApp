@@ -14,7 +14,6 @@ export class StaffBusDeleteComponent implements OnInit {
   bus!: boolean;
 
   constructor(private busService: BusService, private employeeService: EmployeeService,public dialogRefEmployee: MatDialogRef<StaffBusDeleteComponent>, public dialogRef: MatDialogRef<StaffBusDeleteComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
-   alert(data.id)
     this.id = data.id;
     this.bus = data.bus;
    }

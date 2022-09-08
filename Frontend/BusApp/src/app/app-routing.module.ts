@@ -4,6 +4,7 @@ import { AdminHomePageComponent } from './admin-home-page/admin-home-page.compon
 import { AdminRegistrationRequestsComponent } from './admin-registration-requests/admin-registration-requests.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AllBusLinesComponent } from './all-bus-lines/all-bus-lines.component';
+import { DiscountComponent } from './discount/discount.component';
 import { PassengerHomePageComponent } from './passenger-home-page/passenger-home-page.component';
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
 import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/passenger-previous-tickets.component';
@@ -74,6 +75,9 @@ const routes: Routes = [
       },
       {
         path:'prices', component: StaffPriceComponent
+      },
+      {
+        path:'discounts', component: DiscountComponent
       }
     ]  
   },

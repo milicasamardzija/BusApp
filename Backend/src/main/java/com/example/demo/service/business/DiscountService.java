@@ -1,5 +1,6 @@
 package com.example.demo.service.business;
 
+import com.example.demo.dto.business.DiscountRequest;
 import com.example.demo.enums.DiscountType;
 import com.example.demo.model.business.Discount;
 import com.example.demo.repository.busineess.DiscountRepository;
@@ -14,10 +15,10 @@ public class DiscountService {
     @Autowired
     private DiscountRepository discountRepository;
 
-    public void save(Discount discount){
+    public void save(DiscountRequest discount){
         Discount discountNew = new Discount();
-        discountNew.setDiscountType(discount.getDiscountType());
-        discountNew.setPercentage(discount.getPercentage());
+        discountNew.setDiscountType(discount.discountType);
+        discountNew.setPercentage(discount.percentage);
         this.discountRepository.save(discountNew);
     }
 
@@ -37,10 +38,14 @@ public class DiscountService {
     }
 
     public Discount getById(int id) {
-        return this.discountRepository.getById(id);
+        return this.discountRepository.findById(id);
     }
 
     public Discount getByTypeWithPassengers(DiscountType discount) {
         return this.discountRepository.getByTypeWithPassengers(discount);
+    }
+
+    public void update(Discount discount) {
+        this.discountRepository.save(discount);
     }
 }

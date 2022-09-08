@@ -49,7 +49,7 @@ public class DiscountRequestService {
         List<Passenger> passengers = discount.getPassengers();
         passengers.add(passenger);
         discount.setPassengers(passengers);
-        this.discountService.save(discount);
+        this.discountService.update(discount);
 
         this.discountRequestRepository.deleteById(discountRequestResponse.id);
     }

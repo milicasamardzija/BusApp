@@ -1,0 +1,28 @@
+table {
+    width: 90%;
+    margin-left: 5%;
+    color: #434343;;
+    font-size: medium;
+}
+
+thead {
+    color:  #4775a0;
+}
+
+.text {
+    margin-left: 5%;
+    margin-bottom: 3%;
+    color:  #4775a0;
+}
+
+.button {
+    background-color: #4775a0;
+    color: white;
+}
+
+.add{
+    margin-top: 1%;
+    margin-left: 5%;
+    margin-bottom: 3%;
+    margin-right: 2%;
+}

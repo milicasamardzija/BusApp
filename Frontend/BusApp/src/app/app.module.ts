@@ -51,6 +51,9 @@ import { StaffEmployeeAddChangeComponent } from './staff-employee-add-change/sta
 import { PassengerTicketCheckComponent } from './passenger-ticket-check/passenger-ticket-check.component';
 import { StaffPriceComponent } from './staff-price/staff-price.component';
 import { StaffPriceAddComponent } from './staff-price-add/staff-price-add.component';
+import { DiscountComponent } from './discount/discount.component';
+import { StaffDiscountAddChangeComponent } from './staff-discount-add-change/staff-discount-add-change.component';
+import { StaffDiscountDeleteComponent } from './staff-discount-delete/staff-discount-delete.component';
 
 
 @NgModule({
@@ -87,6 +90,9 @@ import { StaffPriceAddComponent } from './staff-price-add/staff-price-add.compon
     PassengerTicketCheckComponent,
     StaffPriceComponent,
     StaffPriceAddComponent,
+    DiscountComponent,
+    StaffDiscountAddChangeComponent,
+    StaffDiscountDeleteComponent,
   ],
   imports: [
     BrowserModule,

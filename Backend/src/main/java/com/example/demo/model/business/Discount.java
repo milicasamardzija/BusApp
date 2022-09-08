@@ -1,6 +1,5 @@
 package com.example.demo.model.business;
 
-import com.example.demo.enums.DiscountType;
 import com.example.demo.model.users.client.Passenger;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -16,12 +15,25 @@ public class Discount {
     @Column(name="id", unique=true, nullable=false)
     private int id;
     @Column
-    private DiscountType discountType;
+    private String discountType;
     @Column
     private double percentage;
     @OneToMany(mappedBy = "discount", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Passenger> passengers;
+
+    public Discount() {}
+
+    public Discount(int id, String discountType, double percentage) {
+        this.id = id;
+        this.discountType = discountType;
+        this.percentage = percentage;
+    }
+
+    public Discount(String discountType, double percentage) {
+        this.discountType = discountType;
+        this.percentage = percentage;
+    }
 
     public int getId() {
         return id;
@@ -31,11 +43,11 @@ public class Discount {
         this.id = id;
     }
 
-    public DiscountType getDiscountType() {
+    public String getDiscountType() {
         return discountType;
     }
 
-    public void setDiscountType(DiscountType discountType) {
+    public void setDiscountType(String discountType) {
         this.discountType = discountType;
     }
 
