@@ -20,6 +20,8 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
+    public Comment(){}
+
     public Comment(String text, User user, Boolean accepted) {
         this.text = text;
         this.accepted = accepted;

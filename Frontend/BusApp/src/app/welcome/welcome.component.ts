@@ -9,7 +9,7 @@ import { RegisterComponent } from '../register/register.component';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-
+  
   constructor(public dialog: MatDialog, public dialogRef : MatDialog) { }
 
   ngOnInit(): void {

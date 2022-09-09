@@ -1,4 +1,12 @@
 <app-search-lines (hide)="hideDIv($event)"></app-search-lines>
+
+<button mat-raised-button class="add" (click)="comment()" *ngIf="comments === false">Pogledaj komentare</button>
+<button mat-raised-button class="add" (click)="line()" *ngIf="comments === true">Pogledaj linije</button>
+<div *ngIf="comments === true">
+<app-comments></app-comments>  
+</div>
+<div *ngIf="comments === false">
+
 <button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="add()">Dodaj</button>
 <div *ngIf="hide===false">
     <div class="example-card" *ngFor = "let l of lines">
@@ -27,5 +35,6 @@
             </mat-card> 
          </div>
      </div>
+</div>
 </div>
 

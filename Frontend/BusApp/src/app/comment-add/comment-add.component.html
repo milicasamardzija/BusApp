@@ -1,0 +1,22 @@
+<div class="example-card">
+    <mat-card-header>
+    <mat-card-title class="title"><i>Dodaj komentar!</i></mat-card-title>     
+    </mat-card-header>
+    <mat-card-content class="contentCard">
+        <div>
+            <table>
+                <tr>
+                    <td>
+                        <p>Tekst</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "text" ></mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="actions">
+        <button mat-raised-button class="buttonYes" (click)="add()">Yes</button>
+        <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+        </div>
+    </mat-card-content>
+</div>
+

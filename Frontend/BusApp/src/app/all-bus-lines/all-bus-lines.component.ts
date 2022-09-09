@@ -14,12 +14,21 @@ export class AllBusLinesComponent implements OnInit {
   lines!: any;
   @Input() hide = false;
   role!: string;
+  comments = false;
 
   constructor(private busLinesService : BusLinesService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getAllLines();
     this.role = localStorage.getItem('role') || "";
+  }
+
+  comment(){
+    this.comments = true;
+  }
+
+  line(){
+    this.comments = false;
   }
 
   getAllLines(){

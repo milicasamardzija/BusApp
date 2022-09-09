@@ -54,6 +54,7 @@ import { StaffPriceAddComponent } from './staff-price-add/staff-price-add.compon
 import { DiscountComponent } from './discount/discount.component';
 import { StaffDiscountAddChangeComponent } from './staff-discount-add-change/staff-discount-add-change.component';
 import { StaffDiscountDeleteComponent } from './staff-discount-delete/staff-discount-delete.component';
+import { CommentAddComponent } from './comment-add/comment-add.component';
 
 
 @NgModule({
@@ -93,6 +94,7 @@ import { StaffDiscountDeleteComponent } from './staff-discount-delete/staff-disc
     DiscountComponent,
     StaffDiscountAddChangeComponent,
     StaffDiscountDeleteComponent,
+    CommentAddComponent,
   ],
   imports: [
     BrowserModule,
