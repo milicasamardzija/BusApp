@@ -10,7 +10,7 @@ import { User } from '../model/User';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User = {name: "", surname: "", telephone: "", email: "", password: "", role: "", country: "", city: "", street: "", number: ""}
+  user: User = {name: "", surname: "", telephone: "", email: "", password: "", role: "", country: "", city: "", street: "", number: "", image: ""}
 
   constructor(private authService : AuthService, public dialogRef: MatDialogRef<RegisterComponent>) { }
 

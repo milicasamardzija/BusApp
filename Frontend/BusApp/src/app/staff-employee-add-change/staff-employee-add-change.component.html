@@ -11,8 +11,6 @@
                         <p>Ime</p>
                         <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.name" ></mat-form-field>
                     </td>
-                </tr>
-                <tr>
                     <td>
                         <p>Prezime</p>
                         <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.surname"></mat-form-field>
@@ -23,8 +21,6 @@
                         <p>Broj telefona</p>
                         <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.telephone"></mat-form-field>
                     </td>
-                </tr>
-                <tr>
                     <td>
                         <p>Email adresa</p>
                         <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.email"></mat-form-field>
@@ -32,8 +28,22 @@
                 </tr>
                 <tr>
                     <td>
-                        <p>Plata</p>
-                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.salary"></mat-form-field>
+                        <p>Drzava</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.address.country"></mat-form-field>
+                    </td>
+                    <td> 
+                        <p>Grad</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.address.city"></mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Ulica</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.address.street"></mat-form-field>
+                    </td>
+                    <td> 
+                        <p>Broj</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.address.number"></mat-form-field>
                     </td>
                 </tr>
                 <tr *ngIf="add===true">
@@ -53,7 +63,10 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-            
+                    </td>
+                    <td>
+                        <p>Plata</p>
+                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "employee.salary"></mat-form-field>
                     </td>
                 </tr>
             </table>

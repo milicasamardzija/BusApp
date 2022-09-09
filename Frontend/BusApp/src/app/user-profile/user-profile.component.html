@@ -14,11 +14,13 @@
 <div style="margin-top: 2%" >
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Ime:</b></i> {{user.name}}</h5>
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Prezime:</b></i> {{user.surname}}</h5>
-  <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Adresa:</b></i>{{user.address.street}} {{user.address.number}}, {{user.address.city}}, {{user.address.country}}</h5>
+  <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Adresa:</b></i>{{user.street}} {{user.number}}, {{user.city}}, {{user.country}}</h5>
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Email:</b></i>{{user.email}}</h5>
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Broj telefona:</b></i> {{user.telephone}}</h5>
 </div>
 <div *ngIf = "role === 'ROLE_PASSENGER'">
   <button mat-raised-button class="button" (click)="change()" >Izmeni podatke</button>
   <button mat-raised-button class="button" (click)="delete()" >Izbrisi nalog</button>
+  <button mat-raised-button class="button" (click)="changePassword()" >Promeni sifru</button>
+  <button mat-raised-button class="button" (click)="discout()" >Zatrazi popust</button>
 </div>

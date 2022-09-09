@@ -1,1 +1,65 @@
-<p>user-profile-change works!</p>
+<div style="height: 40px;"></div>
+<div>
+<table>
+  <tr>
+      <td>
+          <p>Ime</p>
+          <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.name" ></mat-form-field>
+      </td>
+      <td>
+          <p>Prezime</p>
+          <mat-form-field class="inputField" ><input matInput [(ngModel)] = "user.surname" ></mat-form-field>
+      </td>
+  </tr>
+  <tr>
+      <td>
+          <p>Telefon</p>
+          <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.telephone"></mat-form-field>
+      </td>
+      <td>
+        <p>Email</p>
+        <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.email"></mat-form-field>
+    </td>
+  </tr>
+ <!-- <tr>
+      <td>
+          <p>Sifra</p>
+          <mat-form-field class="inputField"><input type="password" matInput [(ngModel)] = "user.password"></mat-form-field>
+      </td>
+      <td>
+          <p>Ponovo unesi sifru</p>
+          <mat-form-field class="inputField"><input matInput  type="password"></mat-form-field>
+      </td>
+  </tr>-->
+  <tr>
+      <td>
+          <p>Drzava</p>
+          <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.country"></mat-form-field>
+      </td>
+      <td> 
+          <p>Grad</p>
+          <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.city"></mat-form-field>
+      </td>
+  </tr>
+  <tr>
+      <td>
+          <p>Ulica</p>
+          <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.street"></mat-form-field>
+      </td>
+      <td> 
+          <p>Broj</p>
+          <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.number"></mat-form-field>
+      </td>
+  </tr>
+  <tr>
+    <td>Promeni sliku</td>
+    <td>
+      <input type="file" (change)="CreateBase64String($event)" class="form-control"/>
+    </td>
+  </tr>
+</table>
+<div class="actions">
+  <button mat-raised-button class="buttonYes" (click)="change()">Yes</button>
+  <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+  </div>
+</div>

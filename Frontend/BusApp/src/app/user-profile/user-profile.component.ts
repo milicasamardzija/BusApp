@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserInfo } from '../model/UserInfo';
+import { MatDialog } from '@angular/material/dialog';
+import { User } from '../model/User';
+import { UserProfileChangeComponent } from '../user-profile-change/user-profile-change.component';
 import { UserService } from './user.service';
 
 @Component({
@@ -8,12 +10,12 @@ import { UserService } from './user.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  user: UserInfo = { name : "", surname: "", email: "", password: "", telephone: "", image : "", address: {
+  user: User= { name : "", surname: "", email: "", password: "", telephone: "", image : "", role: "",
     country: "", city: "", street: "", number: ""
-  }};
+  };
   role: string = "";
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public dialogProfileChange: MatDialog, public dialogProfileDelete: MatDialog, public dialogDiscountRequest: MatDialog) { }
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || "";
@@ -29,10 +31,30 @@ export class UserProfileComponent implements OnInit {
   }
 
   change(){
-
+    const dialogRef = this.dialogProfileChange.open(UserProfileChangeComponent, {
+      width: '750px',
+      height: '650px',
+    });
+    
+    dialogRef.afterClosed().subscribe(
+      response => {
+        if (response.data == "updated"){
+          this.getUserInfo();
+        }
+      }
+    )
   }
 
   delete(){
 
   }
+
+  discout(){
+    
+  }
+
+  changePassword(){
+
+  }
+  
 }

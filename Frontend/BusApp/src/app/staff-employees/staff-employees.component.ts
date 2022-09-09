@@ -28,8 +28,8 @@ export class StaffEmployeesComponent implements OnInit {
 
   add(){
     const dialogRef = this.dialog.open(StaffEmployeeAddChangeComponent, {
-      width: '600px',
-      height: '770px',
+      width: '680px',
+      height: '680px',
       data: {
         id: "",
         add: true,
@@ -47,8 +47,8 @@ export class StaffEmployeesComponent implements OnInit {
 
   change(identifier: number){
     const dialogRef = this.dialog.open(StaffEmployeeAddChangeComponent, {
-      width: '600px',
-      height: '770px',
+      width: '680px',
+      height: '560px',
       data: {
         id: identifier,
         add: false,

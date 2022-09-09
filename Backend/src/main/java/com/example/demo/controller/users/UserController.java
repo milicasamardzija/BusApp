@@ -27,10 +27,10 @@ public class UserController {
     private UserRegistrationRequestService userRegistrationRequestService;
 
     @GetMapping(value = "")
-    public ResponseEntity<UserResponse> fetchProfileInfo(){
+    public ResponseEntity<UserRequest> fetchProfileInfo(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
-        return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
+        return new ResponseEntity<>(new UserRequest(user), HttpStatus.OK);
     }
 
     @PutMapping

@@ -40,7 +40,7 @@ public class User implements UserDetails {
 	private boolean enabled;
 	@Column(length = 255)
 	private String picture;
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "role_id")
 	private Role role;
