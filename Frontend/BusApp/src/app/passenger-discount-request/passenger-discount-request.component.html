@@ -1,0 +1,30 @@
+<p><i>Posaljite zahtev za popust!</i></p>
+<table>
+    <tr>
+        <p>Vrsta popusta</p>
+    </tr>
+<tr>
+        <div style="height: 3rem;font-size: 1rem">
+            <mat-form-field>
+                <mat-label>Vrsta popusta</mat-label>
+                <mat-select [formControl]="discounts"> 
+                    <mat-select-trigger >
+                    {{discounts.value?.[0] || ''}}
+                    <span *ngIf="(discounts.value?.length || 0) > 1"  >
+                        (+{{(discounts.value?.length || 0) - 1}} {{discounts.value?.length === 2 ? 'other' : 'others'}})
+                    </span>
+                    </mat-select-trigger >
+                    <mat-option *ngFor="let p of discountsList" [value]="p.discountType" >{{p.discountType}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+</tr>
+    <tr>Slika dokumenta</tr>
+    <tr>
+      <input type="file" (change)="CreateBase64String($event)" class="form-control"/>
+    </tr>
+</table>
+<div class="actions">
+    <button mat-raised-button class="buttonYes" (click)="add()">Yes</button>
+    <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+    </div>

@@ -1,5 +1,7 @@
 package com.example.demo.dto.users.employees;
 
+import com.example.demo.model.users.Address;
+
 public class EmployeeResponse {
 
     public  int id;
@@ -9,8 +11,9 @@ public class EmployeeResponse {
     public String email;
     public double salary;
     public String type;
+    public Address address;
 
-    public EmployeeResponse(int id, String name, String surname, String telephone, String email, double salary, String type) {
+    public EmployeeResponse(int id, String name, String surname, String telephone, String email, double salary, String type, Address address) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -18,5 +21,6 @@ public class EmployeeResponse {
         this.email = email;
         this.salary = salary;
         this.type = type;
+        this.address = address;
     }
 }

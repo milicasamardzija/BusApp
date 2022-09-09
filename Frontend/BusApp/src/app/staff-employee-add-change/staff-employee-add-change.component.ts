@@ -11,7 +11,7 @@ import { EmployeeService } from '../staff-employees/employee.service';
 })
 export class StaffEmployeeAddChangeComponent implements OnInit {
   employee : Emloyee = { id: 0, name: "", surname: "", email: "", salary: 0, telephone: "", type: "", address: {
-    country: "a", city: "a", street: "a", number: "a"
+    country: "", city: "", street: "", number: ""
   }}
   positions = new FormControl('');
   positionsList:string[] = ['Sluzbenik', 'Vozac', 'Kondukter'];

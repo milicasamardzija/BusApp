@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { User } from '../model/User';
+import { PassengerDiscountRequestComponent } from '../passenger-discount-request/passenger-discount-request.component';
+import { UserChangePasswordComponent } from '../user-change-password/user-change-password.component';
+import { UserDeleteRequestComponent } from '../user-delete-request/user-delete-request.component';
 import { UserProfileChangeComponent } from '../user-profile-change/user-profile-change.component';
 import { UserService } from './user.service';
 
@@ -15,7 +18,7 @@ export class UserProfileComponent implements OnInit {
   };
   role: string = "";
 
-  constructor(private userService: UserService, public dialogProfileChange: MatDialog, public dialogProfileDelete: MatDialog, public dialogDiscountRequest: MatDialog) { }
+  constructor(private userService: UserService, public dialogProfileChange: MatDialog, public dialogPasswordChange: MatDialog, public dialogProfileDelete: MatDialog, public dialogDiscountRequest: MatDialog) { }
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || "";
@@ -46,15 +49,24 @@ export class UserProfileComponent implements OnInit {
   }
 
   delete(){
-
+    const dialogRef = this.dialogProfileDelete.open(UserDeleteRequestComponent, {
+      width: '400px',
+      height: '300px',
+    });
   }
 
   discout(){
-    
+    const dialogRef = this.dialogDiscountRequest.open(PassengerDiscountRequestComponent, {
+      width: '400px',
+      height: '300px',
+    });
   }
 
   changePassword(){
-
+    const dialogRef = this.dialogPasswordChange.open(UserChangePasswordComponent, {
+      width: '400px',
+      height: '400px',
+    });
   }
   
 }

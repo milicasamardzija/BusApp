@@ -1,5 +1,6 @@
 package com.example.demo.controller.users;
 
+import com.example.demo.dto.users.UserChangePasswordRequest;
 import com.example.demo.dto.users.auth.JwtAuthenticationRequest;
 import com.example.demo.dto.users.UserRequest;
 import com.example.demo.dto.users.auth.UserTokenState;
@@ -62,10 +63,36 @@ public class AuthenticationController {
         String jwt = tokenUtils.generateToken(user.getEmail());
         int expiresIn = tokenUtils.getExpiredIn();
         if (!user.isEnabled()) {
-            return ResponseEntity.ok(new UserTokenState(jwt, expiresIn,user.getRole().getName(), user.isEnabled()));
+            return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn,user.getRole().getName(), user.isEnabled(), user.getId()));
         }
 
-        return ResponseEntity.ok(new UserTokenState(jwt, expiresIn,user.getRole().getName(), user.isEnabled()));
+        return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn,user.getRole().getName(), user.isEnabled(), user.getId()));
+    }
+
+    @PostMapping(value = "/changePassword")
+    public ResponseEntity<UserTokenState> changePassword(@RequestBody UserChangePasswordRequest userRequest) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        this.userService.changePassword(userRequest.password, user);
+
+        Authentication authenticationNew = null;
+        try {
+            authenticationNew = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    user.getEmail(), userRequest.password));
+        }
+        catch (Exception ex){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        SecurityContextHolder.getContext().setAuthentication(authenticationNew);
+
+        String jwt = tokenUtils.generateToken(user.getEmail());
+        int expiresIn = tokenUtils.getExpiredIn();
+        if (!user.isEnabled()) {
+            return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn,user.getRole().getName(), user.isEnabled(), user.getId()));
+        }
+
+        return ResponseEntity.ok(new UserTokenState(jwt, (long) expiresIn,user.getRole().getName(), user.isEnabled(), user.getId()));
     }
 
 

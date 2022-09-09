@@ -18,7 +18,7 @@
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Email:</b></i>{{user.email}}</h5>
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Broj telefona:</b></i> {{user.telephone}}</h5>
 </div>
-<div *ngIf = "role === 'ROLE_PASSENGER'">
+<div>
   <button mat-raised-button class="button" (click)="change()" >Izmeni podatke</button>
   <button mat-raised-button class="button" (click)="delete()" >Izbrisi nalog</button>
   <button mat-raised-button class="button" (click)="changePassword()" >Promeni sifru</button>

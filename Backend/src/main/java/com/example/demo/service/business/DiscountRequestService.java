@@ -30,7 +30,6 @@ public class DiscountRequestService {
         return this.discountRequestRepository.findAll();
     }
 
-    //dodaj novi
     public void save(DiscountNewRequest newRequest, User user){
         DiscountRequest discountRequest = new DiscountRequest();
         discountRequest.setDiscount(newRequest.discount);
@@ -39,7 +38,6 @@ public class DiscountRequestService {
         this.discountRequestRepository.save(discountRequest);
     }
 
-    //odobri
     public void approve(DiscountRequestResponse discountRequestResponse){
         Passenger passenger = this.passengerService.findById((discountRequestResponse.id));
         Discount discount = this.discountService.getByTypeWithPassengers(discountRequestResponse.discount);
@@ -54,7 +52,6 @@ public class DiscountRequestService {
         this.discountRequestRepository.deleteById(discountRequestResponse.id);
     }
 
-    //odbij
     public void reject(DiscountRequestResponse discountRequestResponse){
         Passenger passenger = this.passengerService.findById((discountRequestResponse.id));
 

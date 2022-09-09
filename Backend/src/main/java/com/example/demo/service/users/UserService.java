@@ -61,7 +61,6 @@ public class UserService {
         }
         user.setRole(role);
         user.setPicture(updatedUser.image);
-        user.setPassword(passwordEncoder.encode(updatedUser.password));
         user.setName(updatedUser.name);
         user.setSurname(updatedUser.surname);
         user.setTelephone(updatedUser.telephone);
@@ -73,5 +72,10 @@ public class UserService {
 
     public List<User> getAll() {
         return this.userRepository.findAll();
+    }
+
+    public void changePassword(String password, User user) {
+        user.setPassword(passwordEncoder.encode(password));
+        this.userRepository.save(user);
     }
 }

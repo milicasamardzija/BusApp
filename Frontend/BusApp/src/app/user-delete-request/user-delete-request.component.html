@@ -1,0 +1,14 @@
+<div style="height: 40px;"></div>
+<div>
+  <table>
+    <tr>
+      <p><i>Razlog za brisanje naloga:</i></p>
+      <mat-form-field class="inputField"><input type="text" matInput [(ngModel)] = "text"></mat-form-field>
+    </tr>
+  </table>
+<div class="actions">
+  <button mat-raised-button class="buttonYes" (click)="change()">Yes</button>
+  <button mat-raised-button class="buttonNO" (click)="cancel()">No</button>
+  </div>
+</div>
+

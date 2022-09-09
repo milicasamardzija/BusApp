@@ -4,36 +4,35 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class DicountRequestService {
 
   constructor(private _http: HttpClient) { }
 
-  getUserInfo(){
+  getAll(){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get<any>("http://localhost:8081/user", {"headers":headers});
+    return this._http.get<any[]>("http://localhost:8081/discountRequest", {"headers":headers});
   }
 
-  updateUserInfo(user: any){
+  add(dicountType: string, discountProof: string){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.put<any>("http://localhost:8081/user", user, {"headers":headers});
+    return this._http.post("http://localhost:8081/discountRequest" ,{"discount" : dicountType, "discountProof": discountProof} , {"headers":headers});
   }
 
-  getAllUsers(){
+  approve(dicount: any){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get<any[]>("http://localhost:8081/user/allUsers", {"headers":headers});
+    return this._http.post("http://localhost:8081/discountRequest/approve" , dicount , {"headers":headers});
   }
 
-  getAllRequests(){
+  reject(dicount: any){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get<any[]>("http://localhost:8081/user/requests", {"headers":headers});
+    return this._http.post("http://localhost:8081/discountRequest/reject" , dicount , {"headers":headers});
   }
-
 }

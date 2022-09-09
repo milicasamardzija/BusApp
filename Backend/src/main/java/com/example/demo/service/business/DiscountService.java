@@ -41,7 +41,7 @@ public class DiscountService {
         return this.discountRepository.findById(id);
     }
 
-    public Discount getByTypeWithPassengers(DiscountType discount) {
+    public Discount getByTypeWithPassengers(String discount) {
         return this.discountRepository.getByTypeWithPassengers(discount);
     }
 

@@ -13,7 +13,7 @@ public class DiscountRequest {
     @Column(name="id", unique=true, nullable=false)
     private int id;
     @Column
-    private DiscountType discount;
+    private String discount;
     @Column
     private String discountProof;
     @OneToOne(fetch = FetchType.EAGER)
@@ -36,11 +36,11 @@ public class DiscountRequest {
         this.id = id;
     }
 
-    public DiscountType getDiscount() {
+    public String getDiscount() {
         return discount;
     }
 
-    public void setDiscount(DiscountType discount) {
+    public void setDiscount(String discount) {
         this.discount = discount;
     }
 

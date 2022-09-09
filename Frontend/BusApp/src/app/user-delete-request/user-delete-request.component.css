@@ -1,0 +1,35 @@
+.inputField{
+    width: 18rem;
+}
+
+table{
+    margin-left: 7%;
+}
+
+td{
+    width: 60%;
+}
+
+p{
+    margin-top: 2%;
+}
+
+.buttonYes {
+    background-color: #4775a0;
+    color: white;
+    margin-right: 10%;
+}
+
+.buttonNo {
+    background-color: white;
+    color: #4775a0;
+}
+
+.actions{
+    margin-top: 10%;
+    margin-left: 27%;
+}
+
+.title{
+    color: #4775a0;;
+}

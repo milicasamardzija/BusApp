@@ -55,6 +55,9 @@ import { DiscountComponent } from './discount/discount.component';
 import { StaffDiscountAddChangeComponent } from './staff-discount-add-change/staff-discount-add-change.component';
 import { StaffDiscountDeleteComponent } from './staff-discount-delete/staff-discount-delete.component';
 import { CommentAddComponent } from './comment-add/comment-add.component';
+import { PassengerDiscountRequestComponent } from './passenger-discount-request/passenger-discount-request.component';
+import { UserDeleteRequestComponent } from './user-delete-request/user-delete-request.component';
+import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 
 
 @NgModule({
@@ -95,6 +98,9 @@ import { CommentAddComponent } from './comment-add/comment-add.component';
     StaffDiscountAddChangeComponent,
     StaffDiscountDeleteComponent,
     CommentAddComponent,
+    PassengerDiscountRequestComponent,
+    UserDeleteRequestComponent,
+    UserChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

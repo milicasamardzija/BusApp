@@ -35,7 +35,7 @@ public class EmployeeController {
             if (type.equals("Sluzbenik")){
                 break;
             }
-            ret.add(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type));
+            ret.add(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type, employee.getAddress()));
         }
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
@@ -44,7 +44,7 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponse> getById(@PathVariable int id){
         Employee employee = this.employeeService.getById(id);
         String type = this.employeeService.getEmployeeType(employee.getId(), employee.getEmployeeType());
-        return new ResponseEntity<>(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type), HttpStatus.OK);
+        return new ResponseEntity<>(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type, employee.getAddress()), HttpStatus.OK);
     }
 
     @PostMapping

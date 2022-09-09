@@ -4,36 +4,35 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserDeleteRequestService {
 
   constructor(private _http: HttpClient) { }
 
-  getUserInfo(){
+  getAll(){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get<any>("http://localhost:8081/user", {"headers":headers});
+    return this._http.get<any[]>("http://localhost:8081/userDeleteReq",);
   }
 
-  updateUserInfo(user: any){
+  accept(id: number){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.put<any>("http://localhost:8081/user", user, {"headers":headers});
+    return this._http.put("http://localhost:8081/userDeleteReq/accept/" + id, {"headers":headers});
   }
 
-  getAllUsers(){
+  reject(id: number){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get<any[]>("http://localhost:8081/user/allUsers", {"headers":headers});
+    return this._http.put("http://localhost:8081/userDeleteReq/reject/" + id, {"headers":headers});
   }
 
-  getAllRequests(){
+  add(text: string){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get<any[]>("http://localhost:8081/user/requests", {"headers":headers});
+    return this._http.post("http://localhost:8081/userDeleteReq", {"text": text} ,{"headers":headers});
   }
-
 }

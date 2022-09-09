@@ -5,16 +5,14 @@ public class UserTokenState {
     public Long expiresIn;
     public String role;
     public Boolean enabled;
+    public int id;
 
-    public UserTokenState() {
-        this.accessToken = null;
-        this.expiresIn = null;
-    }
 
-    public UserTokenState(String accessToken, long expiresIn, String role, boolean enabled) {
+    public UserTokenState(String accessToken, Long expiresIn, String role, Boolean enabled, int id) {
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
         this.role = role;
         this.enabled = enabled;
+        this.id = id;
     }
 }
