@@ -13,8 +13,16 @@
                 <span>Korisnici sistema</span>
             </button>
             <button mat-button class="menu-button" [routerLink]="['requests']">
-                <mat-icon>done</mat-icon>
+                <mat-icon>account_circle</mat-icon>
                 <span>Zahtevi za registraciju</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="['userRequests']">
+                <mat-icon>clear</mat-icon>
+                <span>Zahtevi za brisanje naloga</span>
+            </button>
+            <button mat-button class="menu-button" [routerLink]="['commentsRequests']">
+                <mat-icon>comment</mat-icon>
+                <span>Komentari</span>
             </button>
             <mat-divider></mat-divider>
     </mat-sidenav>

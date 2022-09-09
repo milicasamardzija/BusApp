@@ -1,0 +1,28 @@
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Komentari</i></p>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Ime</th>
+        <th scope="col">Prezime</th>
+        <th scope="col">Komentar</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let c of comments">
+        <td>{{c.name}}</td>
+        <td>{{c.surname}}</td>
+        <td>{{c.explanation}}</td>
+        <td>
+            <button mat-raised-button class="button" (click)="approve(c.id)">Odobri</button>
+          </td>
+          <td>
+            <button mat-raised-button class="button" (click)="reject(c.id)">Odbij</button>
+          </td>
+      </tr>
+    </tbody>
+</table>
+

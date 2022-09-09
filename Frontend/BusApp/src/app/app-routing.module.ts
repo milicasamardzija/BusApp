@@ -1,7 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminCommentsComponent } from './admin-comments/admin-comments.component';
+import { AdminDiscountRequestsComponent } from './admin-discount-requests/admin-discount-requests.component';
 import { AdminHomePageComponent } from './admin-home-page/admin-home-page.component';
 import { AdminRegistrationRequestsComponent } from './admin-registration-requests/admin-registration-requests.component';
+import { AdminUserDeleteRequestsComponent } from './admin-user-delete-requests/admin-user-delete-requests.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AllBusLinesComponent } from './all-bus-lines/all-bus-lines.component';
 import { CommentsComponent } from './comments/comments.component';
@@ -79,7 +82,10 @@ const routes: Routes = [
       },
       {
         path:'discounts', component: DiscountComponent
-      }
+      },
+      {
+        path:'discountRequests', component: AdminDiscountRequestsComponent
+      },
     ]  
   },
   { path: 'admin', component: AdminHomePageComponent,
@@ -92,6 +98,12 @@ const routes: Routes = [
       },
       {
         path:'requests', component: AdminRegistrationRequestsComponent
+      },
+      {
+        path:'userRequests', component: AdminUserDeleteRequestsComponent
+      },
+      {
+        path:'commentsRequests', component: AdminCommentsComponent
       }
     ]  
   },
@@ -100,7 +112,10 @@ const routes: Routes = [
   },
   {
     path:'comments', component: CommentsComponent
-  }
+  },
+  {
+    path:'monthlyTicket/checkTicket/:id', component: PassengerTicketCheckComponent
+  },
 ];
 
 @NgModule({

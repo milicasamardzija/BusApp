@@ -8,6 +8,7 @@ import { UserService } from '../user-profile/user.service';
 })
 export class AdminUsersComponent implements OnInit {
   users!: any[];
+  searchText!: string;
 
   constructor(private userService: UserService) { }
 

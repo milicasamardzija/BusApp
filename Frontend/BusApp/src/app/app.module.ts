@@ -58,7 +58,10 @@ import { CommentAddComponent } from './comment-add/comment-add.component';
 import { PassengerDiscountRequestComponent } from './passenger-discount-request/passenger-discount-request.component';
 import { UserDeleteRequestComponent } from './user-delete-request/user-delete-request.component';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
-
+import { AdminCommentsComponent } from './admin-comments/admin-comments.component';
+import { AdminUserDeleteRequestsComponent } from './admin-user-delete-requests/admin-user-delete-requests.component';
+import { AdminDiscountRequestsComponent } from './admin-discount-requests/admin-discount-requests.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -101,6 +104,9 @@ import { UserChangePasswordComponent } from './user-change-password/user-change-
     PassengerDiscountRequestComponent,
     UserDeleteRequestComponent,
     UserChangePasswordComponent,
+    AdminCommentsComponent,
+    AdminUserDeleteRequestsComponent,
+    AdminDiscountRequestsComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,7 +129,8 @@ import { UserChangePasswordComponent } from './user-change-password/user-change-
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    Ng2SearchPipeModule
   ],
   providers: [ ] ,
   bootstrap: [AppComponent]

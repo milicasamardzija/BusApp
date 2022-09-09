@@ -10,6 +10,7 @@ import { StaffService } from './staff.service';
 })
 export class AdminRegistrationRequestsComponent implements OnInit {
   users!: any[];
+  searchText!:string;
 
   constructor(private userService: UserService, private staffService: StaffService) { }
 

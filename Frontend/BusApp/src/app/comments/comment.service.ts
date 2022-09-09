@@ -37,7 +37,7 @@ export class CommentService {
     return this._http.put("http://localhost:8081/comment/accept/" + id, {"headers":headers});
   }
 
-  reject(id: null){
+  reject(id: number){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }

@@ -22,6 +22,7 @@
     "@angular/router": "~13.3.11",
     "bootstrap": "^5.2.0",
     "chart.js": "^3.9.1",
+    "ng2-search-filter": "^0.5.1",
     "ngx-material-timepicker": "^5.5.3",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.4.29",
