@@ -19,6 +19,7 @@ export class SearchLinesComponent implements OnInit {
   role: string = "";
   days = new FormControl('');
   daysList:string[] = ['Ponedeljak', 'Utorak', 'Sreda', 'Cetvrtak', 'Petak', 'Subota', 'Nedelja']
+  day = new Date();
   
   @Output() hide = new EventEmitter<boolean>();
 
@@ -31,7 +32,7 @@ export class SearchLinesComponent implements OnInit {
   search(){
     this.hideThis = true;
     this.hide.emit(true);
-    this.busLinesService.search(this.cityStart,this.cityEnd,this.days.value).subscribe(
+    this.busLinesService.search(this.cityStart,this.cityEnd,this.day).subscribe(
       response => {
         this.departures = response;
       }

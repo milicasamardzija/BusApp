@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class PassengerMonthlyTicketComponent implements OnInit {
   tickets!: any[];
+  searchText!:string;
 
   constructor(private monthlyService: MonthlyService) { }
 

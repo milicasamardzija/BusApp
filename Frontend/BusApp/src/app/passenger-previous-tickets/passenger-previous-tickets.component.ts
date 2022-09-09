@@ -10,6 +10,8 @@ import { StandardTicketsService } from './standard-tickets.service';
 export class PassengerPreviousTicketsComponent implements OnInit {
   ticketsStandard!: any[];
   ticketsMonthly!: any[];
+  searchText!: string;
+  searchTextSecond!: string;
 
   constructor(private standardTicketsService: StandardTicketsService, private monthlyTicketService: MonthlyService) { }
 

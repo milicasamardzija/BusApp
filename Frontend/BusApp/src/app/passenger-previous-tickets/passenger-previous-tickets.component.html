@@ -1,6 +1,9 @@
 <div style="height: 60px;"></div>
 <div>
 <p class="text"><i>Ranije kupljene karte</i></p>
+<div class="search">
+  <input class="form-control" type="text" [(ngModel)]="searchText" autocomplete="off" placeholder="Pretrazite karte">
+</div>
 <table class="table table-hover">
   <thead>
       <tr>
@@ -13,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let t of ticketsStandard">
+      <tr *ngFor = "let t of ticketsStandard | filter:searchText">
         <td>{{t.dateIssued | date}}</td>
         <td>{{t.price}}</td>
         <td>{{t.cityStart}}</td>
@@ -23,6 +26,10 @@
       </tr>
     </tbody>
 </table>
+
+<div class="search">
+  <input class="form-control" type="text" [(ngModel)]="searchTextSecond" autocomplete="off" placeholder="Pretrazite karte">
+</div>
 
 <table class="table table-hover" style="margin-top:3%">
   <thead>
@@ -35,7 +42,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let t of ticketsMonthly">
+      <tr *ngFor = "let t of ticketsMonthly | filter:searchTextSecond">
         <td>{{t.dateIssued}}</td>
         <td>{{t.price}}</td>
         <td>{{t.cityStart}}</td>

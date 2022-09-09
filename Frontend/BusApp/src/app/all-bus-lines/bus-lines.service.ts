@@ -15,11 +15,11 @@ export class BusLinesService {
     return this._http.get("http://localhost:8081/drivingLine");
   }
 
-  search(startCity: string, endCity: string, day: number){
+  search(startCity: string, endCity: string, day: Date){
     return this._http.post<any[]>("http://localhost:8081/drivingLine/search", {
       "cityStart": startCity,
       "cityEnd": endCity,
-      "day": day
+      "date": day
     });
   }
 
