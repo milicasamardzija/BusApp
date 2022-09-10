@@ -13,6 +13,7 @@ import { BusService } from './bus.service';
 export class StaffBusesComponent implements OnInit {
   buses!: any[];
   role!: string;
+  searchText!: string;
 
   constructor(private busService: BusService, public dialog: MatDialog) { }
 
@@ -32,7 +33,7 @@ export class StaffBusesComponent implements OnInit {
   add(){
     const dialogRef = this.dialog.open(StaffBusAddChangeComponent, {
       width: '600px',
-      height: '770px',
+      height: '840px',
       data: {
         id: "",
         add: true,
@@ -51,7 +52,7 @@ export class StaffBusesComponent implements OnInit {
   change(identifier: number){
     const dialogRef = this.dialog.open(StaffBusAddChangeComponent, {
       width: '600px',
-      height: '770px',
+      height: '840px',
       data: {
         id: identifier,
         add: false,

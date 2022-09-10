@@ -40,6 +40,23 @@ public class EmployeeController {
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }
 
+    @GetMapping(value = "/busDrivers")
+    public ResponseEntity<List<EmployeeResponse>> getAllBusDrivers(){
+        List<EmployeeResponse> ret = new ArrayList<>();
+        for (Employee employee : this.employeeService.getAll()
+        ) {
+            String type = this.employeeService.getEmployeeType(employee.getId(), employee.getEmployeeType());
+            if (type.equals("Sluzbenik")){
+                break;
+            }
+            if (type.equals("Kondukter")){
+                break;
+            }
+            ret.add(new EmployeeResponse(employee.getId(),employee.getName(), employee.getSurname(), employee.getTelephone(), employee.getEmail(), employee.getSalary(), type, employee.getAddress()));
+        }
+        return new ResponseEntity<>(ret, HttpStatus.OK);
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<EmployeeResponse> getById(@PathVariable int id){
         Employee employee = this.employeeService.getById(id);

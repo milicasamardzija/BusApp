@@ -6,4 +6,5 @@ export interface Bus {
     garageNumber: number;
     kilometersTraveled: number;
     endRegistrationDate: Date;
+    idBusDriver: number;
 }

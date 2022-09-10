@@ -13,6 +13,10 @@ export class EmployeeService {
     return this._http.get<any[]>("http://localhost:8081/employee");
   }
 
+  getAllBusDrivers(){
+    return this._http.get<any[]>("http://localhost:8081/employee/busDrivers");
+  }
+
   getById(id: number){
     return this._http.get<Emloyee>("http://localhost:8081/employee/" + id);
   }

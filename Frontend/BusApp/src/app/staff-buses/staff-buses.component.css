@@ -26,3 +26,10 @@ thead {
     margin-right: 2%;
     margin-bottom: 2%;
 }
+
+.search{
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+}
+  
