@@ -19,3 +19,10 @@ thead {
     background-color: #4775a0;
     color: white;
 }
+
+.search{
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+}
+  

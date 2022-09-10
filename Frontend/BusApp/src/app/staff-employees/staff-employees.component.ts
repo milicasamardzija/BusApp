@@ -11,6 +11,7 @@ import { EmployeeService } from './employee.service';
 })
 export class StaffEmployeesComponent implements OnInit {
   employees!: any[];
+  searchText!: string;
 
   constructor(private employeeService: EmployeeService,  public dialog: MatDialog) { }
 

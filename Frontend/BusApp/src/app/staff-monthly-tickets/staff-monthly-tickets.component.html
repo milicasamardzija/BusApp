@@ -1,6 +1,9 @@
 <div style="height: 60px;"></div>
 <div>
 <p class="text"><i>Zahtevi za mesecne karte</i></p>
+<div class="search">
+  <input class="form-control" type="text" [(ngModel)]="searchText" autocomplete="off" placeholder="Pretrazite zahteve">
+</div>
 <table class="table table-hover">
   <thead>
       <tr>
@@ -12,10 +15,11 @@
         <th scope="col">Pocetno mesto</th>
         <th scope="col">Krajnje mesto</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let t of tickets">
+      <tr *ngFor = "let t of tickets | filter:searchText">
         <td>{{t.passenger.name}}</td>
         <td>{{t.passenger.surname}}</td>
         <td>{{t.passenger.telephone}}</td>
@@ -25,6 +29,9 @@
         <td>{{t.cityEnd}}</td>
         <td>
           <button mat-raised-button class="button" (click)="approveTicket(t.id)">Odobri zahtev</button>
+        </td>
+        <td>
+          <button mat-raised-button class="button" (click)="rejectTicket(t.id)">Odbij zahtev</button>
         </td>
       </tr>
     </tbody>

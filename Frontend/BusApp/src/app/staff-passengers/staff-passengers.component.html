@@ -1,6 +1,9 @@
 <div style="height: 60px;"></div>
 <div>
 <p class="text"><i>Putnici</i></p>
+<div class="search">
+  <input class="form-control" type="text" [(ngModel)]="searchText" autocomplete="off" placeholder="Pretrazite putnike">
+</div>
 <table class="table table-hover">
   <thead>
       <tr>
@@ -11,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let p of passengers">
+      <tr *ngFor = "let p of passengers | filter:searchText">
         <td>{{p.name}}</td>
         <td>{{p.surname}}</td>
         <td>{{p.telephone}}</td>

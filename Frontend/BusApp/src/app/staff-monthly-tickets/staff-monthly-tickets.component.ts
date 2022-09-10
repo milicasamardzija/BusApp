@@ -9,6 +9,7 @@ import { MonthlyService } from '../passenger-monthly-ticket/monthly.service';
 })
 export class StaffMonthlyTicketsComponent implements OnInit {
   tickets!: any[];
+  searchText!: string;
 
   constructor(private monthlyTicketService : MonthlyService) { }
 
@@ -28,6 +29,15 @@ export class StaffMonthlyTicketsComponent implements OnInit {
     this.monthlyTicketService.approveTicket(id).subscribe(
       response => {
         Swal.fire('Uspesno!', 'Odobrili ste zahtev.Karta ce uskoro biti poslata korisniku na email.', 'success');
+        this.getRequests();
+      }
+    )
+  }
+
+  rejectTicket(id: number){
+    this.monthlyTicketService.rejectTicket(id).subscribe(
+      response => {
+        Swal.fire('Uspesno!', 'Odbili ste zahtev za mesecnu kartu.Korisnik ce dobiti obevestenje na email', 'success');
         this.getRequests();
       }
     )

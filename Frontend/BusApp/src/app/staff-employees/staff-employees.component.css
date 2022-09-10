@@ -26,3 +26,9 @@ thead {
     margin-bottom: 3%;
     margin-right: 2%;
 }
+
+.search{
+    max-width: 500px;
+    padding-bottom: 50px;
+    margin:auto;
+}

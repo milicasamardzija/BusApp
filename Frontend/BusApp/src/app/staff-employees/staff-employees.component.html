@@ -2,6 +2,9 @@
 <div>
 <p class="text"><i>Zaposleni</i></p>
 <button  mat-raised-button class="add" (click)="add()" >Dodaj</button>
+<div class="search">
+  <input class="form-control" type="text" [(ngModel)]="searchText" autocomplete="off" placeholder="Pretrazite zaposlene">
+</div>
 <table class="table table-hover">
   <thead>
       <tr>
@@ -16,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor = "let u of employees">
+      <tr *ngFor = "let u of employees | filter:searchText">
         <td>{{u.name}}</td>
         <td>{{u.surname}}</td>
         <td>{{u.telephone}}</td>

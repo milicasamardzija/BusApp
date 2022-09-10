@@ -8,6 +8,7 @@ import { PassengerService } from './passenger.service';
 })
 export class StaffPassengersComponent implements OnInit {
   passengers!: any[];
+  searchText!: string;
 
   constructor(private passengerService: PassengerService) { }
 
