@@ -1,1 +1,34 @@
-<p>admin-discount-requests works!</p>
+<div style="height: 60px;"></div>
+<div>
+<p class="text"><i>Zahtevi za popust</i></p>
+<div class="search">
+  <input class="form-control" type="text" [(ngModel)]="searchText" autocomplete="off" placeholder="Pretrazite zahteve">
+</div>
+<table class="table table-hover">
+  <thead>
+      <tr>
+        <th scope="col">Ime</th>
+        <th scope="col">Prezime</th>
+        <th scope="col">Popust</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor = "let u of users | filter:searchText">
+        <td>{{u.userName}}</td>
+        <td>{{u.userSurname}}</td>
+        <td>{{u.discount}}</td>
+        <td>
+            <button mat-raised-button class="button" (click)="proof(u.discountProof)">Pogledaj dokument</button>
+        </td>
+        <td>
+            <button mat-raised-button class="button" (click)="approve(u)">Odobri</button>
+        </td>
+        <td>
+        <button mat-raised-button class="button" (click)="reject(u.id)">Odbij</button>
+        </td>
+      </tr>
+    </tbody>
+</table>

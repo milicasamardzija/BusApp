@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DiscountService } from '../discount/discount.service';
 import { User } from '../model/User';
 import { PassengerDiscountRequestComponent } from '../passenger-discount-request/passenger-discount-request.component';
 import { UserChangePasswordComponent } from '../user-change-password/user-change-password.component';
@@ -17,12 +18,24 @@ export class UserProfileComponent implements OnInit {
     country: "", city: "", street: "", number: ""
   };
   role: string = "";
+  discountType!: String;
+  discount!: number;
 
-  constructor(private userService: UserService, public dialogProfileChange: MatDialog, public dialogPasswordChange: MatDialog, public dialogProfileDelete: MatDialog, public dialogDiscountRequest: MatDialog) { }
+  constructor(private userService: UserService, private discountService: DiscountService,public dialogProfileChange: MatDialog, public dialogPasswordChange: MatDialog, public dialogProfileDelete: MatDialog, public dialogDiscountRequest: MatDialog) { }
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || "";
     this.getUserInfo();
+    this.getDiscount();
+  }
+
+  getDiscount(){
+    this.discountService.getByUser().subscribe(
+      response => {
+        this.discount = response.percentage;
+        this.discountType = response.discountType;
+      }
+    )
   }
 
   getUserInfo(){

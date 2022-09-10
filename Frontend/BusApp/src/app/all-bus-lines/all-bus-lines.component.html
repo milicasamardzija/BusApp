@@ -9,7 +9,7 @@
 
 <button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="add()">Dodaj</button>
 <div *ngIf="hide===false">
-    <div class="example-card" *ngFor = "let l of lines">
+    <div *ngFor = "let l of lines">
         <div class="card-wrapper" >
             <mat-card class="card">
             <mat-card-header>
@@ -17,8 +17,8 @@
                 <i>Naziv linije: </i><span>{{l.name}}</span>
                 <table>
                 <tr>
-                <td><button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" [routerLink] ="[l.id]" >Izmeni</button></td>
-                <td><button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add"  (click)="delete(l.id)" >Izbrisi</button></td>
+                <td><button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="change" [routerLink] ="[l.id]" >Izmeni</button></td>
+                <td><button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="change"  (click)="delete(l.id)" >Izbrisi</button></td>
                 </tr></table>
             </mat-card-title>   
             </mat-card-header>

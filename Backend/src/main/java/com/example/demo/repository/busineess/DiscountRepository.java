@@ -10,4 +10,6 @@ public interface DiscountRepository extends JpaRepository<Discount, Integer> {
     Discount findById(int id);
     @Query("select d from Discount d left join fetch d.passengers p where d.discountType = ?1")
     Discount getByTypeWithPassengers(String discount);
+    @Query("select d from Discount d left join fetch d.passengers p where p.id = ?1")
+    Discount getByUser(int id);
 }

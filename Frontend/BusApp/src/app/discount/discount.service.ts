@@ -44,4 +44,11 @@ export class DiscountService {
     return this._http.put("http://localhost:8081/discount",discount, {"headers":headers})
   }
 
+  getByUser(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.get<Discount>("http://localhost:8081/discount/getUserDiscount", {"headers":headers});
+  }
+
 }

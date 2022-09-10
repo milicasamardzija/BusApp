@@ -48,9 +48,9 @@ public class DiscountRequestController {
         return new ResponseEntity<>( HttpStatus.OK);
     }
 
-    @PostMapping(value = "/reject")
-    public ResponseEntity<HttpStatus> reject (@RequestBody DiscountRequestResponse discountRequestResponse){
-        this.discountRequestService.reject(discountRequestResponse);
+    @PutMapping(value = "/reject/{id}")
+    public ResponseEntity<HttpStatus> reject (@PathVariable int id){
+        this.discountRequestService.reject(id);
         return new ResponseEntity<>( HttpStatus.OK);
     }
 }

@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DiscountRequestRepository extends JpaRepository<DiscountRequest, Integer> {
+    DiscountRequest findById(int id);
 }

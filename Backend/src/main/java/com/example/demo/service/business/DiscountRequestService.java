@@ -39,7 +39,7 @@ public class DiscountRequestService {
     }
 
     public void approve(DiscountRequestResponse discountRequestResponse){
-        Passenger passenger = this.passengerService.findById((discountRequestResponse.id));
+        Passenger passenger = this.passengerService.findById(discountRequestResponse.userId);
         Discount discount = this.discountService.getByTypeWithPassengers(discountRequestResponse.discount);
         passenger.setDiscount(discount);
         passengerService.save(passenger);
@@ -52,10 +52,11 @@ public class DiscountRequestService {
         this.discountRequestRepository.deleteById(discountRequestResponse.id);
     }
 
-    public void reject(DiscountRequestResponse discountRequestResponse){
-        Passenger passenger = this.passengerService.findById((discountRequestResponse.id));
+    public void reject(int id){
+        DiscountRequest discountRequest = this.discountRequestRepository.findById(id);
+        Passenger passenger = this.passengerService.findById(discountRequest.getUser().getId());
 
         this.emailSenderService.sendEmailForDiscountRejection(passenger.getEmail());
-        this.discountRequestRepository.deleteById(discountRequestResponse.id);
+        this.discountRequestRepository.deleteById(id);
     }
 }

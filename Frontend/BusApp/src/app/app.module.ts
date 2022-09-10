@@ -62,6 +62,7 @@ import { AdminCommentsComponent } from './admin-comments/admin-comments.componen
 import { AdminUserDeleteRequestsComponent } from './admin-user-delete-requests/admin-user-delete-requests.component';
 import { AdminDiscountRequestsComponent } from './admin-discount-requests/admin-discount-requests.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { StaffDiscountProofComponent } from './staff-discount-proof/staff-discount-proof.component';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AdminCommentsComponent,
     AdminUserDeleteRequestsComponent,
     AdminDiscountRequestsComponent,
+    StaffDiscountProofComponent,
   ],
   imports: [
     BrowserModule,

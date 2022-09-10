@@ -48,4 +48,8 @@ public class DiscountService {
     public void update(Discount discount) {
         this.discountRepository.save(discount);
     }
+
+    public Discount getByUser(int id) {
+        return this.discountRepository.getByUser(id);
+    }
 }

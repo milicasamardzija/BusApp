@@ -34,7 +34,7 @@ public class User implements UserDetails {
 	private String password;
 	@Column(name = "telephone")
 	private String telephone;
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE )
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	private Address address;
 	@Column(name = "enabled")
 	private boolean enabled;
