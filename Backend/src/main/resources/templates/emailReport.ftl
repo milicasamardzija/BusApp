@@ -4,7 +4,7 @@
     <title>BusApp</title>
 </head>
 <body>
-<h3>Hi ${name}!!</h3>
-<p>This is daily report!</p>
+<h3>Pozdrav ${name}!</h3>
+<p>U prilogu dobijate dnevni izvestaj o prodatim kartama!</p>
 </body>
 </html>

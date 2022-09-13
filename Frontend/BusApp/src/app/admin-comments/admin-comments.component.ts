@@ -17,7 +17,7 @@ export class AdminCommentsComponent implements OnInit {
   }
 
   getAll(){
-    this.commentsService.getAll().subscribe(
+    this.commentsService.getRequests().subscribe(
       response => {
         this.comments = response;
       }

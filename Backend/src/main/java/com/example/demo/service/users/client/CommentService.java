@@ -15,7 +15,7 @@ public class CommentService {
     private CommentRepository commentRepository;
 
     public List<Comment> getAll(){
-        return this.commentRepository.findAll();
+        return this.commentRepository.find();
     }
 
     public List<Comment> getAllForUsers(){

@@ -27,7 +27,7 @@ export class StandardTicketsService {
       "timeStart": ticket.timeStart,
       "price": ticket.price,
       "activeDepartureId": ticket.activeDepartureId,
-      "dicountPercentage": ticket.dicountPercentage,
+      "discountPercentage": ticket.discountPercentage,
       "fullPrice": ticket.fullPrice,
       "standardTicketType" : 0,
       "date":ticket.date
@@ -46,7 +46,7 @@ export class StandardTicketsService {
       "timeStart": ticket.timeStart,
       "price": ticket.price,
       "activeDepartureId": ticket.activeDepartureId,
-      "dicountPercentage": ticket.dicountPercentage,
+      "discountPercentage": ticket.discountPercentage,
       "fullPrice": ticket.fullPrice,
       "standardTicketType" : 1,
       "date":ticket.date

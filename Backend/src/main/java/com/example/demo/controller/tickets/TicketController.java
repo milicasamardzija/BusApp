@@ -18,14 +18,7 @@ public class TicketController {
 
     @Autowired
     private TicketService ticketService;
-
-    @GetMapping(value = "stat/getStatNumberOfTicketsPassenger")
-    public ResponseEntity<StatisticsPassengerResponse> getStatNumberOfTicketsPassenger(){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)authentication.getPrincipal();
-        return new ResponseEntity<>(this.ticketService.getStatNumberOfTicketsPassenger(user),HttpStatus.OK);
-    }
-
+    
     @PostMapping(value = "stat/getStatPriceOfTicketsPassenger")
     public ResponseEntity<StatisticsPassengerResponse> getStatPriceOfTicketsPassenger(@RequestBody StatisticRequest statisticRequest){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

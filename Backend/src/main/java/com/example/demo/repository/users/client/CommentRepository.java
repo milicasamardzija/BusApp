@@ -12,4 +12,6 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
     @Query("select c from Comment c where c.accepted = true")
     List<Comment> getAllForUsers();
     Comment findById(int id);
+    @Query("select c from Comment c where c.accepted = null")
+    List<Comment> find();
 }

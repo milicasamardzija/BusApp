@@ -18,13 +18,13 @@ mat-sidenav-cotainer{
 }
 
 .content {
-    height: calc(100vh - 98px);
     margin: 16px;
     margin-left: 32px;
 
     color: lightgray;
     font-size: 2rem;
-
+    
+    margin-bottom:40rem;
     border-radius: 10px;
 }
 

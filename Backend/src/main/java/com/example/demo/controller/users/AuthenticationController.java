@@ -49,13 +49,10 @@ public class AuthenticationController {
             @RequestBody JwtAuthenticationRequest authenticationRequest) throws Exception {
 
         Authentication authentication = null;
-        try {
-            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+
+        authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     authenticationRequest.email, authenticationRequest.password));
-        }
-        catch (Exception ex){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 

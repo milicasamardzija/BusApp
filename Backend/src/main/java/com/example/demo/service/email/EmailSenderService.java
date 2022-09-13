@@ -61,10 +61,10 @@ public class EmailSenderService {
 
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setSubject("Confirm your account");
+            mimeMessageHelper.setSubject("Potvrda naloga");
             mimeMessageHelper.setFrom(new InternetAddress("sammilica99@gmail.com", "Bus app"));
             mimeMessageHelper.setTo(email);
-            mimeMessageHelper.setText("To confirm your account, please click here :" + "http://localhost:8081" + "/auth/confirm-account/" + code + ".\n");
+            mimeMessageHelper.setText("Da biste potvrdili registraciju kliknite na ovaj link :" + "http://localhost:8081" + "/auth/confirm-account/" + code + ".\n");
 
             mailSender.send(mimeMessageHelper.getMimeMessage());
         } catch (MessagingException e) {

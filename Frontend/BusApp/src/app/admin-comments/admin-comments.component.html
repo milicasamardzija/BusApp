@@ -15,7 +15,7 @@
       <tr *ngFor = "let c of comments">
         <td>{{c.name}}</td>
         <td>{{c.surname}}</td>
-        <td>{{c.explanation}}</td>
+        <td>{{c.text}}</td>
         <td>
             <button mat-raised-button class="button" (click)="approve(c.id)">Odobri</button>
           </td>

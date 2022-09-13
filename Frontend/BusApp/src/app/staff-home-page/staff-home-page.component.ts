@@ -14,6 +14,7 @@ export class StaffHomePageComponent implements OnInit {
     country: "", city: "", street: "", number: ""
   }};
   role: string = "";
+  isImage =  false;
 
   constructor(private router: Router, private userService: UserService) { }
 
@@ -27,6 +28,11 @@ export class StaffHomePageComponent implements OnInit {
     return this.userService.getUserInfo().subscribe(
       response => {
         this.user = response;
+        if (this.user.image === null){
+          this.isImage = false
+        } else {
+          this.isImage = true
+        }
       }
     )
   }

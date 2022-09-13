@@ -39,7 +39,8 @@ export class MonthlyService {
       "cityEnd": ticket.cityEnd,
       "price": ticket.price,
       "activeDepartureId": ticket.activeDepartureId,
-      "fullPrice": ticket.fullPrice
+      "fullPrice": ticket.fullPrice,
+      "discountPercentage": ticket.discountPercentage
     }
     , {"headers":headers});
   }

@@ -5,5 +5,6 @@ public class MonthlyTicketRequest {
     public String cityStart;
     public String cityEnd;
     public double price;
+    public double fullPrice;
     public double discountPercentage;
 }

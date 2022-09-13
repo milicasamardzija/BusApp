@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { DiscountService } from '../discount/discount.service';
 import { User } from '../model/User';
 import { PassengerDiscountRequestComponent } from '../passenger-discount-request/passenger-discount-request.component';

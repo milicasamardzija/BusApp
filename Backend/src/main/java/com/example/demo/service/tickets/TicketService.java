@@ -188,7 +188,7 @@ public class TicketService {
                 0.0,0.0
         ));
         List<String> mounths = new ArrayList<String>(Arrays.asList(
-                "Standardna","Mesecna"
+                "Standardne karte","Mesecne karte"
         ));
         for (Ticket ticket: this.ticketRepository.getByUserId(user.getId())) {
             if (ticket.getDateIssued().getMonth() == month && ticket.getDateIssued().getYear() == year){

@@ -1,7 +1,10 @@
 <app-user-nav-bar></app-user-nav-bar>
 <mat-sidenav-container>
     <mat-sidenav mode="side" opened>
-            <img class="avatar mat-elevation-z8" [src]="user.image" />
+        <ng-container *ngIf="isImage">
+            <img  class="avatar mat-elevation-z8" [src]="user.image" /></ng-container>
+            <ng-container *ngIf="!isImage">
+                <img  class="avatar mat-elevation-z8" src="../../assets/149071.png" /></ng-container>
             <h4 class="name">{{user.name}}</h4>
             <mat-divider></mat-divider>
             <button mat-button class="menu-button" [routerLink]="['profile']">
@@ -47,9 +50,11 @@
             <mat-divider></mat-divider>
     </mat-sidenav>
     <mat-sidenav-content>
-        <router-outlet></router-outlet>
         <div class="content mat-elevation-z4">
             <router-outlet></router-outlet>
+            <div style="height: 3rem;">
+
+            </div>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>

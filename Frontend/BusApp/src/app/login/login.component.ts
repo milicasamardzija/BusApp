@@ -36,11 +36,15 @@ export class LoginComponent implements OnInit {
           } else {
             Swal.fire('Greska!', 'Vas nalog nije odobren jos uvek!', 'error');
           }
-        } 
+        } ,
+        err => {
+          Swal.fire('Greska',"Pogresili ste prilikom unosa kredencijala ili Vas nalog nije odobren jos uvek!",'error');
+          this.dialogRef.close();
+        }
       );
   }
   catch (err) {
-    Swal.fire('Greska!', 'Pogresili ste prilikom unosa kredencijala!', 'error');
+    Swal.fire('Greska!', 'Pogresili ste prilikom unosa kredencijala ili Vas nalog nije odobren jos uvek!', 'error');
   }
     this.dialogRef.close();
   }

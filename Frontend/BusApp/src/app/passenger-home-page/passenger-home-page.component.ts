@@ -13,19 +13,25 @@ export class PassengerHomePageComponent implements OnInit {
     country: "", city: "", street: "", number: ""
   }};
   role: string = "";
+  isImage = false;
 
   constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role') || "";
     this.getUserInfo();
-   // this.router.navigate(['passenger/lines']);
+    this.router.navigate(['passenger/lines']);
   }
 
   getUserInfo(){
     return this.userService.getUserInfo().subscribe(
       response => {
         this.user = response;
+        if (this.user.image === null){
+          this.isImage = false
+        } else {
+          this.isImage = true
+        }
       }
     )
   }
