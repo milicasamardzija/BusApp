@@ -17,11 +17,11 @@
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Adresa:</b></i>{{user.street}} {{user.number}}, {{user.city}}, {{user.country}}</h5>
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Email:</b></i>{{user.email}}</h5>
   <h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Broj telefona:</b></i> {{user.telephone}}</h5>
-  <div *ngIf="role==='ROLE_PASSENGER'"><h5 class="text"><i style="margin-right:1%; color: #4775a0;"><b>Imate :</b></i> {{discountType}} popust - {{discount}}%</h5></div>
+  <div *ngIf="role==='ROLE_PASSENGER'"><span *ngIf="discountType!=''"><h5 class="text" ><i style="margin-right:1%; color: #4775a0;"><b>Imate :</b></i> {{discountType}} popust - {{discount}}%</h5></span></div>
 </div>
 <div>
   <button mat-raised-button class="button" (click)="change()" >Izmeni podatke</button>
   <button mat-raised-button class="button" (click)="delete()" >Izbrisi nalog</button>
   <button mat-raised-button class="button" (click)="changePassword()" >Promeni sifru</button>
-  <button mat-raised-button class="button" (click)="discout()" *ngIf="discountType!=''">Zatrazi popust</button>
+  <button mat-raised-button class="button" (click)="discout()" *ngIf="discountType==''">Zatrazi popust</button>
 </div>

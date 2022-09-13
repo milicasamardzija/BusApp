@@ -5,6 +5,8 @@ import com.example.demo.repository.users.employees.BusControllerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BusControllerService {
 
@@ -17,5 +19,9 @@ public class BusControllerService {
 
     public void save(BusController busController) {
         this.busControllerRepository.save(busController);
+    }
+
+    public List<BusController> findAll() {
+        return this.busControllerRepository.findAll();
     }
 }

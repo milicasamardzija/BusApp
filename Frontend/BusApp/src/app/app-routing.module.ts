@@ -10,6 +10,7 @@ import { AllBusLinesComponent } from './all-bus-lines/all-bus-lines.component';
 import { CommentsComponent } from './comments/comments.component';
 import { DiscountComponent } from './discount/discount.component';
 import { PassengerHomePageComponent } from './passenger-home-page/passenger-home-page.component';
+import { PassengerMonthlyTicketCheckComponent } from './passenger-monthly-ticket-check/passenger-monthly-ticket-check.component';
 import { PassengerMonthlyTicketComponent } from './passenger-monthly-ticket/passenger-monthly-ticket.component';
 import { PassengerPreviousTicketsComponent } from './passenger-previous-tickets/passenger-previous-tickets.component';
 import { PassengerStatisticsComponent } from './passenger-statistics/passenger-statistics.component';
@@ -114,7 +115,7 @@ const routes: Routes = [
     path:'comments', component: CommentsComponent
   },
   {
-    path:'monthlyTicket/checkTicket/:id', component: PassengerTicketCheckComponent
+    path:'monthlyTicket/checkTicket/:id', component: PassengerMonthlyTicketCheckComponent
   },
 ];
 

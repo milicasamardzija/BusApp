@@ -4,6 +4,8 @@ import com.example.demo.enums.StandardTicketType;
 import com.example.demo.model.tickets.MonthlyTicket;
 import com.example.demo.model.tickets.StandardTicket;
 
+import java.util.Date;
+
 public class TicketPdfResponse {
 
     public String dateIssued;
@@ -16,13 +18,20 @@ public class TicketPdfResponse {
     public double fullPrice;
     public double discountPercentage;
     public StandardTicketType standardTicketType;
+    public String date;
 
     public TicketPdfResponse(StandardTicket standardTicket) {
-        if (dateChecked != null)
+        if (standardTicket.getDateChecked() != null)
             dateChecked = standardTicket.getDateChecked().toString().substring(0,10);
         else
             dateChecked = null;
-        dateExpiration = standardTicket.getDateExpiration().toString().substring(0,10);
+
+        if (standardTicket.getDateExpiration() != null)
+            dateExpiration = standardTicket.getDateExpiration().toString().substring(0,10);
+        else
+            dateExpiration = null;
+
+        date = standardTicket.getDate().toString().substring(0,10);
         dateIssued = standardTicket.getDateIssued().toString().substring(0,10);
         price = standardTicket.getPrice();
         timeStart = standardTicket.getTimeStart();
@@ -33,7 +42,7 @@ public class TicketPdfResponse {
         standardTicketType = standardTicket.getStandardTicketType();
     }
 
-    public TicketPdfResponse(MonthlyTicket monthlyTicket) {
+    public TicketPdfResponse(MonthlyTicket monthlyTicket){
         dateExpiration = monthlyTicket.getDateExpiration().toString().substring(0,10);
         dateIssued = monthlyTicket.getDateIssued().toString().substring(0,10);
         price = monthlyTicket.getPrice();

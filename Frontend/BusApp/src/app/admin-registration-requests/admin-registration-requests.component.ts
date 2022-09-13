@@ -30,6 +30,16 @@ export class AdminRegistrationRequestsComponent implements OnInit {
     this.staffService.approveRequest(id).subscribe(
       response => {
         Swal.fire('Uspesno!', 'Uspesno ste se odobrili zahtev za registraciju.', 'success');
+        this.getAllRequests();
+      }
+    )
+  }
+
+  reject(id: number){
+    this.staffService.rejectRequest(id).subscribe(
+      response => {
+        Swal.fire('Uspesno!', 'Uspesno ste se odbili zahtev za registraciju.', 'success');
+        this.getAllRequests();
       }
     )
   }

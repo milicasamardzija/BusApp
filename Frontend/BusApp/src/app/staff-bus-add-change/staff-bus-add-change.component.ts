@@ -16,6 +16,7 @@ export class StaffBusAddChangeComponent implements OnInit {
   bus: Bus = {id: 0, registrationNumber: "", seatNumber: 0, manufacturer: "", garageNumber: 0, kilometersTraveled: 0, endRegistrationDate: new Date(), idBusDriver: 0};
   busDrivers = new FormControl('');
   busDriversList!: any[];
+  selected!:string;
 
   constructor(private busService: BusService, private employeesService: EmployeeService, public dialogRef: MatDialogRef<StaffBusAddChangeComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
     this.id = data.id;
@@ -31,7 +32,7 @@ export class StaffBusAddChangeComponent implements OnInit {
 
 
   getBusDrivers(){
-    this.employeesService.getAll().subscribe(
+    this.employeesService.getAllBusDrivers().subscribe(
       response => {
         this.busDriversList = response;
       }
@@ -65,6 +66,10 @@ export class StaffBusAddChangeComponent implements OnInit {
         }
       )
     }
+  }
+
+  select(name: string, surname: string){
+    this.selected = name + " " + surname;
   }
 
   cancel(){

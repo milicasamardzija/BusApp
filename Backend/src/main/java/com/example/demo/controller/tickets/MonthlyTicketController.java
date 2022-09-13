@@ -1,6 +1,7 @@
 package com.example.demo.controller.tickets;
 
 import com.example.demo.dto.tickets.MonthlyTicketRequest;
+import com.example.demo.dto.tickets.TicketCheckResponse;
 import com.example.demo.model.tickets.MonthlyTicket;
 import com.example.demo.model.users.User;
 import com.example.demo.service.tickets.MonthlyTicketService;
@@ -74,8 +75,8 @@ public class MonthlyTicketController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping(value = "checkTicket/{id}")
-    public ResponseEntity<String> checkTicket (@PathVariable int id){
+    @GetMapping(value = "/checkTicket/{id}")
+    public ResponseEntity<TicketCheckResponse> checkTicket (@PathVariable int id){
         return new ResponseEntity<>(this.monthlyTicketService.checkTicket(id), HttpStatus.OK);
     }
 }

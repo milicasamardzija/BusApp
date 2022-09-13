@@ -63,6 +63,7 @@ import { AdminUserDeleteRequestsComponent } from './admin-user-delete-requests/a
 import { AdminDiscountRequestsComponent } from './admin-discount-requests/admin-discount-requests.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { StaffDiscountProofComponent } from './staff-discount-proof/staff-discount-proof.component';
+import { PassengerMonthlyTicketCheckComponent } from './passenger-monthly-ticket-check/passenger-monthly-ticket-check.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +110,7 @@ import { StaffDiscountProofComponent } from './staff-discount-proof/staff-discou
     AdminUserDeleteRequestsComponent,
     AdminDiscountRequestsComponent,
     StaffDiscountProofComponent,
+    PassengerMonthlyTicketCheckComponent,
   ],
   imports: [
     BrowserModule,

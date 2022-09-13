@@ -28,4 +28,12 @@ public class BusDepartureService {
     public void save(BusDeparture busDeparture) {
         this.busDepartureRepository.save(busDeparture);
     }
+
+    public void deleteById(int id) {
+        this.busDepartureRepository.deleteById(id);
+    }
+
+    public BusDeparture findById(int id) {
+        return this.busDepartureRepository.findById(id);
+    }
 }

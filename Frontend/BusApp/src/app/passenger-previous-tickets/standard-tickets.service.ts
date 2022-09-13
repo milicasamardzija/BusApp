@@ -28,7 +28,28 @@ export class StandardTicketsService {
       "price": ticket.price,
       "activeDepartureId": ticket.activeDepartureId,
       "dicountPercentage": ticket.dicountPercentage,
-      "fullPrice": ticket.fullPrice
+      "fullPrice": ticket.fullPrice,
+      "standardTicketType" : 0,
+      "date":ticket.date
+    }
+    , {"headers":headers});
+  }
+
+  buyStandardReturnTicket(ticket : any){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.post("http://localhost:8081/standardTicket", 
+    {
+      "cityStart": ticket.cityStart,
+      "cityEnd": ticket.cityEnd,
+      "timeStart": ticket.timeStart,
+      "price": ticket.price,
+      "activeDepartureId": ticket.activeDepartureId,
+      "dicountPercentage": ticket.dicountPercentage,
+      "fullPrice": ticket.fullPrice,
+      "standardTicketType" : 1,
+      "date":ticket.date
     }
     , {"headers":headers});
   }

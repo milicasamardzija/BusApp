@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BusDepartureRepository extends JpaRepository<BusDeparture, Integer> {
+    BusDeparture findById(int id);
 }

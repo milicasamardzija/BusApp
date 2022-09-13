@@ -9,7 +9,7 @@ import { StandardTicketsService } from '../passenger-previous-tickets/standard-t
 })
 export class PassengerTicketCheckComponent implements OnInit {
   id!: number;
-  response!: string;
+  response!: any;
 
   constructor(private standardTicketService: StandardTicketsService, private route: ActivatedRoute) { }
 
@@ -21,7 +21,7 @@ export class PassengerTicketCheckComponent implements OnInit {
   checkTicket(){
     this.standardTicketService.checkTicket(this.id).subscribe(
       (response : any) => {
-        this.response = response.text;
+        this.response = response;
       }
     );
   }

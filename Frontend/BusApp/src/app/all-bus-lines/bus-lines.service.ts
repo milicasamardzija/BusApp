@@ -16,11 +16,22 @@ export class BusLinesService {
   }
 
   search(startCity: string, endCity: string, day: Date){
-    return this._http.post<any[]>("http://localhost:8081/drivingLine/search", {
+    if (localStorage.getItem("role") === ""){
+      return this._http.post<any[]>("http://localhost:8081/drivingLine/search", {
       "cityStart": startCity,
       "cityEnd": endCity,
       "date": day
-    });
+      });
+    } else {
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+      return this._http.post<any[]>("http://localhost:8081/drivingLine/search", {
+        "cityStart": startCity,
+        "cityEnd": endCity,
+        "date": day
+        }, {"headers":headers});
+    } 
   }
 
   add(drivingLine: DrivingLine) {

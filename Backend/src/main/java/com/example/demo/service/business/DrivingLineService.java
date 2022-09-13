@@ -13,9 +13,7 @@ import com.example.demo.service.users.client.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DrivingLineService {
@@ -42,13 +40,16 @@ public class DrivingLineService {
         drivingLine.setName(drivingLineRequest.name);
         drivingLine.setDateStart(drivingLineRequest.dateStart);
         drivingLine.setDateEnd(drivingLineRequest.dateEnd);
+        this.drivingLineRepository.save(drivingLine);
 
         Bus bus = this.busService.findByIdWithDrivingLines(drivingLineRequest.busId);
+        List<DrivingLine> drivingLines = bus.getDrivingLines();
+        drivingLines.add(drivingLine);
+        bus.setDrivingLines(drivingLines);
+
+        busService.save(bus);
         drivingLine.setBus(bus);
 
-       /*for (DaysOfWeek day: drivingLineRequest.daysOfWeek) {
-            activeDepartures.add(new ActiveDeparture(null ,day,bus.getSeatNumber()));
-        }*/
         List<ActiveDeparture> activeDepartures = this.setDateToActiveDepartures(drivingLineRequest.dateStart, drivingLineRequest.dateEnd, drivingLineRequest.daysOfWeek, bus.getSeatNumber());
         drivingLine.setActiveDepartures(activeDepartures);
 
@@ -57,8 +58,6 @@ public class DrivingLineService {
             busDepartures.add(new BusDeparture(busDepartureRequest.city, busDepartureRequest.km, busDepartureRequest.time));
         }
         drivingLine.setBusDepartures(busDepartures);
-
-        this.drivingLineRepository.save(drivingLine);
 
         bus.getDrivingLines().add(drivingLine);
         this.busService.update(bus);
@@ -78,17 +77,15 @@ public class DrivingLineService {
         List<ActiveDeparture> activeDepartures = new ArrayList<>();
         List<Date> days = new ArrayList<>();
         days.add(new Date(dateStart.getTime()));
-        while (days.get(days.size() - 1).compareTo(dateEnd) != 0){
-            int index = days.size() - 1;
-            Date d = days.get(index);
-            Date d1 = new Date(d.getTime());
+        Date d1 = new Date(dateStart.getTime());
+        while (!(d1.getMonth() == dateEnd.getMonth() && d1.getDate() == dateEnd.getDate() && d1.getYear() == dateEnd.getYear())){
             d1.setDate(d1.getDate() + 1);
             days.add(new Date(d1.getTime()));
         }
 
-        for (Date d1 : days) {
-            if (daysOfWeek.contains(DaysOfWeek.values()[d1.getDay()]))
-                activeDepartures.add(new ActiveDeparture(d1, DaysOfWeek.values()[d1.getDay()],seatNumber));
+        for (Date d2 : days) {
+            if (daysOfWeek.contains(DaysOfWeek.values()[d2.getDay()]))
+                activeDepartures.add(new ActiveDeparture(d2, DaysOfWeek.values()[d2.getDay()],seatNumber));
         }
         return  activeDepartures;
     }
@@ -105,14 +102,25 @@ public class DrivingLineService {
         int inxStart = 0;
         int inxEnd = 0;
         ActiveDeparture activeDeparture = null;
+        List<ActiveDeparture> activeDepartures = new ArrayList<>();
         double kmStart = 0;
         double kmEnd = 0;
         String timeStart = "";
         String timeEnd = "";
-        busDepartureSearchRequest.date.setHours(2);
-        busDepartureSearchRequest.date.setMinutes(0);
         for (DrivingLine drivingLine: this.drivingLineRepository.getAll(DaysOfWeek.values()[busDepartureSearchRequest.date.getDay()])) {
-            activeDeparture = activeDepartureService.findByDrivingLine(drivingLine.getId(), DaysOfWeek.values()[busDepartureSearchRequest.date.getDay()], busDepartureSearchRequest.date);
+            activeDepartures = activeDepartureService.findByDrivingLine(drivingLine.getId(), DaysOfWeek.values()[busDepartureSearchRequest.date.getDay()]);
+            Date start = new Date(busDepartureSearchRequest.date.getTime());
+            start.setHours(0);
+            start.setMinutes(1);
+            Date end = new Date(busDepartureSearchRequest.date.getTime());
+            end.setHours(23);
+            end.setMinutes(59);
+            for (ActiveDeparture a: activeDepartures
+                 ) {
+                if (a.getDate().after(start) && a.getDate().before(end))
+                    activeDeparture = a;
+            }
+            
             for (BusDeparture busDeparture: drivingLine.getBusDepartures()) {
                 if (busDeparture.getCity().equalsIgnoreCase(busDepartureSearchRequest.cityStart)){
                     inxStart = drivingLine.getBusDepartures().indexOf(busDeparture);
@@ -126,7 +134,10 @@ public class DrivingLineService {
                 }
             }
             if (inxStart < inxEnd){
-                ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDeparture.getId(), busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),timeStart, timeEnd, price.getPricePerKilometer() * Math.abs(kmEnd - kmStart) * ((100 - discount.getPercentage()) / 100) , price.getPricePerKilometerMonthlyTicket() * Math.abs(kmEnd - kmStart) * 20 * ((100 - discount.getPercentage()) / 100), activeDeparture.getSeats(), price.getPricePerKilometer() * Math.abs(kmEnd - kmStart), discount.getPercentage()));
+                if (user != null)
+                    ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDeparture.getId(), busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),timeStart, timeEnd, price.getPricePerKilometer() * Math.abs(kmEnd - kmStart) * ((100 - discount.getPercentage()) / 100) , price.getPricePerKilometerMonthlyTicket() * Math.abs(kmEnd - kmStart) * 20 * ((100 - discount.getPercentage()) / 100), activeDeparture.getSeats(), price.getPricePerKilometer() * Math.abs(kmEnd - kmStart), discount.getPercentage()));
+                else
+                    ret.add(new BusDepartureSearchResponse(drivingLine.getId(), activeDeparture.getId(), busDepartureSearchRequest.cityStart.toUpperCase(), busDepartureSearchRequest.cityEnd.toUpperCase(),timeStart, timeEnd, price.getPricePerKilometer() * Math.abs(kmEnd - kmStart) , price.getPricePerKilometerMonthlyTicket() * Math.abs(kmEnd - kmStart) * 20 , activeDeparture.getSeats(), price.getPricePerKilometer() * Math.abs(kmEnd - kmStart), 0));
             }
         }
 
@@ -144,33 +155,28 @@ public class DrivingLineService {
         drivingLine.setBus(bus);
         Bus busOld = this.busService.findByIdWithDrivingLines(drivingLine.getBus().getId());
 
-        //this.drivingLineRepository.save(drivingLine);
-
         for (BusDeparture busDeparture: drivingLine.getBusDepartures()
              ) {
-            busDeparture.setDrivingLine(null);
-            this.busDepartureService.delete(busDeparture);
+            this.busDepartureService.deleteById(busDeparture.getId());
         }
         drivingLine.setBusDepartures(null);
 
         for (ActiveDeparture activeDeparture: drivingLine.getActiveDepartures()
              ) {
-            activeDeparture.setDrivingLine(null);
-            this.activeDepartureService.delete(activeDeparture);
+            this.activeDepartureService.deleteById(activeDeparture.getId());
         }
         drivingLine.setActiveDepartures(null);
 
-      /*  List<ActiveDeparture> activeDepartures = new ArrayList<>();
-        for (DaysOfWeek day: drivingLineRequest.daysOfWeek) {
-            activeDepartures.add(new ActiveDeparture(day,bus.getSeatNumber()));
-        }
-        drivingLine.setActiveDepartures(activeDepartures);*/
+        this.drivingLineRepository.save(drivingLine);
 
         List<BusDeparture> busDepartures = new ArrayList<>();
         for (BusDepartureRequest busDepartureRequest: drivingLineRequest.busDepartures) {
             busDepartures.add(new BusDeparture(busDepartureRequest.city, busDepartureRequest.km, busDepartureRequest.time));
         }
         drivingLine.setBusDepartures(busDepartures);
+
+        List<ActiveDeparture> activeDepartures = this.setDateToActiveDepartures(drivingLineRequest.dateStart, drivingLineRequest.dateEnd, drivingLineRequest.daysOfWeek, bus.getSeatNumber());
+        drivingLine.setActiveDepartures(activeDepartures);
 
         this.drivingLineRepository.save(drivingLine);
 
@@ -195,10 +201,49 @@ public class DrivingLineService {
     }
 
     public void deleteById(int id) {
+        DrivingLine drivingLine = this.drivingLineRepository.findById(id);
+        drivingLine.setBus(null);
+        this.drivingLineRepository.save(drivingLine);
+        for (BusDeparture busDeparture: drivingLine.getBusDepartures()
+             ) {
+            this.busDepartureService.delete(busDeparture);
+        }
         this.drivingLineRepository.deleteById(id);
     }
 
     public DrivingLine getById(int id) {
         return this.drivingLineRepository.findCompleteById(id);
+    }
+
+    public List<ActiveDeparture> getDays(DrivingLine drivingLine) {
+        List<ActiveDeparture> ret = new ArrayList<>();
+        for (ActiveDeparture a: drivingLine.getActiveDepartures()
+             ){
+            if (this.containsCheck(a, ret)){
+                continue;
+            } else {
+                ret.add(a);
+            }
+        }
+
+        Collections.sort(ret, (person1, person2) -> {
+            if (person1.getDayOfWeek() == person2.getDayOfWeek()) {
+                return person1.getDate().compareTo(person2.getDate());
+            } else {
+                return person1.getDayOfWeek().compareTo(person2.getDayOfWeek());
+            }
+        });
+
+        return ret;
+    }
+
+    private boolean containsCheck(ActiveDeparture a, List<ActiveDeparture> ret) {
+        for (ActiveDeparture a1 : ret
+             ) {
+            if (a.getDayOfWeek() == a1.getDayOfWeek()){
+                return true;
+            }
+        }
+        return false;
     }
 }

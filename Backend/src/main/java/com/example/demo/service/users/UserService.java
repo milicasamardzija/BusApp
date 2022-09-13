@@ -52,14 +52,8 @@ public class UserService {
         return u;
     }
 
-    public void update(UserRequest updatedUser) {
-        User user = this.userRepository.findByEmail(updatedUser.email);
-        Role role = roleService.findByName(updatedUser.role);
-        if (role == null) {
-            role = new Role(updatedUser.role);
-            roleService.save(role);
-        }
-        user.setRole(role);
+    public void update(UserRequest updatedUser, String email) {
+        User user = this.userRepository.findByEmail(email);
         user.setPicture(updatedUser.image);
         user.setName(updatedUser.name);
         user.setSurname(updatedUser.surname);

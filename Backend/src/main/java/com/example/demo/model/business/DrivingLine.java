@@ -22,13 +22,13 @@ public class DrivingLine {
     private Date dateEnd;
     @OneToMany(mappedBy = "drivingLine", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
-    @Column
     private List<ActiveDeparture> activeDepartures;
-    @OneToMany(mappedBy = "drivingLine", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "drivingLine", fetch = FetchType.EAGER)
     @JsonIgnore
     private List<BusDeparture> busDepartures;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "bus_id")
+    @JsonIgnore
     private Bus bus;
 
     public int getId() {

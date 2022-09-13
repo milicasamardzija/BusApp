@@ -29,7 +29,12 @@ export class StaffBusDeleteComponent implements OnInit {
         this.dialogRef.close({
           data: "updated"
         })
-      })
+      },
+      err => {
+        Swal.fire('Greska',"Postoji linija na kojoj saobraca ovaj autobus, prvo promenite autobus na liniji!",'error');
+        this.dialogRef.close();
+      }
+      )
     } else {
       this.employeeService.delete(this.id).subscribe(
         response => {

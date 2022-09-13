@@ -18,7 +18,20 @@
                 <tr>
                     <td>
                         <p>Uloga</p>
-                        <mat-form-field class="inputField"><input matInput [(ngModel)] = "user.role"></mat-form-field>
+                        <div style="height: 3rem;font-size: 1rem; width:25rem">
+                            <mat-form-field style="width:18rem">
+                                <mat-label>Uloga</mat-label>
+                                <mat-select [formControl]="roles"> 
+                                    <mat-select-trigger >
+                                    {{roles.value?.[0] || ''}}
+                                    <span *ngIf="(roles.value?.length || 0) > 1"  >
+                                        (+{{(roles.value?.length || 0) - 1}} {{roles.value?.length === 2 ? 'other' : 'others'}})
+                                    </span>
+                                    </mat-select-trigger >
+                                    <mat-option *ngFor="let p of rolesList" [value]="p" >{{p}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
                     </td>
                     <td>
                         <p>Telefon</p>

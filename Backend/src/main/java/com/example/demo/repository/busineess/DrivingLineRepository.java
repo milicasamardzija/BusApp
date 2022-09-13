@@ -10,12 +10,11 @@ import java.util.List;
 
 @Repository
 public interface DrivingLineRepository extends JpaRepository<DrivingLine, Integer> {
-    @Query("select d from DrivingLine d left join fetch d.activeDepartures active where d.id = active.drivingLine.id and active.dayOfWeek = ?1")
+    @Query("select distinct d from DrivingLine d left join fetch d.activeDepartures active where d.id = active.drivingLine.id and active.dayOfWeek = ?1")
     List<DrivingLine> getAll(DaysOfWeek day);
     @Query("select distinct d from DrivingLine d left join fetch d.activeDepartures active left join fetch d.bus b where d.id = active.drivingLine.id")
     List<DrivingLine> getAllWithWeeks();
     DrivingLine findById(int id);
     @Query("select distinct d from DrivingLine d left join fetch d.activeDepartures active left join fetch d.bus b where d.id = ?1 ")
     DrivingLine findCompleteById(int id);
-
 }

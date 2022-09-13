@@ -43,7 +43,7 @@ public class EmailSenderService {
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
             helper.setTo(passenger.getEmail());
             helper.setFrom("sammilica99@gmail.com");
-            helper.setSubject("Ticket");
+            helper.setSubject("Karta");
             helper.setText(html, true);
             helper.addAttachment("karta.pdf", pdf);
             mailSender.send(message);
@@ -110,7 +110,7 @@ public class EmailSenderService {
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
             helper.setTo(user.getEmail());
             helper.setFrom("sammilica99@gmail.com");
-            helper.setSubject("Ticket");
+            helper.setSubject("Izvestaj");
             helper.setText(html, true);
             helper.addAttachment("dnevni_izvestaj.pdf", pdf);
             mailSender.send(message);
@@ -128,7 +128,7 @@ public class EmailSenderService {
 
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
-            mimeMessageHelper.setSubject("Odbijen zahtev za popust");
+            mimeMessageHelper.setSubject("Odbijen zahtev za mesecnu kartu");
             mimeMessageHelper.setFrom(new InternetAddress("sammilica99@gmail.com", "Bus app"));
             mimeMessageHelper.setTo(passenger.getEmail());
             mimeMessageHelper.setText("Vas zahtev za mesecnu kartu je odbijen.Za vise informacija javite se nasoj sluzbi.Hvala.");

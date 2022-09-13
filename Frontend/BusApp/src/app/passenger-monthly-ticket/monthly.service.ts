@@ -66,4 +66,11 @@ export class MonthlyService {
     return this._http.put("http://localhost:8081/monthlyTicket/monthlyTicketReject/" + id, {"headers":headers});
   }
 
+  checkTicket(id: number) {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.get("http://localhost:8081/monthlyTicket/checkTicket/" + id, {"headers":headers});
+  }
+
 }

@@ -5,6 +5,8 @@ import com.example.demo.repository.users.employees.BusDriverRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BusDriverService {
 
@@ -20,6 +22,10 @@ public class BusDriverService {
     }
 
     public BusDriver getByIdWithBuses(int idBusDriver) {
-        return this.busDriverRepository.getByIdWithBuses(idBusDriver);
+        return this.busDriverRepository.findById(idBusDriver);
+    }
+
+    public List<BusDriver> findAll() {
+        return this.busDriverRepository.findAll();
     }
 }

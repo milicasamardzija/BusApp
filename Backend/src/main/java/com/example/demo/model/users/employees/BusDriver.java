@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @DiscriminatorValue("BUSS_DRIVER")
 public class BusDriver extends BussStaff {
-    @OneToMany(mappedBy = "busDriver", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "busDriver", fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonIgnore
     private List<Bus> buses;
 

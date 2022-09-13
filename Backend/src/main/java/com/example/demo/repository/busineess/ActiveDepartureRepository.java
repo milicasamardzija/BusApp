@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 public interface ActiveDepartureRepository extends JpaRepository<ActiveDeparture, Integer> {
-    @Query("select a from ActiveDeparture a left join fetch a.drivingLine line where line.id = ?1 and a.dayOfWeek = ?2 and a.date = ?3")
-    ActiveDeparture findByDrivingLine(int id, DaysOfWeek day, Date date);
+    @Query("select a from ActiveDeparture a left join fetch a.drivingLine line where line.id = ?1 and a.dayOfWeek = ?2")
+    List<ActiveDeparture> findByDrivingLine(int id, DaysOfWeek day);
     ActiveDeparture findById(int id);
     @Query("select distinct a  from ActiveDeparture a left join fetch a.drivingLine line left join fetch line.bus b where a.drivingLine.id = line.id and line.bus.id = b.id")
     List<ActiveDeparture> getDepartures();

@@ -20,4 +20,10 @@ public class StaffController {
         staffService.addStaffMember(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/reject/{id}")
+    public ResponseEntity<HttpStatus> reject(@PathVariable int id) {
+        staffService.reject(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

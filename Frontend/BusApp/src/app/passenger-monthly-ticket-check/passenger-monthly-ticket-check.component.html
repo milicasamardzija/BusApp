@@ -1,42 +1,37 @@
-
-<div class="back" *ngIf="response.response == 'Karta je uspesno verifikovana!'">
+<div class="back" *ngIf="response.response == 'Mesecna karta je uspesno verifikovana!'">
     <div style="height: 15rem;">
     </div>
 <div class="example-card2" >
     <div style="height: 0.7rem;"></div>
     <mat-card-header>
-    <mat-card-title class="title"><i>Provera karte</i></mat-card-title>  
+    <mat-card-title class="title"><i>Provera mesecne karte</i></mat-card-title>  
     </mat-card-header>
     <mat-card-content>
         <div  class="contentCard">
             <p><i>Ime:</i><span style="margin-left:1rem">{{response.name}}</span></p>
             <p><i>Prezime:</i><span style="margin-left:1rem">{{response.surname}}</span></p>
-            <p><i>Datum polaska:</i><span style="margin-left:1rem">{{response.dateStart | date}}</span></p>
             <p><i>Mesto polaska:</i><span style="margin-left:1rem">{{response.cityStart}}</span></p>
             <p><i>Mesto dolaska:</i><span style="margin-left:1rem">{{response.cityEnd}}</span></p>
-            <p><i>Tip karte:</i><span style="margin-left:1rem">{{response.typeTicket}}</span></p>
             <p><i>Provera:</i><span style="color:rgb(61, 255, 47);margin-left:1rem">{{response.response}}</span></p>
         </div>        
     </mat-card-content>
 </div>
 </div>
 
-<div class="back" *ngIf="response.response != 'Karta je uspesno verifikovana!'">
+<div class="back" *ngIf="response.response != 'Mesecna karta je uspesno verifikovana!'">
     <div style="height: 15rem;">
     </div>
 <div class="example-card"  >
     <div style="height: 0.7rem;"></div>
     <mat-card-header>
-    <mat-card-title class="title"><i>Provera karte</i></mat-card-title>  
+    <mat-card-title class="title"><i>Provera mesecne karte</i></mat-card-title>  
     </mat-card-header>
     <mat-card-content>
         <div  class="contentCard">
             <p><i>Ime:</i><span style="margin-left:1rem">{{response.name}}</span></p>
             <p><i>Prezime:</i><span style="margin-left:1rem">{{response.surname}}</span></p>
-            <p><i>Datum polaska:</i><span style="margin-left:1rem">{{response.dateStart | date}}</span></p>
             <p><i>Mesto polaska:</i><span style="margin-left:1rem">{{response.cityStart}}</span></p>
             <p><i>Mesto dolaska:</i><span style="margin-left:1rem">{{response.cityEnd}}</span></p>
-            <p><i>Tip karte:</i><span style="margin-left:1rem">{{response.typeTicket}}</span></p>
             <p><i>Razlog odbijanja:</i><span style="color: red;margin-left:1rem">{{response.response}}</span></p>
         </div>        
     </mat-card-content>

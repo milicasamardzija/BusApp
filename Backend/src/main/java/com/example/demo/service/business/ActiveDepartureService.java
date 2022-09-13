@@ -19,8 +19,8 @@ public class ActiveDepartureService {
         this.activeDepartureRepository.save(activeDeparture);
     }
 
-    public ActiveDeparture findByDrivingLine(int id, DaysOfWeek day, Date date) {
-        return this.activeDepartureRepository.findByDrivingLine(id, day, date);
+    public List<ActiveDeparture> findByDrivingLine(int id, DaysOfWeek day) {
+        return this.activeDepartureRepository.findByDrivingLine(id, day);
     }
 
     public ActiveDeparture getById(int activeDepartureId) {
@@ -57,5 +57,9 @@ public class ActiveDepartureService {
 
     public void delete(ActiveDeparture activeDeparture) {
         this.activeDepartureRepository.delete(activeDeparture);
+    }
+
+    public void deleteById(int id) {
+        this.activeDepartureRepository.deleteById(id);
     }
 }

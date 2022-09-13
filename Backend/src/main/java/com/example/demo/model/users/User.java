@@ -24,9 +24,9 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSeqGen")
 	@Column(name="id", unique=true, nullable=false)
 	private int id;
-	@Column(name = "name", nullable = false)
+	@Column(name = "name")
 	private String name;
-	@Column(name = "surname", nullable = false)
+	@Column(name = "surname")
 	private String surname;
 	@Column(name = "email", nullable = false, unique=true)
 	private String email;
@@ -46,6 +46,17 @@ public class User implements UserDetails {
 	private Role role;
 	
 	public User() {}
+
+	public User(int id, String name, String surname, String email, String telephone, Address address, String picture, Role role) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
+		this.telephone = telephone;
+		this.address = address;
+		this.picture = picture;
+		this.role = role;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -35,4 +35,11 @@ export class TicketsService {
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
     return this._http.get("http://localhost:8081/ticket/stat/getStatPriceOfTickets", {"headers": headers});
   }
+
+  getReport(){
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem("token"), }
+    return this._http.get("http://localhost:8081/standardTicket/report", {"headers": headers});
+  }
 }

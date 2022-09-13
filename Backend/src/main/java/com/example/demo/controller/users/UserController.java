@@ -35,7 +35,9 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<Void> updateUser(@RequestBody UserRequest updatedUser){
-        userService.update(updatedUser);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)authentication.getPrincipal();
+        userService.update(updatedUser, user.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -44,7 +46,8 @@ public class UserController {
         List<UserResponse> ret = new ArrayList<>();
 
         for (User user: this.userService.getAll()) {
-            ret.add(new UserResponse(user));
+            if (!user.getRole().getName().equals("ROLE_ADMIN"))
+                ret.add(new UserResponse(user));
         }
         
         return new ResponseEntity<>(ret, HttpStatus.OK);

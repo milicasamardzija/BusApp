@@ -2,6 +2,7 @@ package com.example.demo.service.business;
 
 import com.example.demo.dto.business.BusRequest;
 import com.example.demo.model.business.Bus;
+import com.example.demo.model.business.DrivingLine;
 import com.example.demo.model.users.employees.BusDriver;
 import com.example.demo.repository.busineess.BusRepository;
 import com.example.demo.service.users.employees.BusDriverService;
@@ -36,7 +37,6 @@ public class BusService {
         bus.setBusDriver(busDriver);
 
         busDriver.getBuses().add(bus);
-        this.busDriverService.save(busDriver);
 
         this.busRepository.save(bus);
     }
@@ -56,13 +56,20 @@ public class BusService {
         List<Bus> buses = busDriver.getBuses();
         buses.add(bus);
         busDriver.setBuses(buses);
-        this.busDriverService.save(busDriver);
+        //this.busDriverService.save(busDriver);
 
         this.busRepository.save(bus);
     }
 
     public void deleteById(int id) {
-        this.busRepository.deleteById(id);
+        Bus bus = this.busRepository.findById(id);
+        BusDriver busDriver = bus.getBusDriver();
+
+        List<Bus> buses = busDriver.getBuses();
+        buses.remove(bus);
+        busDriver.setBuses(buses);
+        this.busDriverService.save(busDriver);
+        this.busRepository.delete(bus);
     }
 
     public Bus findById(int busId) {

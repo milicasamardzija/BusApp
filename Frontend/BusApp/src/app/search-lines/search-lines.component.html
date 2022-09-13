@@ -38,7 +38,8 @@
                 <p><b>Cena mesecne karte:</b> {{d.priceMonthly}}</p>
                 <p><b>Broj slobodnih sedista:</b>{{d.seats}}</p>
                 <div *ngIf = "role === 'ROLE_PASSENGER'">
-                    <button mat-raised-button class="button" (click)="buyStandardTicket(d)">Kupi standardnu kartu</button>
+                    <button mat-raised-button class="button" (click)="buyStandardTicket(d)">Kupi jednosmernu kartu</button>
+                    <button mat-raised-button class="button" (click)="buyStandardReturnTicket(d)" style="margin-left: 3%;">Kupi povratnu kartu</button>
                     <button mat-raised-button class="button" (click)="buyMonthlyTicket(d)" style="margin-left: 3%;">Kupi mesecnu kartu</button>
                 </div>
                 </mat-card-content>

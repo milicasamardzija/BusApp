@@ -42,9 +42,7 @@ export class StaffBusesComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(
       response => {
-        if (response.data == "updated"){
-          this.getAll();
-        }
+        this.getAll();
       }
     )
   }
@@ -61,9 +59,7 @@ export class StaffBusesComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(
       response => {
-        if (response.data == "updated"){
-          this.getAll();
-        }
+        this.getAll();
       }
     )
   }
@@ -80,9 +76,7 @@ export class StaffBusesComponent implements OnInit {
   
   dialogRef.afterClosed().subscribe(
     response => {
-      if (response.data == "updated"){
-        this.getAll();
-      }
+      this.getAll();
     }
   )
   }

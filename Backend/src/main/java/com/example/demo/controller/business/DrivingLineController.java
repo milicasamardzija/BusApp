@@ -30,7 +30,8 @@ public class DrivingLineController {
         List<DrivingLineResponse> ret = new ArrayList<>();
         for (DrivingLine drivingLine: this.drivingLineService.getAll()
              ) {
-            ret.add(new DrivingLineResponse(drivingLine.getId(), drivingLine.getName(), drivingLine.getActiveDepartures(), drivingLine.getBusDepartures()));
+            List<ActiveDeparture> days = this.drivingLineService.getDays(drivingLine);
+            ret.add(new DrivingLineResponse(drivingLine.getId(), drivingLine.getName(), days, drivingLine.getBusDepartures()));
         }
         return new ResponseEntity<>(ret, HttpStatus.OK);
     }

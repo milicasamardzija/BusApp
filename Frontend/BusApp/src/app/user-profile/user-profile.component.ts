@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit {
     country: "", city: "", street: "", number: ""
   };
   role: string = "";
-  discountType!: String;
+  discountType:  String = "";
   discount!: number;
 
   constructor(private userService: UserService, private discountService: DiscountService,public dialogProfileChange: MatDialog, public dialogPasswordChange: MatDialog, public dialogProfileDelete: MatDialog, public dialogDiscountRequest: MatDialog) { }
@@ -34,6 +34,10 @@ export class UserProfileComponent implements OnInit {
       response => {
         this.discount = response.percentage;
         this.discountType = response.discountType;
+      },
+      err => {
+        this.discountType = "",
+        this.discount = 0
       }
     )
   }

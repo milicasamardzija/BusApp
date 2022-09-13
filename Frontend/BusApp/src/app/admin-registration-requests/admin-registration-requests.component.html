@@ -21,8 +21,11 @@
         <td>{{u.telephone}}</td>
         <td>{{u.email}}</td>
         <td>
-          <button mat-raised-button class="button" (click)="approve(u.id)">Posalji kartu na email</button>
+          <button mat-raised-button class="button" (click)="approve(u.id)">Potvrdi</button>
         </td>
+        <td>
+          <button mat-raised-button class="button" (click)="reject(u.id)">Odbij</button>
+        </td>       
       </tr>
     </tbody>
 </table>

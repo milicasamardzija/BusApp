@@ -1,11 +1,11 @@
 package com.example.demo.model.tickets;
 
 import com.example.demo.enums.StandardTicketType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @DiscriminatorValue("ST")
@@ -13,10 +13,19 @@ public class StandardTicket extends Ticket{
     @Column
     private Date dateChecked;
     @Column
+    private int returnChecks;
+    @Column
     private StandardTicketType standardTicketType;
     @Column
     private Date date;
 
+    public int getReturnChecks() {
+        return returnChecks;
+    }
+
+    public void setReturnChecks(int returnChecks) {
+        this.returnChecks = returnChecks;
+    }
 
     public Date getDateChecked() {
         return dateChecked;

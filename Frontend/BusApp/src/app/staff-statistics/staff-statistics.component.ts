@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import Swal from 'sweetalert2';
 import { TicketsService } from '../passenger-statistics/tickets.service';
 
 @Component({
@@ -85,6 +86,14 @@ export class StaffStatisticsComponent implements OnInit {
         }]
       }
     })
+  }
+
+  getReport(){
+    this.ticketsService.getReport().subscribe(
+      reponse => {
+      Swal.fire('Uspesno',"Dnevni izvestaj o prodatim kartama je poslat na Vas email!",'success')
+      }
+    )
   }
 
 }

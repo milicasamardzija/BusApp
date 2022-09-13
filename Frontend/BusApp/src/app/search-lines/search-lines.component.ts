@@ -44,7 +44,18 @@ export class SearchLinesComponent implements OnInit {
     this.hide.emit(false);
   }
 
+  buyStandardReturnTicket(ticket : any){
+    ticket.date = this.day
+    this.standardTicketService.buyStandardReturnTicket(ticket).subscribe(
+      response => {
+        console.log(response);
+        Swal.fire('Poslato!', 'Vasa karta je poslata na email.', 'success');
+      }
+    );
+  }
+
   buyStandardTicket(ticket : any){
+    ticket.date = this.day
     this.standardTicketService.buyStandardTicket(ticket).subscribe(
       response => {
         console.log(response);

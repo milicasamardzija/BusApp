@@ -39,5 +39,11 @@ public class StaffService {
         staff.setTelephone(user.getTelephone());
         staff.setRole(role);
         this.staffRepository.save(staff);
+        this.userRegistrationRequestService.deleteByEmail(user.getEmail());
+    }
+
+    public void reject(int id){
+        UserRegistrationRequest user = this.userRegistrationRequestService.findById(id);
+        this.userRegistrationRequestService.deleteByEmail(user.getEmail());
     }
 }

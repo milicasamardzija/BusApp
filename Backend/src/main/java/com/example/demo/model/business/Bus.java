@@ -27,7 +27,7 @@ public class Bus {
     private double kilometersTraveled;
     @Column
     private Date endRegistrationDate;
-    @OneToMany(mappedBy = "bus", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "bus", fetch = FetchType.LAZY, cascade =  CascadeType.MERGE)
     @JsonIgnore
     private List<DrivingLine> drivingLines;
     @ManyToOne(fetch = FetchType.EAGER)

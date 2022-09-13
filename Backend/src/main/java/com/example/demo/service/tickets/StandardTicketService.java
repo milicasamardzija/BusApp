@@ -1,6 +1,7 @@
 package com.example.demo.service.tickets;
 
 import com.example.demo.dto.tickets.StandardTicketRequest;
+import com.example.demo.dto.tickets.TicketCheckResponse;
 import com.example.demo.dto.tickets.TicketPdfResponse;
 import com.example.demo.enums.StandardTicketType;
 import com.example.demo.enums.TicketType;
@@ -80,7 +81,8 @@ public class StandardTicketService {
         if (standardTicket.getStandardTicketType() == StandardTicketType.Jednosmerna)
             this.generatePdf(passenger, new TicketPdfResponse(t), ticket.timeStart, activeDeparture.getDayOfWeek().toString());
         else
-            this.generatePdfPovratna(passenger, new TicketPdfResponse(t), ticket.timeStart, activeDeparture.getDayOfWeek().toString());
+            this.generatePdfPovratna(passenger, new TicketPdfResponse(standardTicket), ticket.timeStart, activeDeparture.getDayOfWeek().toString());
+
         this.emailSenderService.sendEmailWithPdf(passenger);
     }
 
@@ -106,21 +108,47 @@ public class StandardTicketService {
         return this.standardTicketRepository.getPreviousTickets(user.getId(), new Date());
     }
 
-    public String checkTicket(int id) {
+    public TicketCheckResponse checkTicket(int id) {
         StandardTicket standardTicket = this.standardTicketRepository.findById(id);
-        String ret = "";
+        TicketCheckResponse ticketCheckResponse = new TicketCheckResponse();
+        ticketCheckResponse.typeTicket = standardTicket.getStandardTicketType().toString();
+        ticketCheckResponse.cityEnd = standardTicket.getCityEnd();
+        ticketCheckResponse.cityStart = standardTicket.getCityStart();
+        ticketCheckResponse.name = standardTicket.getPassenger().getName();
+        ticketCheckResponse.surname = standardTicket.getPassenger().getSurname();
+        ticketCheckResponse.dateStart = standardTicket.getDate();
 
-        if (standardTicket.getDateChecked() == null && standardTicket.getDateExpiration().after(new Date())){
-            standardTicket.setDateChecked(new Date());
-            this.standardTicketRepository.save(standardTicket);
-            return "Karta je uspesno verifikovana!";
-        } else if (standardTicket.getDateChecked() != null && standardTicket.getDateExpiration().after(new Date())){
-            return "Karta je vec iskoriscena!";
-        } else if (standardTicket.getDateExpiration().before(new Date())){
-            return "Rok vazenja ove karte je istekao!";
+        if(standardTicket.getStandardTicketType() == StandardTicketType.Povratna) {
+            if (standardTicket.getReturnChecks() <= 1 && standardTicket.getDateExpiration().after(new Date())) {
+                standardTicket.setReturnChecks(standardTicket.getReturnChecks()+1);
+                standardTicket.setDateChecked(new Date());
+                this.standardTicketRepository.save(standardTicket);
+                ticketCheckResponse.response = "Karta je uspesno verifikovana!";
+                return ticketCheckResponse;
+            } else if (standardTicket.getReturnChecks() >= 2 && standardTicket.getDateExpiration().after(new Date())) {
+                ticketCheckResponse.response = "Karta je vec iskoriscena!";
+                return ticketCheckResponse;
+            } else if (standardTicket.getDateExpiration().before(new Date())) {
+                ticketCheckResponse.response = "Rok vazenja ove karte je istekao!";
+                return ticketCheckResponse;
+            }
+        } else {
+            if (standardTicket.getReturnChecks() <= 0  && standardTicket.getDate().getDate() == new Date().getDate() && standardTicket.getDate().getMonth() == new Date().getMonth()  && standardTicket.getDate().getYear() == new Date().getYear()) {
+                standardTicket.setReturnChecks(standardTicket.getReturnChecks()+1);
+                standardTicket.setDateChecked(new Date());
+                this.standardTicketRepository.save(standardTicket);
+                ticketCheckResponse.response = "Karta je uspesno verifikovana!";
+                return ticketCheckResponse;
+            } else if (standardTicket.getReturnChecks() >= 1) {
+                ticketCheckResponse.response = "Karta je vec iskoriscena!";
+                return ticketCheckResponse;
+            } else if (standardTicket.getDateExpiration().before(new Date())) {
+                ticketCheckResponse.response = "Rok vazenja ove karte je istekao!";
+                return ticketCheckResponse;
+            }
         }
-
-        return ret;
+        ticketCheckResponse.response = "";
+        return ticketCheckResponse;
     }
 
     public void getDailyReport(User user) {

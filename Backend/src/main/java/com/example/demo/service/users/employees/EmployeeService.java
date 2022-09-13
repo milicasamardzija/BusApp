@@ -7,10 +7,13 @@ import com.example.demo.model.users.employees.BusController;
 import com.example.demo.model.users.employees.BusDriver;
 import com.example.demo.model.users.employees.Employee;
 import com.example.demo.repository.users.AddressRepository;
+import com.example.demo.repository.users.RoleRepository;
 import com.example.demo.repository.users.employees.EmployeeRepository;
+import com.example.demo.service.users.auth.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,9 +27,23 @@ public class EmployeeService {
     private BusDriverService busDriverService;
     @Autowired
     private BusControllerService busControllerService;
+    @Autowired
+    private RoleService roleService;
 
     public List<Employee> getAll() {
-        return  this.employeeRepository.findAll();
+        List<BusDriver> busDrivers = this.busDriverService.findAll();
+        List<BusController> busControllers = this.busControllerService.findAll();
+        List<Employee> employees = new ArrayList<>();
+
+        for (BusDriver busDriver : busDrivers) {
+            employees.add(new Employee(busDriver.getId(), busDriver.getName(), busDriver.getSurname(), busDriver.getEmail(), busDriver.getTelephone(), busDriver.getAddress(), busDriver.getPicture(), busDriver.getRole(), busDriver.getEmployeeType(), busDriver.getSalary()));
+        }
+
+        for (BusController busDriver : busControllers) {
+            employees.add(new Employee(busDriver.getId(), busDriver.getName(), busDriver.getSurname(), busDriver.getEmail(), busDriver.getTelephone(), busDriver.getAddress(), busDriver.getPicture(), busDriver.getRole(), busDriver.getEmployeeType(), busDriver.getSalary()));
+        }
+        
+        return  employees;
     }
 
     public void saveEmployee(EmployeeRequest employee) {
@@ -41,6 +58,7 @@ public class EmployeeService {
 
     private void addNewBusController(EmployeeRequest employee) {
         BusController busController = new BusController();
+        busController.setRole(this.roleService.findByName("ROLE_STAFF"));
         busController.setName(employee.name);
         busController.setSurname(employee.surname);
         busController.setEmail(employee.email);
@@ -54,10 +72,11 @@ public class EmployeeService {
 
     private void addNewBusDriver(EmployeeRequest employee) {
         BusDriver busDriver = new BusDriver();
+        busDriver.setRole(this.roleService.findByName("ROLE_STAFF"));
         busDriver.setName(employee.name);
         busDriver.setSurname(employee.surname);
         busDriver.setTelephone(employee.telephone);
-        busDriver.setAddress(employee.address);
+        busDriver.setAddress(this.addressRepository.save(employee.address));
         busDriver.setEmail(employee.email);
         busDriver.setSalary(employee.salary);
         busDriver.setEmployeeType(EmployeeType.BUS_STAFF);
@@ -67,6 +86,7 @@ public class EmployeeService {
 
     private void addNewStaff(EmployeeRequest employee) {
         Employee employeeNew = new Employee();
+        employeeNew.setRole(this.roleService.findByName("ROLE_STAFF"));
         employeeNew.setName(employee.name);
         employeeNew.setSurname(employee.surname);
         employeeNew.setTelephone(employee.telephone);
@@ -85,7 +105,7 @@ public class EmployeeService {
         employeeExist.setTelephone(employee.telephone);
         employeeExist.setAddress(addressRepository.save(employee.address));
         employeeExist.setSalary(employee.salary);
-        employeeExist.setEmployeeType(this.getEmployeeType(employee.type));
+        employeeExist.setEmail(employee.email);
         this.employeeRepository.save(employeeExist);
     }
 

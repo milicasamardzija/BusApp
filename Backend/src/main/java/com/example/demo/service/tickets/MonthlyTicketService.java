@@ -1,6 +1,7 @@
 package com.example.demo.service.tickets;
 
 import com.example.demo.dto.tickets.MonthlyTicketRequest;
+import com.example.demo.dto.tickets.TicketCheckResponse;
 import com.example.demo.dto.tickets.TicketPdfResponse;
 import com.example.demo.enums.TicketType;
 import com.example.demo.model.business.ActiveDeparture;
@@ -74,7 +75,7 @@ public class MonthlyTicketService {
         Map<String, Object> data = new HashMap<>();
         data.put("passenger", passenger);
         data.put("standardTicket", standardTicket);
-        pdfGenerateService.generatePdfFile("ticketTemplate", data, "ticket.pdf");
+        pdfGenerateService.generatePdfFile("ticketTemplate", data, "karta.pdf");
     }
 
     public List<MonthlyTicket> getMonthlyTicket(User user) {
@@ -110,21 +111,28 @@ public class MonthlyTicketService {
         this.emailSenderService.sendEmailWithPdf(monthlyTicket.getPassenger());
     }
 
-    public String checkTicket(int id) {
-        MonthlyTicket monthlyTicket = this.monthlyTicketRepository.getById(id);
-        String ret = "";
+    public TicketCheckResponse checkTicket(int id) {
+        MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
+        TicketCheckResponse ticketCheckResponse = new TicketCheckResponse();
+        ticketCheckResponse.cityEnd = monthlyTicket.getCityEnd();
+        ticketCheckResponse.cityStart = monthlyTicket.getCityStart();
+        ticketCheckResponse.name = monthlyTicket.getPassenger().getName();
+        ticketCheckResponse.surname = monthlyTicket.getPassenger().getSurname();
 
-        if (monthlyTicket.getApproved() && monthlyTicket.getDateExpiration().before(new Date())){
-            return "Karta je uspesno verifikovana!";
-        } else if (monthlyTicket.getDateExpiration().after(new Date())){
-            return "Rok vazenja ove karte je istekao!";
+        if (monthlyTicket.getApproved() && monthlyTicket.getDateExpiration().after(new Date())){
+            ticketCheckResponse.response = "Mesecna karta je uspesno verifikovana!";
+            return ticketCheckResponse;
+        } else if (monthlyTicket.getDateExpiration().before(new Date())){
+            ticketCheckResponse.response = "Rok vazenja mesecne karte je istekao!";
+            return ticketCheckResponse;
         }
 
-        return ret;
+        return ticketCheckResponse;
     }
 
     public void monthlyTicketReject(int id) {
         MonthlyTicket monthlyTicket = this.monthlyTicketRepository.findById(id);
         this.emailSenderService.sendMonthlyTicketRejection(monthlyTicket.getPassenger());
+        this.monthlyTicketRepository.delete(monthlyTicket);
     }
 }
