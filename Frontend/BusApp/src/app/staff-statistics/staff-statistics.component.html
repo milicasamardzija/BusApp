@@ -1,13 +1,33 @@
+
 <div style="height: 5rem;">
+
 </div>
-<p><i>Statistika</i></p>
-<button mat-raised-button class="add" (click)="getReport()" >Dnevni izvestaj</button>
+<p class="title"><i>Statistika</i></p>
+<div>
+    <p style="color: #4775a0;font-size: 20px;margin-left: 6%;margin-top:6%">Dnevni izvestaj o prodatim kartama:</p>
+    <button mat-raised-button class="add" (click)="getReport()" >Dnevni izvestaj</button>
+</div>
+
+<div style="margin-left: 6%;">
+    <p style="color: #4775a0;font-size: 20px;">Izaberite godinu za koju zelite prikaz statistike:</p>
+    <table>
+        <tr>
+            <td>
+                <mat-form-field><input matInput type="number" min="1900" max="2022" step="1" value="2016" [(ngModel)] = "selectYear"/></mat-form-field>
+            </td>
+            <td>
+                <button mat-raised-button class="buttonYes" (click)="stat()">Prikazi grafike</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
 <div class="card">
     <table>
         <tr>
             <td>
                 <div class="chartFirst">
-                    <canvas id="offerInACtiveTenderChart"></canvas>
+                    <canvas id="offerInACtiveTenderChart" style="height: 40rem;"></canvas>
                 </div>
             </td>
             <td>
@@ -17,4 +37,15 @@
             </td>
         </tr>
     </table>  
+    <table>
+        <tr>
+            <td>
+                <div class="chartThird">
+                    <canvas id="PriceChart"></canvas>
+                </div>
+            </td>
+        </tr>
+    </table> 
 </div>
+
+

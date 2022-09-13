@@ -1,5 +1,6 @@
 package com.example.demo.controller.tickets;
 
+import com.example.demo.dto.statistics.StatisticRequest;
 import com.example.demo.dto.statistics.StatisticsPassengerResponse;
 import com.example.demo.model.users.User;
 import com.example.demo.service.tickets.TicketService;
@@ -9,9 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "ticket")
@@ -27,20 +26,20 @@ public class TicketController {
         return new ResponseEntity<>(this.ticketService.getStatNumberOfTicketsPassenger(user),HttpStatus.OK);
     }
 
-    @GetMapping(value = "stat/getStatPriceOfTicketsPassenger")
-    public ResponseEntity<StatisticsPassengerResponse> getStatPriceOfTicketsPassenger(){
+    @PostMapping(value = "stat/getStatPriceOfTicketsPassenger")
+    public ResponseEntity<StatisticsPassengerResponse> getStatPriceOfTicketsPassenger(@RequestBody StatisticRequest statisticRequest){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = (User)authentication.getPrincipal();
-        return new ResponseEntity<>(this.ticketService.getStatPriceOfTicketsPassenger(user),HttpStatus.OK);
+        return new ResponseEntity<>(this.ticketService.getStatPriceOfTicketsPassenger(user, statisticRequest),HttpStatus.OK);
     }
 
-    @GetMapping(value = "stat/getStatNumberOfTickets")
-    public ResponseEntity<StatisticsPassengerResponse> getStatNumberOfTickets(){
-        return new ResponseEntity<>(this.ticketService.getStatNumberOfTickets(),HttpStatus.OK);
+    @PostMapping(value = "stat/getStatNumberOfTickets")
+    public ResponseEntity<StatisticsPassengerResponse> getStatNumberOfTickets(@RequestBody StatisticRequest statisticRequest){
+        return new ResponseEntity<>(this.ticketService.getStatNumberOfTickets(statisticRequest),HttpStatus.OK);
     }
 
-    @GetMapping(value = "stat/getStatPriceOfTickets")
-    public ResponseEntity<StatisticsPassengerResponse> getStatPriceOfTickets(){
-        return new ResponseEntity<>(this.ticketService.getStatPriceOfTickets(),HttpStatus.OK);
+    @PostMapping(value = "stat/getStatPriceOfTickets")
+    public ResponseEntity<StatisticsPassengerResponse> getStatPriceOfTickets(@RequestBody StatisticRequest statisticRequest){
+        return new ResponseEntity<>(this.ticketService.getStatPriceOfTickets(statisticRequest),HttpStatus.OK);
     }
 }

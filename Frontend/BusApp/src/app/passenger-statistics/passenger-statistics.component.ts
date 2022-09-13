@@ -1,56 +1,82 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core/datetime';
+import { MatDatepicker } from '@angular/material/datepicker';
 import {Chart, registerables} from 'chart.js'
 import { TicketsService } from './tickets.service';
+
 
 @Component({
   selector: 'app-passenger-statistics',
   templateUrl: './passenger-statistics.component.html',
   styleUrls: ['./passenger-statistics.component.css']
+ 
 })
 export class PassengerStatisticsComponent implements OnInit {
-  chartNumberOfTicketsPassenger: any;
-  chartPriceOfTicketsPassenger: any;
+  chartPriceOfTicketsPassenger!: any;
+  chartNumberOfTicketsPassenger!: any;
 
-  numberOfTicketsData: any;
-  priceOfTicketsData: any;
+  selectYear = '2022-09';
+
+  chartPie!: Chart;
+  chartBar!: Chart;
+
+  data!: any;
 
   constructor(private ticketsService : TicketsService) { }
 
-  ngOnInit(): void {
-
-    this.ticketsService.getStatNumberOfTicketsPassenger().subscribe(
+  stat(){
+    this.ticketsService.getStatPriceOfTicketsPassenger(this.selectYear).subscribe(
       response => {
-        this.numberOfTicketsData = response;
-        this.chartNumberOfTicketsPassenger = document.getElementById('offerInACtiveTenderChart');
-        Chart.register(...registerables);
-      this.loadChartOffesrInACtiveTender();
-      }
-    )
-    this.ticketsService.getStatPriceOfTicketsPassenger().subscribe(
-      response => {
-        this.priceOfTicketsData = response;
+        this.data = response;
+        console.log(this.data)
+        if (this.chartPie != null){
+          this.chartPie.destroy();
+        } 
         this.chartPriceOfTicketsPassenger = document.getElementById('winningPriceChart');
         Chart.register(...registerables);
-        this.loadChartWinnings();
+        if (this.chartBar != null){
+          this.chartBar.destroy();
+        }
+        this.chartPie = this.loadChartWinnings();
+        this.chartNumberOfTicketsPassenger = document.getElementById('offerInACtiveTenderChart');
+        Chart.register(...registerables);
+        this.loadChartOffesrInACtiveTender();
       }
     )
   }
 
 
-  loadChartOffesrInACtiveTender()  : void {
-    new Chart( this.chartNumberOfTicketsPassenger, {
+  ngOnInit(): void {
+  
+  }
+
+  loadChartOffesrInACtiveTender()  : Chart {
+    return new Chart( this.chartNumberOfTicketsPassenger, {
       type: 'bar',
       data: {
-          labels: this.numberOfTicketsData.ticketTypes,
+          labels: this.data.x,
           datasets: [{
-              label: '#broj kupljenih karata',
-              data: this.numberOfTicketsData.numberOfTickets,
+              label: '#vrednost kupljenih karti sa punom cenom',
+              data: this.data.y1,
               backgroundColor: [
                 'rgb(255, 182, 102)',
                   'rgba(54, 162, 235, 0.2)',
               ],
               borderColor: [
                 'rgb(255, 182, 102)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgb(102, 178, 255)',
+              ],
+              borderWidth: 1
+          }, {
+            label: '#vrednost kupljenih karti sa popustom',
+              data: this.data.y2,
+              backgroundColor: [
+                'rgb(102, 178, 255)',
+                  'rgba(54, 162, 235, 0.2)',
+              ],
+              borderColor: [
+                'rgb(102, 178, 255)',
                   'rgba(54, 162, 235, 1)',
                   'rgb(102, 178, 255)',
               ],
@@ -68,20 +94,25 @@ export class PassengerStatisticsComponent implements OnInit {
     )
   }
 
-  loadChartWinnings() : void {
-    new Chart( this.chartPriceOfTicketsPassenger,{
-      type: 'pie',
+  loadChartWinnings() : Chart {
+    return new Chart( this.chartPriceOfTicketsPassenger,{
+     type: 'bar',
       data: {
-        labels: this.priceOfTicketsData.ticketTypes,
-        datasets: [{
-          label: 'Potroseno novca na karte',
-          data: this.priceOfTicketsData.numberOfTickets,
-          backgroundColor: [
-            'rgb(255, 182, 102)',
-            'rgb(102, 178, 255)'
-          ],
-          hoverOffset: 4
-        }]
+          labels: this.data.x,
+          datasets: [{
+              label: '#ustedjeno novca na popust',
+              data: this.data.y5,
+              backgroundColor: [
+                'rgb(255, 182, 102)',
+                  'rgba(54, 162, 235, 0.2)',
+              ],
+              borderColor: [
+                'rgb(255, 182, 102)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgb(102, 178, 255)',
+              ],
+              borderWidth: 1
+          },]
       }
     })
   }

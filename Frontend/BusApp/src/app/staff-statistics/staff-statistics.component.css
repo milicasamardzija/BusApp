@@ -1,25 +1,48 @@
-.chartFirst{
-    width: 70%;
-    margin-left: 15%;
-    margin-top: 3rem;
+.add{
+    background-color: #4775a0;
+    color: white;
+    margin-top: 10%;
 }
 
-.chartSecond{
-    width: 70%;
-    margin-top: 3rem
+.buttonYes {
+    background-color: #4775a0;
+    color: white;
+    margin-left: 10%;
+}
+
+.buttonNo {
+    background-color: white;
+    color: #4775a0;
+}
+
+.actions{
+    margin-top: 4%;
+    margin-left: 35%;
+}
+
+.title{
+    color: #4775a0;
+    margin-left: 6%;
+    font-size: 30px;
+    width: 10rem;
+}
+
+td {
+    width:10rem;
 }
 
 .card{
-    margin-right: 100px;
-    margin-left: 100px;
-    background-color: aliceblue;
-    height: 30rem;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
-p{
-    color: #4775a0;
-    margin-left: 7%;
-    margin-bottom: 2%;
+.toggle-example{
+    margin-left: 3%;
+}
+
+mat-form-field{
+    margin-top: 0rem;
 }
 
 .add{
@@ -27,4 +50,23 @@ p{
     margin-left: 6%;
     margin-right: 2%;
     margin-bottom: 2%;
+}
+
+.chartFirst{
+    width: 40rem;
+    margin-left: 3%;
+    margin-top: 6rem;
+}
+
+.chartSecond{
+    width: 40rem;
+    margin-left: 1%;
+    margin-top: 6rem;
+}
+
+.chartThird {
+    width: 40rem;
+    margin-left: 22rem;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
 }

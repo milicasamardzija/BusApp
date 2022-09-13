@@ -8,32 +8,32 @@ export class TicketsService {
 
   constructor(private _http: HttpClient) { }
 
-  getStatNumberOfTicketsPassenger(){
+  getStatNumberOfTicketsPassenger(year: string){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
     return this._http.get("http://localhost:8081/ticket/stat/getStatNumberOfTicketsPassenger", {"headers": headers});
   }
 
-  getStatPriceOfTicketsPassenger(){
+  getStatPriceOfTicketsPassenger(year: string){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get("http://localhost:8081/ticket/stat/getStatPriceOfTicketsPassenger", {"headers": headers});
+    return this._http.post("http://localhost:8081/ticket/stat/getStatPriceOfTicketsPassenger", {"year": year}, {"headers": headers});
   }
 
-  getStatNumberOfTicketsStaff(){
+  getStatNumberOfTicketsStaff(year: string){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get("http://localhost:8081/ticket/stat/getStatNumberOfTickets", {"headers": headers});
+    return this._http.post("http://localhost:8081/ticket/stat/getStatNumberOfTickets", {"year": year}, {"headers": headers});
   }
 
-  getStatPriceOfTicketsStaffr(){
+  getStatPriceOfTicketsStaffr(year: string){
     const headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + localStorage.getItem("token"), }
-    return this._http.get("http://localhost:8081/ticket/stat/getStatPriceOfTickets", {"headers": headers});
+    return this._http.post("http://localhost:8081/ticket/stat/getStatPriceOfTickets", {"year": year}, {"headers": headers});
   }
 
   getReport(){
