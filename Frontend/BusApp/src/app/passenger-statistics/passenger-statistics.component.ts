@@ -40,7 +40,7 @@ export class PassengerStatisticsComponent implements OnInit {
         this.chartPie = this.loadChartWinnings();
         this.chartNumberOfTicketsPassenger = document.getElementById('offerInACtiveTenderChart');
         Chart.register(...registerables);
-        this.loadChartOffesrInACtiveTender();
+        this.chartBar = this.loadChartOffesrInACtiveTender();
       }
     )
   }
@@ -60,25 +60,23 @@ export class PassengerStatisticsComponent implements OnInit {
               data: this.data.y1,
               backgroundColor: [
                 'rgb(255, 182, 102)',
-                  'rgba(54, 162, 235, 0.2)',
+                'rgb(255, 182, 102)',
               ],
               borderColor: [
                 'rgb(255, 182, 102)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgb(102, 178, 255)',
+                'rgb(255, 182, 102)',
               ],
               borderWidth: 1
           }, {
             label: '#vrednost kupljenih karti sa popustom',
               data: this.data.y2,
               backgroundColor: [
-                'rgb(102, 178, 255)',
+                'rgba(54, 162, 235, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
               ],
               borderColor: [
-                'rgb(102, 178, 255)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgb(102, 178, 255)',
+                'rgba(54, 162, 235, 0.2)'
+                ,'rgba(54, 162, 235, 0.2)',
               ],
               borderWidth: 1
           }]
@@ -103,13 +101,12 @@ export class PassengerStatisticsComponent implements OnInit {
               label: '#ustedjeno novca na popust',
               data: this.data.y5,
               backgroundColor: [
-                'rgb(255, 182, 102)',
-                  'rgba(54, 162, 235, 0.2)',
+                'rgb(229, 255, 204)',
+                'rgb(229, 255, 204)',
               ],
               borderColor: [
-                'rgb(255, 182, 102)',
-                  'rgba(54, 162, 235, 1)',
-                  'rgb(102, 178, 255)',
+                'rgb(229, 255, 204)',
+                'rgb(229, 255, 204)',
               ],
               borderWidth: 1
           },]

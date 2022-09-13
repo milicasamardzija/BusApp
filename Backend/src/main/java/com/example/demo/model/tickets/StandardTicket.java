@@ -16,8 +16,6 @@ public class StandardTicket extends Ticket{
     private int returnChecks;
     @Column
     private StandardTicketType standardTicketType;
-    @Column
-    private Date date;
 
     public int getReturnChecks() {
         return returnChecks;
@@ -43,11 +41,4 @@ public class StandardTicket extends Ticket{
         this.standardTicketType = standardTicketType;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

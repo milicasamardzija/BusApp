@@ -57,7 +57,9 @@ public class MonthlyTicketService {
         Calendar dateStart = Calendar.getInstance();
         dateStart.set(Calendar.DAY_OF_MONTH, 1);
         dateStart.set(Calendar.MONTH, new Date().getMonth() + 1);
-        monthlyTicket.setDateIssued(dateStart.getTime());
+        monthlyTicket.setDate(dateStart.getTime());
+
+        monthlyTicket.setDateIssued(new Date());
 
         Calendar dateEnd = Calendar.getInstance();
         dateEnd.set(Calendar.DAY_OF_MONTH, 30);
@@ -120,13 +122,13 @@ public class MonthlyTicketService {
         ticketCheckResponse.name = monthlyTicket.getPassenger().getName();
         ticketCheckResponse.surname = monthlyTicket.getPassenger().getSurname();
 
-        if (monthlyTicket.getApproved() && monthlyTicket.getDateExpiration().after(new Date()) && monthlyTicket.getDateIssued().before(new Date())){
+        if (monthlyTicket.getApproved() && monthlyTicket.getDate().before(new Date()) && monthlyTicket.getDateExpiration().after(new Date())){
             ticketCheckResponse.response = "Mesecna karta je uspesno verifikovana!";
             return ticketCheckResponse;
         } else if (monthlyTicket.getDateExpiration().before(new Date())){
             ticketCheckResponse.response = "Rok vazenja mesecne karte je istekao!";
             return ticketCheckResponse;
-        }else if ( monthlyTicket.getDateIssued().after(new Date())){
+        }else if (monthlyTicket.getDate().after(new Date())){
             ticketCheckResponse.response = "Karta vazi tek sledeci mesec!";
             return ticketCheckResponse;
         }

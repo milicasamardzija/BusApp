@@ -14,7 +14,7 @@ mat-sidenav{
 }
 
 mat-sidenav-cotainer{
-    height: calc(100vh - 65px);
+    height: 1000px;
 }
 
 .content {
@@ -26,6 +26,7 @@ mat-sidenav-cotainer{
     font-size: 2rem;
 
     border-radius: 10px;
+    height: 1000px;
 }
 
 .menu-button {

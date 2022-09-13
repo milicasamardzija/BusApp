@@ -211,6 +211,7 @@ public class TicketService {
         }
         if (ticket.getTicketType() == TicketType.MESECNA_KARTA){
             fullPrice.set(1, fullPrice.get(1) + ticket.getFullPrice());
+            discountPrice.set(1, discountPrice.get(1) + ticket.getPrice());
             usteda.set(1,usteda.get(1) + (ticket.getFullPrice() - ticket.getPrice()));
         }
     }

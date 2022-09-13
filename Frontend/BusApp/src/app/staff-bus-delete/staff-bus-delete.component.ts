@@ -42,6 +42,10 @@ export class StaffBusDeleteComponent implements OnInit {
           this.dialogRefEmployee.close({
             data: "updated"
           })
+        },
+        err => {
+          Swal.fire('Greska',"Postoji autobus koji vozi ovaj vozac, prvo promenite vozaca na autobusu!",'error');
+          this.dialogRef.close();
         })
     }
   }

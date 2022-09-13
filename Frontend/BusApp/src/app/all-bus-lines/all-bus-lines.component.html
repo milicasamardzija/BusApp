@@ -7,7 +7,7 @@
 </div>
 <div *ngIf="comments === false">
 
-<button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="add()">Dodaj</button>
+<button *ngIf="role==='ROLE_STAFF'" mat-raised-button class="add" (click)="add()">Dodaj novu liniju</button>
 <div *ngIf="hide===false">
     <div *ngFor = "let l of lines">
         <div class="card-wrapper" >

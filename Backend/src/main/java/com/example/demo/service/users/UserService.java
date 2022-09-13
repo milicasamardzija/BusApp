@@ -72,4 +72,9 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(password));
         this.userRepository.save(user);
     }
+
+    public void setEnabled(User user) {
+        user.setEnabled(false);
+        this.userRepository.save(user);
+    }
 }

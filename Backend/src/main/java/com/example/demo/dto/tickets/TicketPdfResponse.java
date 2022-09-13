@@ -45,6 +45,7 @@ public class TicketPdfResponse {
     public TicketPdfResponse(MonthlyTicket monthlyTicket){
         dateExpiration = monthlyTicket.getDateExpiration().toString().substring(0,10);
         dateIssued = monthlyTicket.getDateIssued().toString().substring(0,10);
+        date = monthlyTicket.getDate().toString().substring(0,10);
         price = monthlyTicket.getPrice();
         timeStart = monthlyTicket.getTimeStart();
         cityEnd = monthlyTicket.getCityEnd();

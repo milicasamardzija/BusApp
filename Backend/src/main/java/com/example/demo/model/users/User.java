@@ -44,6 +44,7 @@ public class User implements UserDetails {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@JoinColumn(name = "role_id")
 	private Role role;
+
 	
 	public User() {}
 

@@ -23,5 +23,5 @@
   <button mat-raised-button class="button" (click)="change()" >Izmeni podatke</button>
   <button mat-raised-button class="button" (click)="delete()" >Izbrisi nalog</button>
   <button mat-raised-button class="button" (click)="changePassword()" >Promeni sifru</button>
-  <button mat-raised-button class="button" (click)="discout()" *ngIf="discountType==''">Zatrazi popust</button>
+  <button mat-raised-button class="button" (click)="discout()" *ngIf="discountType=='' && role != 'ROLE_STAFF'">Zatrazi popust</button>
 </div>

@@ -38,6 +38,8 @@ public class Ticket {
     private double fullPrice;
     @Column
     private double discountPercentage;
+    @Column
+    private Date date;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "passenger_id")
     private Passenger passenger;
@@ -128,5 +130,13 @@ public class Ticket {
 
     public void setDiscountPercentage(double discountPercentage) {
         this.discountPercentage = discountPercentage;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

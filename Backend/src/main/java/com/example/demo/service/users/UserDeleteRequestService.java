@@ -1,5 +1,6 @@
 package com.example.demo.service.users;
 
+import com.example.demo.model.users.User;
 import com.example.demo.model.users.UserDeleteRequest;
 import com.example.demo.repository.users.UserDeleteRequestRepository;
 import com.example.demo.service.email.EmailSenderService;
@@ -15,6 +16,8 @@ public class UserDeleteRequestService {
     private UserDeleteRequestRepository userDeleteRequestRepository;
     @Autowired
     private EmailSenderService emailSenderService;
+    @Autowired
+    private UserService userService;
 
     public UserDeleteRequest saveRequest(UserDeleteRequest request){
         return this.userDeleteRequestRepository.save(request);
@@ -23,6 +26,8 @@ public class UserDeleteRequestService {
     public void acceptRequest(int id){
         UserDeleteRequest userDeleteRequest = this.userDeleteRequestRepository.findById(id);
         this.emailSenderService.acceptDeleteRequest(userDeleteRequest.getUser());
+        User user = this.userService.findByEmail(userDeleteRequest.getUser().getEmail());
+        this.userService.setEnabled(user);
         this.userDeleteRequestRepository.delete(userDeleteRequest);
     }
 
